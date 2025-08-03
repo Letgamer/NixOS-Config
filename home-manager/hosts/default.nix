@@ -3,28 +3,27 @@
   pkgs,
   username,
   inputs,
+  outputs,
   ...
 }: {
-  home.homeDirectory = "/home/${username}";
-  home.username = "${username}";
+  # You can import other home-manager modules here
+  imports = [
+    # If you want to use modules your own flake exports (from modules/home-manager):
+    outputs.homeManagerModules.git
 
-  programs = {
-    home-manager.enable = true;
-    git = {
-      # can use home-manager normally as well as with persistence
-      enable = true;
-      userName = "Letgamer";
-      userEmail = "alexstephan005@gmail.com ";
-    };
+    # Or modules exported from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModules.default
+  ];
+
+  home = {
+    username = "${username}";
+    homeDirectory = "/home/${username}";
   };
 
-  #home.persistence."/nix/persist/home/${username}" = {
-  #  allowOther = true;
-  #  directories = [
-  #    ".ssh"
-  #    "flake"
-  #    ];
-  #};
+  programs.home-manager.enable = true;
+
+  # Nicely reload system units when changing configs
+  systemd.user.startServices = "sd-switch";
 
   home.stateVersion = "25.05";
 }

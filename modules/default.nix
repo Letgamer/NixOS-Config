@@ -4,4 +4,8 @@
   # List your module files here
   hyprland = import ./hyprland.nix;
   boot = import ./boot.nix;
+  impermanence = import ./impermanence.nix;
+  locale = import ./locale.nix;
+  hardware = import ./hardware.nix;
+  ssh = import ./ssh.nix;
 }

@@ -20,6 +20,10 @@
     # all modules used
     outputs.nixosModules.hyprland
     outputs.nixosModules.boot
+    outputs.nixosModules.impermanence
+    outputs.nixosModules.locale
+    outputs.nixosModules.hardware
+    outputs.nixosModules.ssh
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -39,35 +43,10 @@
     };
   };
 
-  hardware.enableRedistributableFirmware = true;
-
   # Needed for home-manager impermanence!
-  programs.fuse.userAllowOther = true;
+  #programs.fuse.userAllowOther = true;
 
   networking.hostName = "${hostname}";
-
-  boot.tmp.cleanOnBoot = true;
-  environment.persistence."/nix/persist" = {
-    hideMounts = true;
-    directories = [
-      "/root"
-      "/var/lib/nixos"
-      "/etc/ssh"
-    ];
-    files = [
-      "/etc/machine-id"
-    ];
-    users.${username} = {
-      directories = [
-        "flake"
-        { directory = ".ssh"; mode = "0700"; }
-      ];
-    };
-  };
-
-  users.mutableUsers = false;
-  users.users.root.hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
-  # Use the systemd-boot EFI boot loader.
 
   nix = let
     flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
@@ -104,36 +83,8 @@
 
   programs.nix-ld.enable = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  #  networking.networkmanager.enable = true;
-
-  networking.wireless.enable = true;
-
-  networking.wireless.networks = {
-    "Fritz!Box 7590 GF" = {
-      # SSID with spaces and/or special characters
-      psk = "93855776213011631045";
-    };
-  };
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    earlySetup = true;
-    font = "Lat2-Terminus16";
-    keyMap = "de";
-  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
@@ -144,6 +95,9 @@
     #     tree
     #   ];
   };
+
+  users.mutableUsers = false;
+  users.users.root.hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -156,24 +110,6 @@
     btop
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.settings.PermitRootLogin = "yes";
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
   networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
