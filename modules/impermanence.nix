@@ -16,6 +16,7 @@
     ];
     files = [
       "/etc/machine-id"
+      "/var/lib/swapfile"
     ];
     users.${username} = {
       directories = [
