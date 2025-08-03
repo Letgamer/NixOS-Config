@@ -39,6 +39,8 @@
     hardware,
     impermanence,
     home-manager,
+    hyprland,
+    hyprland-plugins,
     ...
   } @ inputs: let
     inherit (self) outputs;

@@ -21,6 +21,7 @@
     users.${username} = {
       directories = [
         "flake"
+        ".config/OpenRGB/"
         {
           directory = ".ssh";
           mode = "0700";

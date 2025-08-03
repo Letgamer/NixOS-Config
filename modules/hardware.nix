@@ -5,9 +5,7 @@
   modulesPath,
   inputs,
   ...
-}: let
-  pkgs-mesa = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in {
+}: {
   imports = [
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
     inputs.hardware.nixosModules.common-gpu-amd
@@ -46,13 +44,8 @@ in {
       enable = true;
       enable32Bit = true;
 
-      # Use the mesa package matching your Hyprland nixpkgs to avoid version mismatch
-      package = pkgs-mesa.mesa;
-      package32 = pkgs-mesa.pkgsi686Linux.mesa;
-
       # Optional: extra Vulkan ICD and Mesa Vulkan layers, useful for some apps and games
       extraPackages = with pkgs; [
-        amdvlk # AMD's Vulkan driver (optional: fallback to radv in Mesa)
         vulkan-tools # For vulkaninfo and debugging Vulkan apps
       ];
       extraPackages32 = with pkgs; [
@@ -70,6 +63,8 @@ in {
     glxinfo
     radeontop # AMD GPU utilization monitor
     lm_sensors # For temperature sensors
+    pciutils
+    #openrgb # for led control
   ];
 
   # Allow firmware Updates

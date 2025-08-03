@@ -8,4 +8,5 @@
   locale = import ./locale.nix;
   hardware = import ./hardware.nix;
   ssh = import ./ssh.nix;
+  rgb = import ./rgb.nix;
 }

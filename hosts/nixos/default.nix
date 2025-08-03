@@ -24,6 +24,7 @@
     outputs.nixosModules.locale
     outputs.nixosModules.hardware
     outputs.nixosModules.ssh
+    outputs.nixosModules.rgb
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
@@ -89,7 +90,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
     isNormalUser = true;
-    extraGroups = ["wheel"]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "video"
+      "render"
+      ]; # Enable ‘sudo’ for the user.
     hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
     #   packages = with pkgs; [
     #     tree
@@ -108,6 +113,7 @@
     nixfmt-rfc-style
     alejandra
     btop
+    hashcat
   ];
 
   networking.firewall.enable = false;
