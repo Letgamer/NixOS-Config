@@ -4,13 +4,13 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  programs = {
-    git = {
-      # can use home-manager normally as well as with persistence
-      enable = true;
-      userName = "Letgamer";
-      userEmail = "alexstephan005@gmail.com ";
+}:
+{
+  programs.git = {
+    enable = true;
+    settings = {
+      user.name = "Letgamer";
+      user.email = "alexstephan005@gmail.com";
     };
   };
 }

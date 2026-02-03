@@ -9,4 +9,8 @@
   hardware = import ./hardware.nix;
   ssh = import ./ssh.nix;
   rgb = import ./rgb.nix;
+
+  pkgs = {
+    mobile = import ./pkgs/mobile.nix;
+  };
 }

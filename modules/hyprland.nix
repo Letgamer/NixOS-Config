@@ -4,8 +4,10 @@
   pkgs,
   modulesPath,
   inputs,
+  system,
   ...
-}: {
+}:
+{
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
@@ -13,8 +15,27 @@
     # set the flake package
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
     # make sure to also set the portal package, so that they are in sync
-    portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    portalPackage =
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+  };
+
+  services.displayManager.defaultSession = "hyprland";
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
+    ];
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Auto startup without login manager
+  #services.xserver.displayManager.lightdm.enable = false;
+  services.getty.autologinUser = "user";
+  #environment.loginShellInit = ''
+  #  if uwsm check may-start; then
+  #    exec uwsm start hyprland-uwsm.desktop
+  #  fi
+  #'';
 }

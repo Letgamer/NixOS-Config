@@ -7,7 +7,8 @@
   pkgs,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -37,21 +38,22 @@
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."crypted".device = "/dev/disk/by-uuid/3a554b93-d1b5-4cf6-b0c1-c32895683127";
+  boot.initrd.luks.devices."crypted".device =
+    "/dev/disk/by-uuid/3a554b93-d1b5-4cf6-b0c1-c32895683127";
 
-  fileSystems."/etc/nixos" = {
+  fileSystems."/etc/nixos" = lib.mkIf (!config.virtualisation.vmVariant) {
     device = "/nix/persist/etc/nixos";
     fsType = "none";
-    options = ["bind"];
+    options = [ "bind" ];
   };
 
-  fileSystems."/var/log" = {
+  fileSystems."/var/log" = lib.mkIf (!config.virtualisation.vmVariant) {
     device = "/nix/persist/var/log";
     fsType = "none";
-    options = ["bind"];
+    options = [ "bind" ];
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

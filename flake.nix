@@ -18,13 +18,12 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    hardware.url = "github:NixOS/nixos-hardware";
     impermanence.url = "github:nix-community/impermanence";
     hyprland.url = "github:hyprwm/Hyprland";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland-plugins = {
@@ -33,61 +32,71 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    hardware,
-    impermanence,
-    home-manager,
-    hyprland,
-    hyprland-plugins,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    system = "x86_64-linux";
-    username = "user";
-    hostname = "nixos";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations = {
-      ${hostname} = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs outputs lib username hostname;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      impermanence,
+      home-manager,
+      hyprland,
+      hyprland-plugins,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      system = "x86_64-linux";
+      username = "user";
+      hostname = "nixos";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      nixosConfigurations = {
+        ${hostname} = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              outputs
+              lib
+              username
+              hostname
+              ;
+          };
+          modules = [
+            ./hosts/${hostname}
+            impermanence.nixosModules.impermanence
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.extraSpecialArgs = {
+                inherit username inputs outputs;
+              };
+              home-manager.users.${username} = {
+                imports = [
+                  ./home-manager/hosts
+                ];
+              };
+            }
+          ];
         };
-        modules = [
-          ./hosts/${hostname}
-          impermanence.nixosModules.impermanence
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {
-              inherit username inputs outputs;
-            };
-            home-manager.users.${username} = {
-              imports = [
-                ./home-manager/hosts
-              ];
-            };
-          }
-        ];
       };
+
+      # Packages available via `nix build .#<name>`
+      packages.${system} = import ./pkgs pkgs;
+
+      # Code formatter used with `nix fmt`
+      formatter.${system} = pkgs.alejandra;
+
+      # Custom overlays
+      overlays = import ./overlays { inherit inputs; };
+
+      # Exported NixOS modules
+      nixosModules = import ./modules;
+
+      # Exported Home Manager modules
+      homeManagerModules = import ./home-manager/modules;
     };
-    # Packages available via `nix build .#<name>`
-    packages.${system} = import ./pkgs pkgs;
-
-    # Code formatter used with `nix fmt`
-    formatter.${system} = pkgs.alejandra;
-
-    # Custom overlays
-    overlays = import ./overlays {inherit inputs;};
-
-    # Exported NixOS modules
-    nixosModules = import ./modules;
-
-    # Exported Home Manager modules
-    homeManagerModules = import ./home-manager/modules;
-  };
 }

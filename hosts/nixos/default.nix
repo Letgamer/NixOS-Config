@@ -10,12 +10,9 @@
   username,
   hostname,
   ...
-}: {
+}:
+{
   imports = [
-    # Hardware config
-    inputs.hardware.nixosModules.common-cpu-intel-cpu-only
-    inputs.hardware.nixosModules.common-gpu-amd
-    inputs.hardware.nixosModules.common-pc-ssd
 
     # all modules used
     outputs.nixosModules.hyprland
@@ -26,9 +23,33 @@
     outputs.nixosModules.ssh
     outputs.nixosModules.rgb
 
+    # all packages installed
+    outputs.nixosModules.pkgs.mobile
+
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
   ];
+
+  users.users.nixosvmtest.isNormalUser = true;
+  users.users.nixosvmtest.initialPassword = "test";
+  users.users.nixosvmtest.extraGroups = [
+    "wheel"
+    "video"
+    "render"
+    "sudo"
+    "kvm"
+    "adbusers"
+    "docker"
+    "libvirt"
+    "networkmanager"
+  ];
+  virtualisation.vmVariant = {
+    # following configuration is added only when building VM with build-vm
+    virtualisation = {
+      memorySize = 4096; # Use 2048MiB memory.
+      cores = 3;
+    };
+  };
 
   nixpkgs = {
     overlays = [
@@ -41,6 +62,7 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      android_sdk.accept_license = true;
     };
   };
 
@@ -49,38 +71,40 @@
 
   networking.hostName = "${hostname}";
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      builders-use-substitutes = true;
-      auto-optimise-store = true;
-      log-lines = 20;
-      max-jobs = "auto";
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        builders-use-substitutes = true;
+        auto-optimise-store = true;
+        log-lines = 20;
+        max-jobs = "auto";
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
+
+      # Don't warn about dirty flakes and accept flake configs by default
+      extraOptions = ''
+        accept-flake-config = true
+        warn-dirty = false
+      '';
+
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 1d";
+      };
+
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
-    # Opinionated: disable channels
-    channel.enable = false;
-
-    # Don't warn about dirty flakes and accept flake configs by default
-    extraOptions = ''
-      accept-flake-config = true
-      warn-dirty = false
-    '';
-
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 1d";
-    };
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
 
   programs.nix-ld.enable = true;
 
@@ -94,7 +118,13 @@
       "wheel"
       "video"
       "render"
-      ]; # Enable ‘sudo’ for the user.
+      "sudo"
+      "kvm"
+      "adbusers"
+      "docker"
+      "libvirt"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
     #   packages = with pkgs; [
     #     tree
@@ -102,7 +132,8 @@
   };
 
   users.mutableUsers = false;
-  users.users.root.hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
+  #users.users.root.hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
+  users.users.root.initialPassword = "test";
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
