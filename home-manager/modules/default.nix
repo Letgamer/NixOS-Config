@@ -4,4 +4,6 @@
   # List your module files here
   git = import ./git.nix;
   hyprland = import ./hyprland.nix;
+  waybar = import ./waybar.nix;
+  wayland = import ./wayland.nix;
 }

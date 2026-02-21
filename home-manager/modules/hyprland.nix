@@ -3,6 +3,7 @@
   lib,
   pkgs,
   modulesPath,
+  inputs,
   ...
 }:
 {
@@ -13,21 +14,103 @@
     portalPackage = null;
 
     settings = {
-      env = [
-        "NIXOS_OZONE_WL,1"
-        "ELECTRON_OZONE_PLATFORM_HINT,wayland"
-        "MOZ_ENABLE_WAYLAND,1"
-        "OZONE_PLATFORM,wayland"
-        "EGL_PLATFORM,wayland"
-        "CLUTTER_BACKEND,wayland"
-        "SDL_VIDEODRIVER,wayland"
-        "NIXPKGS_ALLOW_UNFREE,1"
-        "QT_ENABLE_HIGHDPI_SCALING,1"
-        "QT_QPA_PLATFORM,wayland;xcb"
-        "QT_QPA_PLATFORMTHEME,qt6ct"
-        "_JAVA_AWT_WM_NONREPARENTING,1"
-      ];
+
       monitor = ",preferred,auto,1";
+
+      "$mainMod" = "SUPER";
+      "$terminal" = "kitty";
+      "$fileManager" = "nautilus";
+      "$menu" = "${lib.getExe pkgs.hyprlauncher}";
+
+      exec-once = [
+      ];
+
+      general = {
+        gaps_in = 2;
+        gaps_out = 5;
+
+        border_size = 2;
+
+        resize_on_border = true;
+
+        allow_tearing = false;
+
+        layout = "dwindle";
+      };
+
+      decoration = {
+        rounding = 10;
+
+        active_opacity = 0.9;
+        inactive_opacity = 0.9;
+
+        shadow = {
+          enabled = true;
+          range = 4;
+          render_power = 3;
+        };
+
+        blur = {
+          enabled = true;
+          size = 3;
+          passes = 1;
+
+          vibrancy = 0.1696;
+        };
+      };
+
+      animations = {
+        enabled = true;
+        bezier = [
+          "easeOutQuint,0.23,1,0.32,1"
+          "easeInOutCubic,0.65,0.05,0.36,1"
+          "linear,0,0,1,1"
+          "almostLinear,0.5,0.5,0.75,1.0"
+          "quick,0.15,0,0.1,1"
+        ];
+        animation = [
+          "global, 1, 10, default"
+          "border, 1, 5.39, easeOutQuint"
+          "windows, 1, 4.79, easeOutQuint"
+          "windowsIn, 1, 4.1, easeOutQuint, popin 87%"
+          "windowsOut, 1, 1.49, linear, popin 87%"
+          "fadeIn, 1, 1.73, almostLinear"
+          "fadeOut, 1, 1.46, almostLinear"
+          "fade, 1, 3.03, quick"
+          "layers, 1, 3.81, easeOutQuint"
+          "layersIn, 1, 4, easeOutQuint, fade"
+          "layersOut, 1, 1.5, linear, fade"
+          "fadeLayersIn, 1, 1.79, almostLinear"
+          "fadeLayersOut, 1, 1.39, almostLinear"
+        ];
+      };
+
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+      };
+
+      input = {
+        kb_layout = "de";
+
+        follow_mouse = 1;
+
+        touchpad.natural_scroll = false;
+
+        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
+      };
+
+      misc = {
+        disable_watchdog_warning = true;
+      };
+
+      bind = [
+        "$mainMod, Return, exec, $terminal"
+        "$mainMod, D, exec, $menu"
+
+        # Control L --> lock
+        "bind = CONTROL, L, exec, uwsm app -- hyprlock"
+      ];
     };
   };
 }

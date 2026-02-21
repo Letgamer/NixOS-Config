@@ -22,12 +22,14 @@
     outputs.nixosModules.hardware
     outputs.nixosModules.ssh
     outputs.nixosModules.rgb
+    outputs.nixosModules.stylix
 
     # all packages installed
-    outputs.nixosModules.pkgs.mobile
+    #outputs.nixosModules.pkgs.mobile
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    inputs.stylix.nixosModules.stylix
   ];
 
   users.users.nixosvmtest.isNormalUser = true;
@@ -48,6 +50,11 @@
     virtualisation = {
       memorySize = 4096; # Use 2048MiB memory.
       cores = 3;
+      qemu.options = [
+        "-vga std"
+        "-display gtk"
+        "-device VGA,vgamem_mb=1028"
+      ];
     };
   };
 

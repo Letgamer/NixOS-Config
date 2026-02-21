@@ -21,21 +21,21 @@
 
   services.displayManager.defaultSession = "hyprland";
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland
-    ];
-  };
+  # XDPH doesn’t implement a file picker. For that, it is recommended to install xdg-desktop-portal-gtk alongside XDPH.
+  environment.systemPackages = with pkgs; [
+    xdg-desktop-portal-gtk
+  ];
+
+  security.pam.services.hyprlock = { };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Auto startup without login manager
-  #services.xserver.displayManager.lightdm.enable = false;
+  services.xserver.displayManager.lightdm.enable = false;
   services.getty.autologinUser = "user";
-  #environment.loginShellInit = ''
-  #  if uwsm check may-start; then
-  #    exec uwsm start hyprland-uwsm.desktop
-  #  fi
-  #'';
+  environment.loginShellInit = ''
+    if uwsm check may-start; then
+      exec uwsm start hyprland-uwsm.desktop
+    fi
+  '';
 }

@@ -30,6 +30,10 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland"; # Prevents version mismatch.
     };
+    stylix = {
+      url = "github:nix-community/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,6 +44,7 @@
       home-manager,
       hyprland,
       hyprland-plugins,
+      stylix,
       ...
     }@inputs:
     let
