@@ -29,31 +29,31 @@
         border_size = 2;
 
         resize_on_border = true;
-
-        allow_tearing = false;
-
-        layout = "dwindle";
       };
 
       decoration = {
         rounding = 10;
 
         active_opacity = 0.9;
-        inactive_opacity = 0.9;
-
-        shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
-        };
+        inactive_opacity = 0.7;
 
         blur = {
-          enabled = true;
           size = 3;
-          passes = 1;
-
-          vibrancy = 0.1696;
         };
+      };
+
+      dwindle = {
+        pseudotile = true;
+        preserve_split = true;
+      };
+
+      input = {
+        kb_layout = "de";
+      };
+
+      misc = {
+        disable_watchdog_warning = true;
+        focus_on_activate = true;
       };
 
       windowrule = [
@@ -66,7 +66,6 @@
       ];
 
       animations = {
-        enabled = true;
         bezier = [
           "easeOutQuint,0.23,1,0.32,1"
           "easeInOutCubic,0.65,0.05,0.36,1"
@@ -89,26 +88,6 @@
           "fadeLayersIn, 1, 1.79, almostLinear"
           "fadeLayersOut, 1, 1.39, almostLinear"
         ];
-      };
-
-      dwindle = {
-        pseudotile = true;
-        preserve_split = true;
-      };
-
-      input = {
-        kb_layout = "de";
-
-        follow_mouse = 1;
-
-        touchpad.natural_scroll = false;
-
-        sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
-      };
-
-      misc = {
-        disable_watchdog_warning = true;
-        focus_on_activate = true;
       };
 
       bindel = [
