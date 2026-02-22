@@ -10,9 +10,6 @@
   programs.waybar = {
     enable = true;
     # Enabling waybar systemd target
-    systemd = {
-      enable = true;
-      target = "hyprland-session.target";
-    };
+    systemd.enable = true;
   };
 }

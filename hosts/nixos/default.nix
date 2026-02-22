@@ -23,6 +23,7 @@
     outputs.nixosModules.ssh
     outputs.nixosModules.rgb
     outputs.nixosModules.stylix
+    outputs.nixosModules.sound
 
     # all packages installed
     #outputs.nixosModules.pkgs.mobile

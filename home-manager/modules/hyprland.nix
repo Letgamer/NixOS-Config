@@ -20,10 +20,7 @@
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
       "$fileManager" = "nautilus";
-      "$menu" = "${lib.getExe pkgs.hyprlauncher}";
-
-      exec-once = [
-      ];
+      "$menu" = "hyprlauncher";
 
       general = {
         gaps_in = 2;
@@ -58,6 +55,15 @@
           vibrancy = 0.1696;
         };
       };
+
+      windowrule = [
+        # Custom rules for the clipboard manager
+        "match:class clipse, float on, stay_focused on"
+        # XWayland Fix
+        "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_initial_focus on, suppress_event activatefocus"
+        # Ignore maximize requests from all apps
+        "match:class = .*, suppress_event = maximize"
+      ];
 
       animations = {
         enabled = true;
@@ -102,14 +108,76 @@
 
       misc = {
         disable_watchdog_warning = true;
+        focus_on_activate = true;
       };
 
-      bind = [
-        "$mainMod, Return, exec, $terminal"
-        "$mainMod, D, exec, $menu"
+      bindel = [
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
+        ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+      ];
 
+      bindl = [
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPause, exec, playerctl play-pause"
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioPrev, exec, playerctl previous"
+      ];
+
+      bind = [
         # Control L --> lock
-        "bind = CONTROL, L, exec, uwsm app -- hyprlock"
+        "CONTROL, L, exec, uwsm app -- hyprlock"
+
+        # Screenshot
+        ", Print, exec, hyprshot -m window -z"
+        "shift, Print, exec, hyprshot -m region -z"
+
+        "$mainMod, X, exec, kitty --class clipse -e clipse"
+        "$mainMod, Q, exec, $terminal"
+        "$mainMod, C, killactive"
+        "$mainMod, M, exit"
+        "$mainMod, E, exec, $fileManager"
+        "$mainMod, V, togglefloating"
+        "$mainMod, SPACE, exec, $menu"
+        "$mainMod, P, pseudo"
+        "$mainMod, J, togglesplit"
+        "$mainMod, F, fullscreen"
+
+        # Move focus with mainMod + arrow keys
+        "$mainMod, left, movefocus, l"
+        "$mainMod, right, movefocus, r"
+        "$mainMod, up, movefocus, u"
+        "$mainMod, down, movefocus, d"
+
+        # Toggle scratchpad
+        "$mainMod, S, togglespecialworkspace, magic"
+        "$mainMod+SHIFT, S, movetoworkspace, special:magic"
+
+        # Scroll through existing workspaces with mainMod + scroll
+        "$mainMod, mouse_down, workspace, e+1"
+        "$mainMod, mouse_up, workspace, e-1"
+      ]
+      ++ (builtins.concatLists (
+        builtins.genList (
+          x:
+          let
+            ws = toString (x + 1);
+          in
+          [
+            "$mainMod, ${ws}, workspace, ${ws}"
+            "$mainMod SHIFT, ${ws}, movetoworkspace, ${ws}"
+            "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${ws}"
+          ]
+        ) 9
+      ));
+
+      # Move/resize windows with mainMod + LMB/RMB and dragging
+      bindm = [
+        "$mainMod, mouse:272, movewindow"
+        "$mainMod, mouse:273, resizewindow"
       ];
     };
   };

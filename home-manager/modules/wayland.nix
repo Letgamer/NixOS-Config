@@ -18,6 +18,7 @@ in
     brightnessctl
     playerctl
     hyprlauncher
+    wl-clipboard
   ];
 
   # Needed for Hyprpicker and hyprpolkitagent, TODO: upstream to stylix
@@ -43,11 +44,10 @@ in
     export EGL_PLATFORM=wayland
     export CLUTTER_BACKEND=wayland
     export SDL_VIDEODRIVER=wayland
-    export NIXPKGS_ALLOW_UNFREE=1
     export QT_AUTO_SCREEN_SCALE_FACTOR=1
     export QT_ENABLE_HIGHDPI_SCALING=1
     export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-    export QT_QPA_PLATFORM=wayland;xcb
+    export QT_QPA_PLATFORM=wayland
     export QT_QPA_PLATFORMTHEME=qt6ct
     export _JAVA_AWT_WM_NONREPARENTING=1
   '';
@@ -125,6 +125,12 @@ in
         }
       ];
     };
+  };
+
+  # https://home-manager-options.extranix.com/?query=hyprshot&release=release-25.11
+  programs.hyprshot = {
+    enable = true;
+    saveLocation = "$HOME/Pictures/Screenshots";
   };
 
   # https://home-manager-options.extranix.com/?query=clipse&release=release-25.11
