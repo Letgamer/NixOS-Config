@@ -51,6 +51,14 @@
         kb_layout = "de";
       };
 
+      # TODO: enable and set permissions:
+      # https://wiki.hypr.land/Configuring/Variables/#ecosystem
+      # https://wiki.hypr.land/Configuring/Permissions/
+      ecosystem = {
+        no_update_news = true;
+        no_donation_nag = true;
+      };
+
       misc = {
         disable_watchdog_warning = true;
         focus_on_activate = true;
@@ -124,6 +132,7 @@
         "$mainMod, P, pseudo"
         "$mainMod, J, togglesplit"
         "$mainMod, F, fullscreen"
+        "$mainMod+SHIFT, C, exec, hyprpicker -a"
 
         # Move focus with mainMod + arrow keys
         "$mainMod, left, movefocus, l"

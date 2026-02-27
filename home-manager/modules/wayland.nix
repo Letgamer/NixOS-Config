@@ -18,7 +18,9 @@ in
     brightnessctl
     playerctl
     hyprlauncher
+    hyprpicker
     wl-clipboard
+    libnotify
   ];
 
   # Needed for Hyprpicker and hyprpolkitagent, TODO: upstream to stylix
@@ -70,6 +72,11 @@ in
 
   # https://home-manager-options.extranix.com/?query=swaync&release=release-25.11
   services.swaync = {
+    enable = true;
+  };
+
+  # https://home-manager-options.extranix.com/?query=mako&release=release-25.11
+  services.mako = {
     enable = true;
   };
 
