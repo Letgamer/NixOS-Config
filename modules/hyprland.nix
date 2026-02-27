@@ -30,6 +30,8 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  services.udisks2.enable = true;
+
   # Auto startup without login manager
   services.xserver.displayManager.lightdm.enable = false;
   services.getty.autologinUser = "user";

@@ -158,6 +158,10 @@ in
     enable = true;
   };
 
+  # https://home-manager-options.extranix.com/?query=udiskie&release=release-25.11
+  # TODO: System Tray Waybar integration
+  services.udiskie.enable = true;
+
   # hyprpolkitagent is a polkit authentication daemon. It is required for GUI applications to be able to request elevated privileges.
   services.hyprpolkitagent.enable = true;
 
