@@ -22,6 +22,10 @@
       "$fileManager" = "nautilus";
       "$menu" = "hyprlauncher";
 
+      exec-once = [
+        "uwsm finalize"
+      ];
+
       general = {
         gaps_in = 2;
         gaps_out = 5;
@@ -118,10 +122,6 @@
         # Control L --> lock
         "CONTROL, L, exec, uwsm app -- hyprlock"
 
-        # Screenshot
-        ", Print, exec, hyprshot -m window -z"
-        "shift, Print, exec, hyprshot -m region -z"
-
         "$mainMod, X, exec, kitty --class clipse -e clipse"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive"
@@ -143,6 +143,14 @@
         # Toggle scratchpad
         "$mainMod, S, togglespecialworkspace, magic"
         "$mainMod+SHIFT, S, movetoworkspace, special:magic"
+
+        # SCREENSHOT
+        # area
+        ", Print, exec, grimblast --notify --freeze copysave area"
+        # current screen
+        "CTRL, Print, exec, grimblast --notify --cursor --freeze copysave output"
+        # all screens
+        "ALT, Print, exec, grimblast --notify --cursor --freeze copysave screen"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"

@@ -21,6 +21,7 @@ in
     hyprpicker
     wl-clipboard
     libnotify
+    grimblast
   ];
 
   # Needed for Hyprpicker and hyprpolkitagent, TODO: upstream to stylix
@@ -52,7 +53,9 @@ in
     export QT_QPA_PLATFORM=wayland
     export QT_QPA_PLATFORMTHEME=qt6ct
     export _JAVA_AWT_WM_NONREPARENTING=1
+    export GRIMBLAST_NO_CURSOR=0
   '';
+  # https://github.com/hyprwm/contrib/issues/142 GRIMBLAST
 
   home.file.".config/uwsm/env-hyprland".text = ''
     export WLR_RENDERER_ALLOW_SOFTWARE=1
@@ -68,11 +71,6 @@ in
       preload = "~/.config/backgrounds/mountains.png";
       wallpaper = ", ~/.config/backgrounds/mountains.png";
     };
-  };
-
-  # https://home-manager-options.extranix.com/?query=swaync&release=release-25.11
-  services.swaync = {
-    enable = true;
   };
 
   # https://home-manager-options.extranix.com/?query=mako&release=release-25.11
@@ -115,25 +113,45 @@ in
         fade_on_empty = false;
 
         placeholder_text = "Input Password...";
-        
+
         position = "0, -10%";
       };
     };
   };
 
-  # https://home-manager-options.extranix.com/?query=hyprshot&release=release-25.11
-  programs.hyprshot = {
+  # https://home-manager-options.extranix.com/?query=hypridle&release=release-25.11
+  services.hypridle = {
     enable = true;
-    saveLocation = "$HOME/Pictures/Screenshots";
+    settings = {
+      general = {
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        # 5 min – Lock session
+        {
+          timeout = 300;
+          on-timeout = "loginctl lock-session";
+        }
+        # 10 min – Dim screen
+        {
+          timeout = 600;
+          on-timeout = "brightnessctl -s set 10";
+          on-resume = "brightnessctl -r";
+        }
+        # 30 min – Suspend
+        {
+          timeout = 1800;
+          on-timeout = "systemctl suspend";
+        }
+      ];
+    };
   };
 
   # https://home-manager-options.extranix.com/?query=clipse&release=release-25.11
   services.clipse = {
-    enable = true;
-  };
-
-  # https://home-manager-options.extranix.com/?query=hypridle&release=release-25.11
-  services.hypridle = {
     enable = true;
   };
 
