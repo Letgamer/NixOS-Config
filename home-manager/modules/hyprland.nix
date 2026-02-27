@@ -70,7 +70,7 @@
 
       windowrule = [
         # Custom rules for the clipboard manager
-        "match:class clipse, float on, stay_focused on"
+        "match:class clipse, float on, stay_focused on, size 622 652"
         # XWayland Fix
         "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_initial_focus on, suppress_event activatefocus"
         # Ignore maximize requests from all apps
@@ -146,11 +146,11 @@
 
         # SCREENSHOT
         # area
-        ", Print, exec, grimblast --notify --freeze copysave area"
+        ", Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave area"
         # current screen
-        "CTRL, Print, exec, grimblast --notify --cursor --freeze copysave output"
+        "CTRL, Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave output"
         # all screens
-        "ALT, Print, exec, grimblast --notify --cursor --freeze copysave screen"
+        "ALT, Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave screen"
 
         # Scroll through existing workspaces with mainMod + scroll
         "$mainMod, mouse_down, workspace, e+1"

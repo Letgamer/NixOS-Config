@@ -76,6 +76,9 @@ in
   # https://home-manager-options.extranix.com/?query=mako&release=release-25.11
   services.mako = {
     enable = true;
+    settings = {
+      border-radius = 10;
+    };
   };
 
   # https://home-manager-options.extranix.com/?query=hyprlock&release=release-25.11
