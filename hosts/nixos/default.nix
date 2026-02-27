@@ -17,9 +17,9 @@
     # all modules used
     outputs.nixosModules.hyprland
     outputs.nixosModules.boot
-    outputs.nixosModules.impermanence
+    #outputs.nixosModules.impermanence
     outputs.nixosModules.locale
-    outputs.nixosModules.hardware
+    #outputs.nixosModules.hardware
     outputs.nixosModules.ssh
     outputs.nixosModules.rgb
     outputs.nixosModules.stylix
@@ -33,19 +33,8 @@
     inputs.stylix.nixosModules.stylix
   ];
 
-  users.users.nixosvmtest.isNormalUser = true;
-  users.users.nixosvmtest.initialPassword = "test";
-  users.users.nixosvmtest.extraGroups = [
-    "wheel"
-    "video"
-    "render"
-    "sudo"
-    "kvm"
-    "adbusers"
-    "docker"
-    "libvirt"
-    "networkmanager"
-  ];
+  networking.networkmanager.enable = true;
+
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {
@@ -133,7 +122,7 @@
       "libvirt"
       "networkmanager"
     ]; # Enable ‘sudo’ for the user.
-    hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
+    initialPassword = "user";
     #   packages = with pkgs; [
     #     tree
     #   ];

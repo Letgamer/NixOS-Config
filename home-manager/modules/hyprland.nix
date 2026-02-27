@@ -15,7 +15,7 @@
 
     settings = {
 
-      monitor = ",preferred,auto,1";
+      monitor = ",preferred,auto,2";
 
       "$mainMod" = "SUPER";
       "$terminal" = "kitty";
