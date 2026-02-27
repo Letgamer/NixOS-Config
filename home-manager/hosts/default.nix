@@ -14,6 +14,7 @@
     outputs.homeManagerModules.hyprland
     outputs.homeManagerModules.waybar
     outputs.homeManagerModules.wayland
+    outputs.homeManagerModules.ssh
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default

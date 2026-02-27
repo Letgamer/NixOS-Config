@@ -6,4 +6,5 @@
   hyprland = import ./hyprland.nix;
   waybar = import ./waybar.nix;
   wayland = import ./wayland.nix;
+  ssh = import ./ssh.nix;
 }
