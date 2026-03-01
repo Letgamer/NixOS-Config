@@ -6,6 +6,9 @@
   inputs,
   ...
 }:
+let
+  cursorName = "Bibata-Original-Classic-Hyprcursor";
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -22,8 +25,16 @@
       "$fileManager" = "nautilus";
       "$menu" = "hyprlauncher";
 
+      env = [
+      "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      "HYPRCURSOR_THEME,${cursorName}"
+      "HYPRCURSOR_SIZE,${toString 24}"
+      # See https://github.com/hyprwm/contrib/issues/142
+      "GRIMBLAST_NO_CURSOR,0"
+    ];
+
       exec-once = [
-        "uwsm finalize"
+        "hyprctl setcursor ${cursorName} 16"
       ];
 
       general = {
@@ -103,12 +114,11 @@
       };
 
       bindel = [
-        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ", XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ", XF86MonBrightnessUp, exec, brightnessctl s 10%+"
-        ", XF86MonBrightnessDown, exec, brightnessctl s 10%-"
+        ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+ && osd volume"
+        ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && osd volume"
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && osd volume"
+        ", XF86MonBrightnessUp, exec, brightnessctl s 10%+ && osd brightness"
+        ", XF86MonBrightnessDown, exec, brightnessctl s 10%- && osd brightness"
       ];
 
       bindl = [
@@ -120,7 +130,7 @@
 
       bind = [
         # Control L --> lock
-        "CONTROL, L, exec, uwsm app -- hyprlock"
+        "CONTROL, L, exec, loginctl lock-session"
 
         "$mainMod, X, exec, kitty --class clipse -e clipse"
         "$mainMod, Q, exec, $terminal"

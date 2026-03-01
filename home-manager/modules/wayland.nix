@@ -22,6 +22,42 @@ in
     wl-clipboard
     libnotify
     grimblast
+    inputs.fufexan-dotfiles.packages."x86_64-linux".bibata-hyprcursor
+    # https://github.com/emersion/mako/wiki/Volume-change-notification
+    (pkgs.writeShellScriptBin "osd" ''
+      #!${lib.getExe pkgs.bash}
+
+      mode="$1"  # "volume" or "brightness"
+
+      case "$mode" in
+        volume)
+          volume_info=$(${lib.getExe' pkgs.wireplumber "wpctl"} get-volume @DEFAULT_AUDIO_SINK@)
+          if [[ "$volume_info" == *"[MUTED]" ]]; then
+              text="Muted"
+              value=0
+          else
+              value=$(awk '{print int($2 * 100)}' <<< "$volume_info")
+              text="Volume"
+          fi
+          ;;
+        brightness)
+          current=$(${lib.getExe pkgs.brightnessctl} g)
+          max=$(${lib.getExe pkgs.brightnessctl} m)
+          value=$(( current * 100 / max ))
+          text="Brightness"
+          ;;
+        *)
+          echo "Usage: $0 {volume|brightness}" >&2
+          exit 1
+          ;;
+      esac
+
+      ${lib.getExe pkgs.libnotify} -t 1000 \
+        -a "osd" \
+        -h string:x-canonical-private-synchronous:"$mode" \
+        -h int:value:$value \
+        "$text $value%"
+    '')
   ];
 
   # Needed for Hyprpicker and hyprpolkitagent, TODO: upstream to stylix
@@ -73,11 +109,36 @@ in
     };
   };
 
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Original-Classic";
+    size = 24;
+
+    hyprcursor.enable = true;
+    gtk.enable = true;
+    x11.enable = true;
+  };
+
   # https://home-manager-options.extranix.com/?query=mako&release=release-25.11
+  # Configure Volume and Brightness Notification https://github.com/emersion/mako/wiki/Volume-change-notification
   services.mako = {
     enable = true;
     settings = {
       border-radius = 10;
+
+      # Volume notification rule
+      "app-name=osd" = {
+        layer = "overlay";
+        history = 0;
+        anchor = "top-center";
+        group-by = "app-name";
+        format = "<b>%s</b>\\n%b";
+      };
+
+      # Only show latest grouped notification
+      "app-name=osd group-index=0" = {
+        invisible = 0;
+      };
     };
   };
 
