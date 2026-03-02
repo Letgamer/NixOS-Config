@@ -26,6 +26,12 @@
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         # See https://github.com/hyprwm/contrib/issues/142
         "GRIMBLAST_NO_CURSOR,0"
+        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
+        "HYPRCURSOR_SIZE,24"
+      ];
+
+      exec-once = [
+        "hyprctl setcursor rose-pine-hyprcursor 24"
       ];
 
       general = {

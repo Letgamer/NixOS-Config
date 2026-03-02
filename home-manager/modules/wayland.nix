@@ -24,6 +24,7 @@ in
     grimblast
     firefox
     burpsuite
+    rose-pine-hyprcursor
     # https://github.com/emersion/mako/wiki/Volume-change-notification
     (pkgs.writeShellScriptBin "osd" ''
       #!${lib.getExe pkgs.bash}
