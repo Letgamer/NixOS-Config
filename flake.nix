@@ -26,16 +26,8 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland"; # Prevents version mismatch.
-    };
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    fufexan-dotfiles = {
-      url = "github:fufexan/dotfiles";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -47,7 +39,6 @@
       impermanence,
       home-manager,
       hyprland,
-      hyprland-plugins,
       stylix,
       ...
     }@inputs:

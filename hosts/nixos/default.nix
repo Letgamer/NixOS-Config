@@ -144,6 +144,13 @@
     hashcat
   ];
 
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+    cpuFreqGovernor = "schedutil"; #power, performance, ondemand
+  };
+  services.power-profiles-daemon.enable = true;
+
   networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system

@@ -6,9 +6,6 @@
   inputs,
   ...
 }:
-let
-  cursorName = "Bibata-Original-Classic-Hyprcursor";
-in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -26,15 +23,9 @@ in
       "$menu" = "hyprlauncher";
 
       env = [
-      "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
-      "HYPRCURSOR_THEME,${cursorName}"
-      "HYPRCURSOR_SIZE,${toString 24}"
-      # See https://github.com/hyprwm/contrib/issues/142
-      "GRIMBLAST_NO_CURSOR,0"
-    ];
-
-      exec-once = [
-        "hyprctl setcursor ${cursorName} 16"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+        # See https://github.com/hyprwm/contrib/issues/142
+        "GRIMBLAST_NO_CURSOR,0"
       ];
 
       general = {

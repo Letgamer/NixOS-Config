@@ -22,7 +22,8 @@ in
     wl-clipboard
     libnotify
     grimblast
-    inputs.fufexan-dotfiles.packages."x86_64-linux".bibata-hyprcursor
+    firefox
+    burpsuite
     # https://github.com/emersion/mako/wiki/Volume-change-notification
     (pkgs.writeShellScriptBin "osd" ''
       #!${lib.getExe pkgs.bash}
@@ -107,16 +108,6 @@ in
       preload = "~/.config/backgrounds/mountains.png";
       wallpaper = ", ~/.config/backgrounds/mountains.png";
     };
-  };
-
-  home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Original-Classic";
-    size = 24;
-
-    hyprcursor.enable = true;
-    gtk.enable = true;
-    x11.enable = true;
   };
 
   # https://home-manager-options.extranix.com/?query=mako&release=release-25.11
