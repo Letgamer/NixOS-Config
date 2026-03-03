@@ -22,8 +22,6 @@ in
     wl-clipboard
     libnotify
     grimblast
-    firefox
-    burpsuite
     rose-pine-hyprcursor
     # https://github.com/emersion/mako/wiki/Volume-change-notification
     (pkgs.writeShellScriptBin "osd" ''

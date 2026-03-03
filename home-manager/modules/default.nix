@@ -7,4 +7,5 @@
   waybar = import ./waybar.nix;
   wayland = import ./wayland.nix;
   ssh = import ./ssh.nix;
+  firefox = import ./firefox.nix;
 }

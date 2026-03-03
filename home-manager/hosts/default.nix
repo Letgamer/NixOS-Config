@@ -15,6 +15,7 @@
     outputs.homeManagerModules.waybar
     outputs.homeManagerModules.wayland
     outputs.homeManagerModules.ssh
+    outputs.homeManagerModules.firefox
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
