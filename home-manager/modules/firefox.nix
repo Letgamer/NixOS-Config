@@ -6,6 +6,12 @@
   inputs,
   ...
 }:
+let
+  sanitize = s:
+    lib.toLower (
+      builtins.replaceStrings ["@" "." "{" "}"] ["_" "_" "_" "_"] s
+    );
+in
 {
   stylix.targets.firefox.profileNames = [ "default" ];
 
@@ -20,7 +26,7 @@
     };
   };
 
-  programs.firefox = {
+  programs.firefox = with pkgs.firefox-addons; {
     enable = true;
     profiles.default = {
       isDefault = true;
@@ -764,9 +770,17 @@
         "browser.startup.homepage_override.mstone" = "ignore";
         "browser.uitour.enabled" = false;
         "startup.homepage_override_url" = "";
+        "startup.homepage_welcome_url.additional" = "";
         "trailhead.firstrun.didSeeAboutWelcome" = true;
         "browser.bookmarks.restore_default_bookmarks" = false;
         "browser.bookmarks.addedImportButton" = true;
+        "browser.contentblocking.introCount" = 99;
+
+        # Disable Warnings
+        "browser.tabs.warnOnClose" = false;
+        "browser.tabs.warnOnCloseOtherTabs" = false;
+        "browser.tabs.warnOnOpen" = false;
+        "browser.warnOnQuit" = false;
 
         # Disable Tab Restrictions for Pop-Ups
         "browser.link.open_newwindow.restriction" = 0;
@@ -780,6 +794,7 @@
         "browser.ml.chat.page.footerBadge" = false;
         "browser.ml.chat.page.menuBadge" = false;
         "browser.ml.chat.menu" = false;
+        "browser.ml.chat.sidebar" = false;
         "browser.ml.linkPreview.enabled" = false;
         "browser.ml.pageAssist.enabled" = false;
         "browser.ml.smartAssist.enabled" = false;
@@ -929,6 +944,7 @@
         "full-screen-api.warning.timeout" = 0;
         "browser.toolbars.bookmarks.visibility" = "always";
         "browser.tabs.loadBookmarksInTabs" = true;
+        "browser.startup.couldRestoreSession.count" = -1;
 
         # Enable htb domains without redirectiuon to google
         "browser.fixup.domainsuffixwhitelist.htb" = true;
@@ -938,8 +954,6 @@
         # This is needed to pin the extensions!
         "browser.uiCustomization.state" = builtins.toJSON {
           placements = {
-            unified-extensions-area = [];
-            widget-overflow-fixed-list = [];
             nav-bar = [
               "back-button"
               "forward-button"
@@ -951,41 +965,39 @@
               "downloads-button"
               "fxa-toolbar-menu-button"
               # Extension Order is defined here!
-              "ublock0_raymondhill_net-browser-action"
-              "_446900e4-71c2-419f-a6a7-df9c091e268b_-browser-action" # Bitwarden
-              "pwnfoxy_la1n23_lol-browser-action"
-              "addon_darkreader_org-browser-action"
-              "wappalyzer_crunchlabz_com-browser-action"
-              "magnolia_12_34-browser-action"
-              "_c3c10168-4186-445c-9c5b-63f12b8e2c87_-browser-action" # Cookie Editor
-              "_f1423c11-a4e2-4709-a0f8-6d6a68c83d08_-browser-action" # Hacktools
-              "_f6ca2dfb-43a6-4334-9fad-8d5a71a1fe67_-browser-action" # simple-modify-headers
+              "${sanitize ublock-origin.addonId}-browser-action"
+              "${sanitize bitwarden.addonId}-browser-action"
+              "${sanitize pwnfox.addonId}-browser-action"
+              "${sanitize darkreader.addonId}-browser-action"
+              "${sanitize wappalyzer.addonId}-browser-action"
+              "${sanitize bypass-paywalls-clean.addonId}-browser-action"
+              "${sanitize cookie-editor.addonId}-browser-action"
+              "${sanitize hacktools.addonId}-browser-action"
+              "${sanitize simple-modify-header.addonId}-browser-action"
             ];
-            toolbar-menubar = ["menubar-items"];
-            TabsToolbar = [ "firefox-view-button" "tabbrowser-tabs" "new-tab-button" "alltabs-button"];
-            vertical-tabs = [];
-            PersonalToolbar = ["personal-bookmarks"];
           };
-          seen = ["save-to-pocket-button" "developer-button" "ublock0_raymondhill_net-browser-action" ];
-          dirtyAreaCache = ["nav-bar" "PersonalToolbar" "toolbar-menubar" "TabsToolbar" "widget-overflow-fixed-list" "unified-extensions-area"];
-          currentVersion = 23;
-          newElementCount = 2;
         };
       };
 
       extensions = {
         force = true;
-        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+        packages = [
           bitwarden
-          #bypass-paywalls-clean # somehow old version is used??
+          bypass-paywalls-clean
+          cookie-editor
           darkreader
           hacktools
+          pwnfox
+          simple-modify-header
           ublock-origin
           wappalyzer
         ];
         settings = {
-        # TODO: figure out how to configure every extension!
-          "uBlock0@raymondhill.net".settings = {
+        # Darkreader config: https://github.com/BryceBeagle/nixos-config/blob/main/modules/programs/firefox/extensions/darkreader.nix
+        # https://github.com/nix-community/home-manager/pull/6389 
+        # https://github.com/nix-community/home-manager/issues/4618
+        # https://github.com/nix-community/home-manager/issues/8094
+          "${ublock-origin.addonId}".settings = {
             selectedFilterLists = [
               "user-filters"
               "ublock-filters"
@@ -1015,31 +1027,62 @@
               "DEU-0"
             ];
           };
-        };
-      };
-    };
-
-    policies = {
-      ExtensionSettings = {
-        # TODO: Create issues in https://gitlab.com/rycee/nur-expressions so we can switch away from policies
-        "{f6ca2dfb-43a6-4334-9fad-8d5a71a1fe67}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/simple-modify-header/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-        };
-        "PwnFoxy@la1n23.lol" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/pwnfoxy/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-        };
-        "{c3c10168-4186-445c-9c5b-63f12b8e2c87}" = {
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/cookie-editor/latest.xpi";
-          installation_mode = "force_installed";
-          default_area = "navbar";
-        };
-        "magnolia@12.34" = {
-          install_url = "https://gitflic.ru/project/magnolia1234/bpc_uploads/blob/raw?file=bypass_paywalls_clean-latest.xpi";
-          installation_mode = "force_installed";
+          # Bitwarden Configuration
+          "${bitwarden.addonId}" = {
+            force = true;
+            settings = {
+              global_environment_environment = {
+                region = "Self-hosted";
+                urls = {
+                  base = "https://vaultwarden.let-net.cc";
+                };
+              };
+              global_loginEmail_storedEmail = "alexstephan005@protonmail.com";
+              global_vaultBrowserIntroCarousel_introCarouselDismissed = true;
+              global_extensionInitialInstall_extensionInstalled = true;
+              global_vaultAppearance_copyButtons = "quick";
+              user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoad = true;
+              user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoadDefault = true;
+              user_5450439a-482e-48fe-91ba-a0fecf259c67_domainSettings_defaultUriMatchStrategy = 1;
+            };
+          };
+          # Cookie-Editor
+          "${cookie-editor.addonId}" = {
+            force = true;
+            settings = {
+              all_options.adsEnabled = false;
+            };
+          };
+          "${pwnfox.addonId}" = {
+            force = true;
+            settings = {
+              enabled = true;
+              useBurpProxyContainer = true;
+              removeSecurityHeaders = true;
+            };
+          };
+          "${wappalyzer.addonId}" = {
+            force = true;
+            settings = {
+              termsAccepted = true;
+              tracking = false;
+              version = 1;
+              upgradeMessage = false;
+              theme = "dark";
+            };
+          };
+          "${bypass-paywalls-clean.addonId}" = {
+            force = true;
+            settings = {
+              optInShown = true;
+              customShown = true;
+              fetchShown = true;
+              optInFetch = true;
+              optIn = true;
+              customOptIn = true;
+              optInUpdate = false;
+            };
+          };
         };
       };
     };
