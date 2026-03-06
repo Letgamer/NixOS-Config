@@ -1,11 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}:
-{
   programs.git = {
     enable = true;
     lfs.enable = true;

@@ -1,13 +1,9 @@
 {
-  config,
-  lib,
   pkgs,
-  username,
   hostname,
   ...
 }:
 let
-  flake = builtins.getFlake (builtins.toString ./.);
   vscodeCliArgs = [
     # https://code.visualstudio.com/docs/configure/settings-sync#_recommended-configure-the-keyring-to-use-with-vs-code
     # For use with any package that implements the Secret Service API
@@ -98,7 +94,6 @@ in
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
           "explorer.confirmDelete" = false;
           "explorer.confirmDragAndDrop" = false;
-          "extensions.autoUpdate" = false;
           "git.autofetch" = true;
           "git.confirmSync" = false;
           "github.gitProtocol" = "ssh";
@@ -129,7 +124,7 @@ in
               };
               "options" = {
                 "home-manager" = {
-                  "expr" = "${flake}.nixosConfigurations.${hostname}.options.home-manager.users.type.getSubOptions []";
+                  "expr" = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options.home-manager.users.type.getSubOptions []";
                 };
               };
             };

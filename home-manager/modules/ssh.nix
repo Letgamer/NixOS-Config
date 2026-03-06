@@ -1,11 +1,4 @@
 {
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  ...
-}:
-{
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;

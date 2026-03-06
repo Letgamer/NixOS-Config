@@ -7,7 +7,7 @@
   # You can change versions, add patches, set compilation flags, anything really.
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: let
-    pkgs-hypr = inputs.hyprland.inputs.nixpkgs.legacyPackages.${final.system};
+    #pkgs-hypr = inputs.hyprland.inputs.nixpkgs.legacyPackages.${final.system};
   in {
     # Replace Mesa, Wayland, and related libraries with Hyprland-compatible versions
     #mesa = pkgs-hypr.mesa;
