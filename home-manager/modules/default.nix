@@ -8,4 +8,5 @@
   wayland = import ./wayland.nix;
   ssh = import ./ssh.nix;
   firefox = import ./firefox.nix;
+  vscode = import ./vscode.nix;
 }

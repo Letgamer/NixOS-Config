@@ -2,6 +2,7 @@
   config,
   pkgs,
   username,
+  hostname,
   inputs,
   outputs,
   ...
@@ -16,6 +17,7 @@
     outputs.homeManagerModules.wayland
     outputs.homeManagerModules.ssh
     outputs.homeManagerModules.firefox
+    outputs.homeManagerModules.vscode
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
