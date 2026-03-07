@@ -10,7 +10,6 @@ let
 in
 {
   home.packages = with pkgs; [
-    kitty
     nautilus
     clipse
     brightnessctl

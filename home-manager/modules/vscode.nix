@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   hostname,
   ...
 }:
@@ -12,11 +13,9 @@ let
   ];
 in
 {
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    enableBashIntegration = true;
-  };
+  home.packages = with pkgs; [
+    alejandra
+  ];
 
   programs.vscode = {
     enable = true;
@@ -120,7 +119,7 @@ in
           "nix.serverSettings"= {
             "nixd" = {
               "formatting" = {
-                "command" = ["nixfmt"];
+                "command" = ["alejandra"];
               };
               "options" = {
                 "home-manager" = {
@@ -129,6 +128,10 @@ in
               };
             };
           };
+          # Terminal Settings
+          "terminal.external.linuxExec" = "kitty";
+          "terminal.integrated.defaultProfile.linux" = "fish";
+          "terminal.integrated.profiles.linux.fish.path" = "${lib.getExe pkgs.fish}";
         };
       };
     };
