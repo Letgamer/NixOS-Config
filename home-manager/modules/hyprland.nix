@@ -10,7 +10,7 @@
       monitor = ",preferred,auto,2";
 
       "$mainMod" = "SUPER";
-      "$terminal" = "alacritty";
+      "$terminal" = "ghostty +new-window";
       "$fileManager" = "nautilus";
       "$menu" = "hyprlauncher";
 
