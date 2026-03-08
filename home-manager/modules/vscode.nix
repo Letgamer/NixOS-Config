@@ -129,9 +129,9 @@ in
             };
           };
           # Terminal Settings
-          "terminal.external.linuxExec" = "kitty";
-          "terminal.integrated.defaultProfile.linux" = "fish";
-          "terminal.integrated.profiles.linux.fish.path" = "${lib.getExe pkgs.fish}";
+          "terminal.external.linuxExec" = "alacritty";
+          "terminal.integrated.defaultProfile.linux" = "zsh";
+          "terminal.integrated.profiles.linux.zsh.path" = "${lib.getExe pkgs.zsh}";
         };
       };
     };
