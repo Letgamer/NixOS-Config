@@ -19,6 +19,7 @@ in
       shell-integration = "zsh";
       command = "${lib.getExe pkgs.zsh}";
       shell-integration-features = "ssh-env";
+      right-click-action = "copy-or-paste";
     };
   };
 
