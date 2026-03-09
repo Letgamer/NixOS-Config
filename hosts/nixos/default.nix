@@ -26,6 +26,7 @@
 
     # all packages installed
     #outputs.nixosModules.pkgs.mobile
+    outputs.nixosModules.pkgs.hardware
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix

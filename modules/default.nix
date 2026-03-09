@@ -14,5 +14,6 @@
 
   pkgs = {
     mobile = import ./pkgs/mobile.nix;
+    hardware = import ./pkgs/hardware.nix;
   };
 }
