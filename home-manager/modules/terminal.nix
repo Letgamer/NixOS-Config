@@ -30,12 +30,46 @@ in
     autocd = true;
     history = {
       append = true;
-      extended = true;
       share = true;
       ignoreAllDups = true;
+      ignoreDups = true;
       ignoreSpace = true;
+      expireDuplicatesFirst = true;
+      findNoDups = true;
+      saveNoDups = true;
       save = 1000000;
       size = 1000000;
+    };
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+        "extract"
+      ];
+    };
+    shellAliases = {
+      cat = "bat";
+      pcat = "cat";
+
+      man = "batman";
+      diff = "batdiff";
+      grep = "batgrep";
+      watch = "batwatch";
+
+      top = "btop";
+      vscode = "code";
+
+      # Misc
+      ".." = "cd ..";
+      mkdir = "mkdir -p";
+      mk = "() { mkdir -p -- '$1' && cd -- '$1'; };";
+      cdp = "pwd | wl-copy";
+      cfp = "(){ readlink -f '$1' | wl-copy; }";
+      serve = "python3 -m http.server \${1:-8000}";
+    };
+    shellGlobalAliases = {
+      copy = "wl-copy";
+      urlencode = "python3 -c 'import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read().strip()))'";
+      urldecode = "python3 -c 'import urllib.parse, sys; print(urllib.parse.unquote(sys.stdin.read().strip()))'";
     };
   };
 
@@ -130,7 +164,12 @@ in
   };
 
   # Better cat
-  programs.bat.enable = true;
+  programs.bat = {
+    enable = true;
+    extraPackages = with pkgs.bat-extras; [
+      batdiff batman batgrep batwatch
+    ];
+  };
   # Ripgrep
   programs.ripgrep.enable = true;
   # Ripgrep in documents
