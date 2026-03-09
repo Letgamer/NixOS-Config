@@ -34,14 +34,14 @@ in
               value=0
           else
               value=$(awk '{print int($2 * 100)}' <<< "$volume_info")
-              text="Volume"
+              text="󰕾  Volume"
           fi
           ;;
         brightness)
           current=$(${lib.getExe pkgs.brightnessctl} g)
           max=$(${lib.getExe pkgs.brightnessctl} m)
           value=$(( current * 100 / max ))
-          text="Brightness"
+          text="  Brightness"
           ;;
         *)
           echo "Usage: $0 {volume|brightness}" >&2

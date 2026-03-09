@@ -87,7 +87,7 @@ in
       add_newline = true;
       format = lib.concatStrings [
         "[░▒▓](${c.base0D})"
-        "[ ❄ ](bg:${c.base0D} fg:${c.base00}) "
+        "[  ](bg:${c.base0D} fg:${c.base00}) "
         "$directory "
         "$git_branch "
         "$git_status "
