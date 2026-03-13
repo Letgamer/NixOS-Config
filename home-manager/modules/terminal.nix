@@ -57,7 +57,8 @@ in
       watch = "batwatch";
 
       top = "btop";
-      vscode = "code";
+      vscode = "code .";
+      code = "code .";
 
       # Misc
       ".." = "cd ..";

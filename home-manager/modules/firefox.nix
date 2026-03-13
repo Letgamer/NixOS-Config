@@ -923,6 +923,10 @@ in
         "signon.autofillForms" = false;
         "browser.formfill.enable" = false;
         "signon.formlessCapture.enabled" = false;
+        "signon.showAutoCompleteFooter" = false;
+        "signon.autofillForms.http" = false;
+        "signon.management.page.breach-alerts.enabled" = false;
+        "signon.generation.enabled" = false;
 
         # Scrolling
         "apz.overscroll.enabled" = true;
@@ -1038,6 +1042,10 @@ in
               global_vaultBrowserIntroCarousel_introCarouselDismissed = true;
               global_extensionInitialInstall_extensionInstalled = true;
               global_vaultAppearance_copyButtons = "quick";
+              global_autofillSettingsLocal_inlineMenuVisibility = {
+                __json__ = true;
+                value = "1";
+              };
               user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoad = true;
               user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoadDefault = true;
               user_5450439a-482e-48fe-91ba-a0fecf259c67_domainSettings_defaultUriMatchStrategy = 1;
@@ -1073,7 +1081,6 @@ in
             settings = {
               optInShown = true;
               customShown = true;
-              fetchShown = true;
               optInFetch = true;
               optIn = true;
               customOptIn = true;

@@ -119,6 +119,8 @@
       "sudo"
       "kvm"
       "adbusers"
+      "usb"
+      "wireshark"
       "docker"
       "libvirt"
       "networkmanager"
@@ -143,6 +145,8 @@
     # for vscode!!
     nixd
   ];
+
+  services.libinput.touchpad.naturalScrolling = true;
 
   powerManagement = {
     enable = true;
