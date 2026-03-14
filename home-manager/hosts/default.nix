@@ -1,5 +1,6 @@
 {
   username,
+  inputs,
   outputs,
   ...
 }:
@@ -19,6 +20,9 @@
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
     #inputs.stylix.homeModules.stylix
+
+    # This uses a database based on unstable, which can mismatch with stable in rare cases
+    inputs.nix-index-database.homeModules.default
   ];
 
   home = {

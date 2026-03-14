@@ -147,6 +147,12 @@ in
     nix-output-monitor.enable = true;
   };
 
+  programs.nix-index = {
+    enable =  true;
+    enableZshIntegration = true;
+  };
+  programs.nix-index-database.comma.enable = true;
+
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

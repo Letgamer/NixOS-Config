@@ -26,6 +26,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +46,7 @@
       nixpkgs,
       impermanence,
       home-manager,
+      nix-index-database,
       hyprland,
       stylix,
       firefox-addons,
