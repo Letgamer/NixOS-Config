@@ -9,19 +9,20 @@
     extra-substituters = [
       "https://cache.nixos.org/"
       "https://nix-community.cachix.org/"
-      "https://hyprland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
   };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    impermanence.url = "github:nix-community/impermanence";
-    hyprland.url = "github:hyprwm/Hyprland";
+    impermanence = {
+      url = "github:nix-community/impermanence";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,7 +48,6 @@
       impermanence,
       home-manager,
       nix-index-database,
-      hyprland,
       stylix,
       firefox-addons,
       ...

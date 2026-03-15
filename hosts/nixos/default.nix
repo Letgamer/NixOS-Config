@@ -142,6 +142,7 @@
     wget
     btop
     hashcat
+    git
     # for vscode!!
     nixd
   ];

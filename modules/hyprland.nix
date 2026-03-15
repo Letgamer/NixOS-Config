@@ -9,16 +9,18 @@
     withUWSM = true; # recommended for most users
     xwayland.enable = true; # enable x11 legacy support
     # set the flake package
-    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    #package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+    package = pkgs.unstable.hyprland;
+    portalPackage = pkgs.unstable.xdg-desktop-portal-hyprland;
     # make sure to also set the portal package, so that they are in sync
-    portalPackage =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+    #portalPackage =
+    #  inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
 
   services.displayManager.defaultSession = "hyprland";
 
   # XDPH doesn’t implement a file picker. For that, it is recommended to install xdg-desktop-portal-gtk alongside XDPH.
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs.unstable; [
     xdg-desktop-portal-gtk
   ];
 

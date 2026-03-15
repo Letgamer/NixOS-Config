@@ -129,7 +129,7 @@
         "$mainMod, V, togglefloating"
         "$mainMod, SPACE, exec, $menu"
         "$mainMod, P, pseudo"
-        "$mainMod, J, togglesplit"
+        "$mainMod, J, layoutmsg, togglesplit"
         "$mainMod, F, fullscreen"
         "$mainMod+SHIFT, C, exec, hyprpicker -a"
 
