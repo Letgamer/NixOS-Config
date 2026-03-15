@@ -93,16 +93,17 @@
         warn-dirty = false
       '';
 
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 1d";
-      };
-
       # Opinionated: make flake registry and nix path match flake inputs
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
       nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
+  
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep 5 --keep-since 3d";
+    flake = "/home/user/NixOS-Config";
+  };
 
   programs.nix-ld.enable = true;
 
