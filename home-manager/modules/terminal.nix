@@ -64,12 +64,14 @@ in
       ".." = "cd ..";
       mkdir = "mkdir -p";
       mk = "() { mkdir -p -- '$1' && cd -- '$1'; };";
-      cdp = "pwd | wl-copy";
-      cfp = "(){ readlink -f '$1' | wl-copy; }";
+      cpwd = "pwd | wl-copy -n";
+      cfp = "(){ readlink -f '$1' | wl-copy -n; }";
       serve = "python3 -m http.server \${1:-8000}";
+      tempe = "cd '$(mktemp -d)' && chmod -R 0700 .";
     };
     shellGlobalAliases = {
-      copy = "wl-copy";
+      copy = "wl-copy -n";
+      pasta = "wl-paste -n";
       urlencode = "python3 -c 'import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read().strip()))'";
       urldecode = "python3 -c 'import urllib.parse, sys; print(urllib.parse.unquote(sys.stdin.read().strip()))'";
     };
