@@ -196,6 +196,7 @@
     .modules-left #workspaces button.active {
       border-bottom: 1px solid @base0D;
       border: 1px solid @base0D;
+      background-color: @base02;
     }
     '';
   };
