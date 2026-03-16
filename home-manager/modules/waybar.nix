@@ -109,7 +109,7 @@
         };
 
         "custom/power" = {
-          format = "⏻ ";
+          format = "⏻";
           tooltip = false;
           on-click = "systemctl poweroff";
           on-click-right = "systemctl suspend";
@@ -118,6 +118,85 @@
     ];
 
     style = ''
+    /* This styles Waybar generally */
+    window#waybar {
+      background-color: transparent;
+      color: @base05;
+    }
+
+    /* Rounded containers for each module */
+    .module {
+      background-color: @base00;
+      min-width:  15px;
+      margin-top: 4px;
+      margin-left: 1px;
+      margin-right: 1px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border-radius: 12px;
+      border: 2px solid @base0D;
+    }
+    .module:last-child {
+      margin-right: 4px;
+    }
+    .module:first-child {
+      margin-right: 4px;
+    }
+
+    /* Module Settings */
+    #network,
+    #battery,
+    #wireplumber {
+      padding-right: 15px;
+    }
+    #network,
+    #power-profiles-daemon,
+    #bluetooth {
+      font-size: 18px;
+    }
+    #power-profiles-daemon {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+    /* Hide empty bar */
+    window#waybar.empty #window {
+      background: none;
+      border: none;
+    }
+
+    /* Battery visual settings */
+    #battery.full{
+      color: @base0B;
+    }
+    #battery.charging,
+    #battery.plugged .text {
+      animation: blink 5s infinite alternate;
+    }
+    #battery.warning:not(.charging) {
+      color: @base09;
+    }
+    #battery.critical:not(.charging) .text {
+      color: @base08;
+      animation: blink 1s infinite alternate;
+    }
+    #battery.critical:not(.charging) {
+      border-color: @base08;
+    }
+    @keyframes blink {
+      0% { opacity: 1; }
+      100% { opacity: 0.2; }
+    }
+
+    /* Workspace visual settings */
+    #workspaces {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .modules-left #workspaces button.focused,
+    .modules-left #workspaces button.active {
+      border-bottom: 1px solid @base0D;
+      border: 1px solid @base0D;
+    }
     '';
   };
 }
