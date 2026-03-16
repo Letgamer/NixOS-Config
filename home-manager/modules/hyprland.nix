@@ -70,7 +70,13 @@
 
       windowrule = [
         # Custom rules for the clipboard manager
-        "match:class clipse, float on, stay_focused on, size 622 652"
+        "match:class com.clipse.clipse, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.65)"
+        # Custom Rules for Wiremix
+        "match:class com.wiremix.wiremix, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.25)"
+        # Custom Rules for Impala Iwd TUI
+        "match:class com.impala.impala, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
+        # Custom Rules for Bluetooth TUI
+        "match:class com.bluetui.bluetui, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # XWayland Fix
         "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_initial_focus on, suppress_event activatefocus"
         # Ignore maximize requests from all apps
@@ -121,7 +127,8 @@
         # Control L --> lock
         "CONTROL, L, exec, loginctl lock-session"
 
-        "$mainMod, X, exec, kitty --class clipse -e clipse"
+        "$mainMod, X, exec, ghostty --confirm-close-surface=false --class=com.clipse.clipse -e clipse"
+        "$mainMod, Y, exec, nmcli device status | grep -E 'tun|vpn' | awk '{print $1}' | xargs -I {} nmcli -t -f IP4.ADDRESS device show {} | cut -d: -f2 | cut -d/ -f1 | wl-copy -n"
         "$mainMod, Q, exec, $terminal"
         "$mainMod, C, killactive"
         "$mainMod, M, exit"

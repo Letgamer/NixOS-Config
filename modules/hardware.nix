@@ -43,11 +43,6 @@
     # enable CPU microcode updates
     cpu.intel.updateMicrocode = true;
 
-    bluetooth = {
-      enable = true;
-      powerOnBoot = true;
-    };
-
     amdgpu.opencl.enable = true; # Proprietary AMD OpenCL support
     amdgpu.initrd.enable = true; # Enable Initrd support
 
@@ -82,7 +77,6 @@
     rocmPackages.rocm-runtime
     rocmPackages.rocminfo
     rocmPackages.rocm-smi
-    #openrgb # for led control
   ];
 
   # Allow firmware Updates

@@ -104,7 +104,6 @@ in
       right_format = lib.concatStrings [ 
         "$venv "
         "$nix_shell "
-        "$vpnip "
         "$time"];
       time = {
         disabled = false;
@@ -125,11 +124,6 @@ in
         command = "basename \"$VIRTUAL_ENV\"";
         when    = "test -n \"$VIRTUAL_ENV\"";  # only show if in a venv
         format  = "[ $output](bold green) ";
-      };
-      custom.vpnip = {
-        command = "ip -4 -o addr show tun0 | awk '{print $4}' | cut -d/ -f1";
-        when = "test -d /sys/class/net/tun0";
-        format = "[ $output](red) ";
       };
       directory.substitutions = {
         Documents = "󰈙 ";

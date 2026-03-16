@@ -23,6 +23,7 @@
     #outputs.nixosModules.rgb
     outputs.nixosModules.stylix
     outputs.nixosModules.sound
+    outputs.nixosModules.bluetooth
 
     # all packages installed
     #outputs.nixosModules.pkgs.mobile
@@ -33,7 +34,10 @@
     inputs.stylix.nixosModules.stylix
   ];
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.backend = "iwd";
+  };
 
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
@@ -144,6 +148,8 @@
     btop
     hashcat
     git
+    openvpn
+    impala
     # for vscode!!
     nixd
   ];

@@ -1,5 +1,6 @@
 {
   pkgs,
+  username,
   ...
 }:
 {
@@ -31,7 +32,7 @@
 
   # Auto startup without login manager
   services.xserver.displayManager.lightdm.enable = false;
-  services.getty.autologinUser = "user";
+  services.getty.autologinUser = "${username}";
   environment.loginShellInit = ''
     if uwsm check may-start; then
       exec uwsm start hyprland-uwsm.desktop
