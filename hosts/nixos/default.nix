@@ -24,20 +24,19 @@
     outputs.nixosModules.stylix
     outputs.nixosModules.sound
     outputs.nixosModules.bluetooth
+    outputs.nixosModules.network
+    outputs.nixosModules.nixpkgs
+    outputs.nixosModules.users
 
     # all packages installed
     #outputs.nixosModules.pkgs.mobile
+    outputs.nixosModules.pkgs.default
     outputs.nixosModules.pkgs.hardware
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     inputs.stylix.nixosModules.stylix
   ];
-
-  networking.networkmanager = {
-    enable = true;
-    wifi.backend = "iwd";
-  };
 
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
@@ -52,107 +51,8 @@
     };
   };
 
-  nixpkgs = {
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-      inputs.firefox-addons.overlays.default
-    ];
-    # Configure your nixpkgs instance
-    config = {
-      # Disable if you don't want unfree packages
-      allowUnfree = true;
-      android_sdk.accept_license = true;
-    };
-  };
-
-  # Needed for home-manager impermanence!
-  #programs.fuse.userAllowOther = true;
-
-  networking.hostName = "${hostname}";
-
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        # Enable flakes and new 'nix' command
-        experimental-features = "nix-command flakes";
-        # Opinionated: disable global registry
-        flake-registry = "";
-        builders-use-substitutes = true;
-        auto-optimise-store = true;
-        log-lines = 20;
-        max-jobs = "auto";
-      };
-      # Opinionated: disable channels
-      channel.enable = false;
-
-      # Don't warn about dirty flakes and accept flake configs by default
-      extraOptions = ''
-        accept-flake-config = true
-        warn-dirty = false
-      '';
-
-      # Opinionated: make flake registry and nix path match flake inputs
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-    };
-  
-  programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep 5 --keep-since 3d";
-    flake = "/home/user/NixOS-Config";
-  };
-
-  programs.nix-ld.enable = true;
-
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${username}" = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "video"
-      "render"
-      "sudo"
-      "kvm"
-      "adbusers"
-      "usb"
-      "wireshark"
-      "docker"
-      "libvirt"
-      "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
-    initialPassword = "user";
-    #   packages = with pkgs; [
-    #     tree
-    #   ];
-  };
-
-  users.mutableUsers = false;
-  #users.users.root.hashedPassword = "$y$j9T$jHODSqFn4BM1Z8DbpJR0e.$H/H8ORqJqOdfyzJnkhJrzMccilcLUXZvxtGLahpNci9";
-  users.users.root.initialPassword = "test";
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
-  environment.systemPackages = with pkgs; [
-    #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    btop
-    hashcat
-    git
-    openvpn
-    impala
-    # for vscode!!
-    nixd
-  ];
 
   services.libinput.touchpad.naturalScrolling = true;
 
@@ -162,8 +62,6 @@
     cpuFreqGovernor = "schedutil"; #power, performance, ondemand
   };
   services.power-profiles-daemon.enable = true;
-
-  networking.firewall.enable = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you

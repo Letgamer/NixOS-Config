@@ -12,8 +12,12 @@
   stylix = import ./stylix.nix;
   sound = import ./sound.nix;
   bluetooth = import ./bluetooth.nix;
+  network = import ./network.nix;
+  nixpkgs = import ./nixpkgs.nix;
+  users = import ./users.nix;
 
   pkgs = {
+    default = import ./pkgs/default.nix;
     mobile = import ./pkgs/mobile.nix;
     hardware = import ./pkgs/hardware.nix;
   };
