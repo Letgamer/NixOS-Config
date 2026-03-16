@@ -10,4 +10,5 @@
   firefox = import ./firefox.nix;
   vscode = import ./vscode.nix;
   terminal = import ./terminal.nix;
+  spotify = import ./spotify.nix;
 }

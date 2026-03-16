@@ -122,6 +122,11 @@ in
         format = "<b>%s</b>\\n%b";
       };
 
+      # Prevent notifications from Spotify
+      "app-name=Spotify" = {
+        invisible = 1;  # Hide Spotify notifications
+      };
+
       # Only show latest grouped notification
       "app-name=osd group-index=0" = {
         invisible = 0;

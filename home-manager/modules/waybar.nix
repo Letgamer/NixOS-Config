@@ -37,6 +37,9 @@
 
         "hyprland/window" = {
           "max-length" = 50;
+          rewrite = {
+            "Spotify Free" = " Spotify";
+          };
         };
 
         "wireplumber#source" = {
