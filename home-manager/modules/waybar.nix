@@ -140,7 +140,7 @@
       margin-right: 4px;
     }
     .module:first-child {
-      margin-right: 4px;
+      margin-left: 4px;
     }
 
     /* Module Settings */
