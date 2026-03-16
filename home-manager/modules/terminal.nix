@@ -85,7 +85,6 @@ in
     enable = true;
     enableZshIntegration = true;
     settings = {
-      add_newline = true;
       format = lib.concatStrings [
         "[░▒▓](${c.base0D})"
         "[  ](bg:${c.base0D} fg:${c.base00}) "
