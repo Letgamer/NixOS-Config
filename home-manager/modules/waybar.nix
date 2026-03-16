@@ -129,8 +129,6 @@
       background-color: @base00;
       min-width:  15px;
       margin-top: 4px;
-      margin-left: 1px;
-      margin-right: 1px;
       padding-left: 10px;
       padding-right: 10px;
       border-radius: 12px;

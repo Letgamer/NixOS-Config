@@ -97,14 +97,17 @@ in
         "$nodejs "
         "$golang "
         "$php "
-        "$ruby"
-        "$java"
-        "\n$character"
+        "$ruby "
+        "$java "
+        "$fill"
+        "\${custom.venv}"
+        "\${custom.vpn}"
+        "$nix_shell"
+        "$line_break"
+        "$character"
       ];
       right_format = lib.concatStrings [ 
-        "$venv "
-        "$nix_shell "
-        "$time"];
+        "$time  "];
       time = {
         disabled = false;
         time_format = "%T"; # HH:MM:SS
@@ -124,6 +127,15 @@ in
         command = "basename \"$VIRTUAL_ENV\"";
         when    = "test -n \"$VIRTUAL_ENV\"";  # only show if in a venv
         format  = "[ $output](bold green) ";
+      };
+      custom.vpn = {
+        command = ''
+          for iface in tun0 tun1 tun2 wg0 wg1; do
+            ip -4 addr show "$iface" 2>/dev/null | awk '/inet / {gsub(/\/.*/, "", $2); print $2; exit}'
+          done | head -1
+        '';
+        when = "ip link show tun0 2>/dev/null || ip link show tun1 2>/dev/null || ip link show wg0 2>/dev/null || ip link show wg1 2>/dev/null";
+        format = "[ $output](red) ";
       };
       directory.substitutions = {
         Documents = "󰈙 ";
