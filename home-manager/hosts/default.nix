@@ -17,6 +17,7 @@
     outputs.homeManagerModules.vscode
     outputs.homeManagerModules.terminal
     outputs.homeManagerModules.spotify
+    outputs.homeManagerModules.discord
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
@@ -25,6 +26,7 @@
     # This uses a database based on unstable, which can mismatch with stable in rare cases
     inputs.nix-index-database.homeModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
+    inputs.nixcord.homeModules.nixcord
   ];
 
   home = {

@@ -14,7 +14,7 @@ in
     clipse
     brightnessctl
     playerctl
-    hyprlauncher
+    unstable.hyprlauncher
     hyprpicker
     wl-clipboard
     libnotify

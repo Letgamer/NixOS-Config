@@ -11,4 +11,5 @@
   vscode = import ./vscode.nix;
   terminal = import ./terminal.nix;
   spotify = import ./spotify.nix;
+  discord = import ./discord.nix;
 }
