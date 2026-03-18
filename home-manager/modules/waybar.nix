@@ -88,7 +88,7 @@
           format-ethernet = "󰈀";
           format-disconnected = "󰖪";
           on-click-right = "ip -4 addr show $(ip -4 route show default | awk '{print $5; exit}') | awk '/inet / {print $2}' | cut -d/ -f1 | wl-copy -n";
-          on-click = "ghostty --confirm-close-surface=false --class=com.impala.impala -e impala";
+          on-click = "ghostty --confirm-close-surface=false --class=com.gazelle.gazelle -e gazelle";
         };
 
         "custom/vpn-ip"= {

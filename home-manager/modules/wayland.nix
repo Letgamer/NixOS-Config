@@ -1,7 +1,7 @@
 {
   config,
-  lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -10,16 +10,17 @@ let
 in
 {
   home.packages = with pkgs; [
-    nautilus
-    clipse
-    brightnessctl
-    playerctl
-    unstable.hyprlauncher
-    hyprpicker
-    wl-clipboard
-    libnotify
-    grimblast
-    rose-pine-hyprcursor
+    pkgs.nautilus
+    pkgs.clipse
+    pkgs.brightnessctl
+    pkgs.playerctl
+    pkgs.unstable.hyprlauncher
+    pkgs.hyprpicker
+    pkgs.wl-clipboard
+    pkgs.libnotify
+    pkgs.grimblast
+    pkgs.rose-pine-hyprcursor
+    inputs.gazelle.packages.${pkgs.stdenv.hostPlatform.system}.default
     # https://github.com/emersion/mako/wiki/Volume-change-notification
     (pkgs.writeShellScriptBin "osd" ''
       #!${lib.getExe pkgs.bash}
@@ -96,6 +97,39 @@ in
 
   # Deploy the image to ~/.wallpapers
   home.file.".config/backgrounds/mountains.png".source = ./wallpapers/mountains.png;
+
+  home.file.".config/gazelle/theme.toml".text = ''
+    [colors.primary]
+    foreground = "#${c.base05}"
+    background = "#${c.base00}"
+
+    [colors.normal]
+    black = "#${c.base01}"
+    red = "#${c.base08}"
+    green = "#${c.base0B}"
+    yellow = "#${c.base0A}"
+    blue = "#${c.base0D}"
+    magenta = "#${c.base0E}"
+    cyan = "#${c.base0C}"
+    white = "#${c.base05}"
+
+    [colors.bright]
+    black = "#${c.base03}"
+    red = "#${c.base08}"
+    green = "#${c.base0B}"
+    yellow = "#${c.base0A}"
+    blue = "#${c.base0D}"
+    magenta = "#${c.base0E}"
+    cyan = "#${c.base0C}"
+    white = "#${c.base07}"
+  '';
+
+  programs.gazelle = {
+    enable = true;
+    settings = {
+      theme = "user-theme"; # choose your theme
+    };
+  };
 
   # https://home-manager-options.extranix.com/?query=hyprpaper&release=release-25.11
   services.hyprpaper = {

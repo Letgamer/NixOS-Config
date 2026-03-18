@@ -48,6 +48,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-nixcord.follows = "nixpkgs";
     };
+    gazelle = {
+      url = "github:Zeus-Deus/gazelle-tui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
