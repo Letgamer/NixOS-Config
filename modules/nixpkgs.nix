@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   outputs,
   inputs,
   ...
@@ -17,7 +18,11 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      allowBroken = true;
+      allowInsecurePredicate = x: true;
+      allowUnsupportedSystem = true;
       android_sdk.accept_license = true;
+      microsoftVisualStudioLicenseAccepted = true;
     };
   };
 
@@ -35,15 +40,14 @@
         auto-optimise-store = true;
         log-lines = 20;
         max-jobs = "auto";
+        # Don't warn about dirty flakes and accept flake configs by default
+        accept-flake-config = true;
+        warn-dirty = false;
+
+        eval-cache = true;
       };
       # Opinionated: disable channels
       channel.enable = false;
-
-      # Don't warn about dirty flakes and accept flake configs by default
-      extraOptions = ''
-        accept-flake-config = true
-        warn-dirty = false
-      '';
 
       # Opinionated: make flake registry and nix path match flake inputs
       registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;

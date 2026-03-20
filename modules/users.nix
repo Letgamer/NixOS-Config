@@ -17,7 +17,9 @@
       "wireshark"
       "docker"
       "libvirt"
+      "libvirtd"
       "networkmanager"
+      "network"
     ];
     # Enable ‘sudo’ for the user.
     initialPassword = "user";
