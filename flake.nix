@@ -60,9 +60,6 @@
       nixpkgs,
       impermanence,
       home-manager,
-      nix-index-database,
-      stylix,
-      firefox-addons,
       ...
     }@inputs:
     let

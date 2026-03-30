@@ -98,7 +98,7 @@ in
           "github.gitProtocol" = "ssh";
           "security.workspace.trust.enabled" = false;
           "workbench.startupEditor" = "none";
-          "workbench.secondarySidebar.defaultVisibility" = "hidden";
+          "workbench.secondarySideBar.defaultVisibility" = "hidden";
           "remote.SSH.defaultExtensions" = [
             "ms-azuretools.vscode-docker"
             "oderwat.indent-rainbow"

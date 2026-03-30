@@ -30,6 +30,8 @@
 
   services.udisks2.enable = true;
 
+  services.dbus.implementation = "broker";
+
   # Auto startup without login manager
   services.xserver.displayManager.lightdm.enable = false;
   services.getty.autologinUser = "${username}";

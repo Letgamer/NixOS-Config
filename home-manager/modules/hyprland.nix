@@ -38,7 +38,7 @@
       decoration = {
         rounding = 10;
 
-        active_opacity = 0.9;
+        active_opacity = 0.93;
         inactive_opacity = 0.7;
 
         blur = {

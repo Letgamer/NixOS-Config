@@ -1,6 +1,7 @@
 {
   hostname,
   username,
+  pkgs,
   ...
 }:
 {
@@ -36,7 +37,7 @@
             "class<firefox>" = "";
             "class<code>" = "󰨞";
             "class<spotify>" = "";
-            "class<discord>" = "";
+            "class<vesktop>" = "";
           };
         };
 
@@ -51,7 +52,7 @@
         "wireplumber#source" = {
           node-type = "Audio/Source";
           format = "{volume}% ";
-          format-muted = "";
+          format-muted = " ";
           scroll-step = 5;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
           on-click-right = "ghostty --confirm-close-surface=false --class=com.wiremix.wiremix -e wiremix --tab input";
@@ -60,8 +61,8 @@
         "wireplumber#sink" = {
           node-type = "Audio/Sink";
           format = "{volume}% {icon}";
-          format-muted = "";
-          format-icons = [ "" "" "" ];
+          format-muted = " ";
+          format-icons = [ "" " " " " ];
           scroll-step = 5;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-click-right = "ghostty --confirm-close-surface=false --class=com.wiremix.wiremix -e wiremix --tab output";
@@ -71,22 +72,22 @@
           format-icons = {
             default = "";
             performance = "";
-            balanced = "";
-            power-saver = "";
+            balanced = " ";
+            power-saver = " ";
           };
         };
 
         bluetooth = {
           format = "";
           format-off = "󰂲";
-          format-connected = "󰂰";
+          format-connected = "󰂰 ";
           on-click = "ghostty --confirm-close-surface=false --class=com.bluetui.bluetui -e bluetui";
         };
         
         network = {
-          format-wifi = "";
-          format-ethernet = "󰈀";
-          format-disconnected = "󰖪";
+          format-wifi = " ";
+          format-ethernet = "󰈀 ";
+          format-disconnected = "󰖪 ";
           on-click-right = "ip -4 addr show $(ip -4 route show default | awk '{print $5; exit}') | awk '/inet / {print $2}' | cut -d/ -f1 | wl-copy -n";
           on-click = "ghostty --confirm-close-surface=false --class=com.gazelle.gazelle -e gazelle";
         };
@@ -103,12 +104,12 @@
 
         battery = {
           format = "{capacity}% {icon}";
-          format-icons = ["" "" "" "" ""];
+          format-icons = [" " " " " " " " " "];
           states = {
             warning = 30;
             critical = 15;
           };
-          format-charging = "{capacity}% ";
+          format-charging = "{capacity}% 󰂄";
           format-alt = "{time} {icon}";
         };
 
@@ -137,34 +138,24 @@
     .module {
       background-color: @base00;
       min-width:  15px;
-      margin-top: 4px;
-      padding-left: 10px;
-      padding-right: 10px;
+      margin: 4px 2px;
+      padding: 0 5px;
       border-radius: 12px;
       border: 2px solid @base0D;
     }
-    .module:last-child {
-      margin-right: 4px;
+    .modules-left {
+      padding-left: 4px;
     }
-    .module:first-child {
-      margin-left: 4px;
+    .modules-right {
+      padding-right: 4px;
     }
 
-    /* Module Settings */
-    #network,
-    #battery,
-    #wireplumber {
-      padding-right: 15px;
-    }
     #network,
     #power-profiles-daemon,
     #bluetooth {
       font-size: 18px;
     }
-    #power-profiles-daemon {
-      padding-right: 5px;
-      padding-left: 5px;
-    }
+
     /* Hide empty bar */
     window#waybar.empty #window {
       background: none;

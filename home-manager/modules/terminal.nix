@@ -49,12 +49,12 @@ in
     };
     shellAliases = {
       cat = "bat";
-      pcat = "cat";
+      pcat = "command cat";
 
-      man = "batman";
-      diff = "batdiff";
-      grep = "batgrep";
-      watch = "batwatch";
+      bman = "batman";
+      bdiff = "batdiff";
+      bgrep = "batgrep";
+      bwatch = "batwatch";
 
       top = "btop";
       vscode = "code .";
