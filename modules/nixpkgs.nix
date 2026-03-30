@@ -4,8 +4,7 @@
   outputs,
   inputs,
   ...
-}:
-{
+}: {
   nixpkgs = {
     overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
@@ -26,34 +25,32 @@
     };
   };
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        # Enable flakes and new 'nix' command
-        experimental-features = "nix-command flakes";
-        # Opinionated: disable global registry
-        flake-registry = "";
-        builders-use-substitutes = true;
-        auto-optimise-store = true;
-        log-lines = 20;
-        max-jobs = "auto";
-        # Don't warn about dirty flakes and accept flake configs by default
-        accept-flake-config = true;
-        warn-dirty = false;
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Opinionated: disable global registry
+      flake-registry = "";
+      builders-use-substitutes = true;
+      auto-optimise-store = true;
+      log-lines = 20;
+      max-jobs = "auto";
+      # Don't warn about dirty flakes and accept flake configs by default
+      accept-flake-config = true;
+      warn-dirty = false;
 
-        eval-cache = true;
-      };
-      # Opinionated: disable channels
-      channel.enable = false;
-
-      # Opinionated: make flake registry and nix path match flake inputs
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+      eval-cache = true;
     };
-  
+    # Opinionated: disable channels
+    channel.enable = false;
+
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+  };
+
   programs.nh = {
     enable = true;
     clean.enable = true;

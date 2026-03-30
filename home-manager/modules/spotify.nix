@@ -2,11 +2,9 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
-in
-{
+in {
   programs.spicetify = {
     enable = true;
     wayland = true;
@@ -14,7 +12,7 @@ in
       adblockify
       fullScreen
       hidePodcasts
-      keyboardShortcut 
+      keyboardShortcut
       shuffle
       volumePercentage
     ];

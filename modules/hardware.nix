@@ -2,9 +2,7 @@
   lib,
   pkgs,
   ...
-}:
-{
-
+}: {
   # Increase the number of parallel build jobs for Nix to 24
   nix.settings.max-jobs = lib.mkForce 12;
 
@@ -20,7 +18,7 @@
       "thunderbolt"
     ];
 
-    initrd.kernelModules = [ "amdgpu" ];
+    initrd.kernelModules = ["amdgpu"];
     kernelModules = [
       "kvm-intel"
       "intel_rapl"
@@ -60,7 +58,7 @@
   services.fstrim.enable = true;
 
   # Recommended to explicitly declare video driver for Xorg and fallback support
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   environment.variables = {
     HIP_PLATFORM = "amd";

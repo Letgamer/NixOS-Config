@@ -2,8 +2,7 @@
   pkgs,
   username,
   ...
-}:
-{
+}: {
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
@@ -24,7 +23,7 @@
     xdg-desktop-portal-gtk
   ];
 
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock = {};
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

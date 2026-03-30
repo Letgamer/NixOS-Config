@@ -2,22 +2,21 @@
   hostname,
   username,
   ...
-}:
-{
+}: {
   # https://home-manager-options.extranix.com/?query=waybar&release=release-25.11
   programs.waybar = {
     enable = true;
     # Enabling waybar systemd target
     systemd.enable = true;
-    
+
     settings = [
       {
         layer = "top";
         height = 0;
 
-        modules-left = [ "hyprland/workspaces" ];
-        modules-center = [ "hyprland/window" ];
-        modules-right = [ 
+        modules-left = ["hyprland/workspaces"];
+        modules-center = ["hyprland/window"];
+        modules-right = [
           "wireplumber#source"
           "wireplumber#sink"
           "bluetooth"
@@ -62,7 +61,7 @@
           node-type = "Audio/Sink";
           format = "{volume}% {icon}";
           format-muted = " ";
-          format-icons = [ "" " " " " ];
+          format-icons = ["" " " " "];
           scroll-step = 5;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
           on-click-right = "ghostty --confirm-close-surface=false --class=com.wiremix.wiremix -e wiremix --tab output";
@@ -83,7 +82,7 @@
           format-connected = "󰂰 ";
           on-click = "ghostty --confirm-close-surface=false --class=com.bluetui.bluetui -e bluetui";
         };
-        
+
         network = {
           format-wifi = " ";
           format-ethernet = "󰈀 ";
@@ -92,7 +91,7 @@
           on-click = "ghostty --confirm-close-surface=false --class=com.gazelle.gazelle -e gazelle";
         };
 
-        "custom/vpn-ip"= {
+        "custom/vpn-ip" = {
           exec = "nmcli device status | grep -E 'tun|vpn' | awk '{print $1}' | xargs -I {} nmcli -t -f IP4.ADDRESS device show {} | cut -d: -f2 | cut -d/ -f1";
           return-type = "text";
           interval = 15;
@@ -128,74 +127,75 @@
     ];
 
     style = ''
-    /* This styles Waybar generally */
-    window#waybar {
-      background-color: transparent;
-      color: @base05;
-    }
+      /* This styles Waybar generally */
+      window#waybar {
+        background-color: transparent;
+        color: @base05;
+      }
 
-    /* Rounded containers for each module */
-    .module {
-      background-color: @base00;
-      min-width: 15px;
-      margin: 4px 2px 0 2px;
-      padding: 0 5px;
-      border-radius: 12px;
-      border: 2px solid @base0D;
-    }
-    .modules-left {
-      padding-left: 4px;
-    }
-    .modules-right {
-      padding-right: 4px;
-    }
+      /* Rounded containers for each module */
+      .module {
+        background-color: @base00;
+        min-width: 15px;
+        margin: 4px 2px 0 2px;
+        padding: 0 5px;
+        border-radius: 12px;
+        border: 2px solid @base0D;
+        box-shadow: 0 2px 2px rgba(0,0,0,0.25);
+      }
+      .modules-left {
+        padding-left: 2px;
+      }
+      .modules-right {
+        padding-right: 2px;
+      }
 
-    #network,
-    #power-profiles-daemon,
-    #bluetooth {
-      font-size: 18px;
-    }
+      #network,
+      #power-profiles-daemon,
+      #bluetooth {
+        font-size: 18px;
+      }
 
-    /* Hide empty bar */
-    window#waybar.empty #window {
-      background: none;
-      border: none;
-    }
+      /* Hide empty bar */
+      window#waybar.empty #window {
+        background: none;
+        border: none;
+      }
 
-    /* Battery visual settings */
-    #battery.full{
-      color: @base0B;
-    }
-    #battery.charging,
-    #battery.plugged .text {
-      animation: blink 5s infinite alternate;
-    }
-    #battery.warning:not(.charging) {
-      color: @base09;
-    }
-    #battery.critical:not(.charging) .text {
-      color: @base08;
-      animation: blink 1s infinite alternate;
-    }
-    #battery.critical:not(.charging) {
-      border-color: @base08;
-    }
-    @keyframes blink {
-      0% { opacity: 1; }
-      100% { opacity: 0.2; }
-    }
+      /* Battery visual settings */
+      #battery.full{
+        color: @base0B;
+      }
+      #battery.charging,
+      #battery.plugged .text {
+        animation: blink 5s infinite alternate;
+      }
+      #battery.warning:not(.charging) {
+        color: @base09;
+      }
+      #battery.critical:not(.charging) .text {
+        color: @base08;
+        animation: blink 1s infinite alternate;
+      }
+      #battery.critical:not(.charging) {
+        border-color: @base08;
+      }
+      @keyframes blink {
+        0% { opacity: 1; }
+        100% { opacity: 0.2; }
+      }
 
-    /* Workspace visual settings */
-    #workspaces {
-      padding-left: 0;
-      padding-right: 0;
-    }
-    .modules-left #workspaces button.focused,
-    .modules-left #workspaces button.active {
-      border-bottom: 1px solid @base0D;
-      border: 1px solid @base0D;
-      background-color: @base02;
-    }
+      /* Workspace visual settings */
+      #workspaces {
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .modules-left #workspaces button.focused,
+      .modules-left #workspaces button.active {
+        border-bottom: 1px solid @base0D;
+        border: 1px solid @base0D;
+        background-color: @base02;
+      }
     '';
   };
 }

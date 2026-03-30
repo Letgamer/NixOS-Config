@@ -3,11 +3,9 @@
   lib,
   config,
   ...
-}:
-let
+}: let
   c = config.lib.stylix.colors.withHashtag;
-in
-{
+in {
   home.shell.enableShellIntegration = true;
   home.shell.enableZshIntegration = true;
 
@@ -107,8 +105,9 @@ in
         "$line_break"
         "$character"
       ];
-      right_format = lib.concatStrings [ 
-        "$time  "];
+      right_format = lib.concatStrings [
+        "$time  "
+      ];
       time = {
         disabled = false;
         time_format = "%T"; # HH:MM:SS
@@ -126,8 +125,8 @@ in
       # Virtual environment (right side)
       custom.venv = {
         command = "basename \"$VIRTUAL_ENV\"";
-        when    = "test -n \"$VIRTUAL_ENV\"";  # only show if in a venv
-        format  = "[ $output](bold green) ";
+        when = "test -n \"$VIRTUAL_ENV\""; # only show if in a venv
+        format = "[ $output](bold green) ";
       };
       custom.vpn = {
         command = ''
@@ -155,7 +154,7 @@ in
   };
 
   programs.nix-index = {
-    enable =  true;
+    enable = true;
     enableZshIntegration = true;
   };
   programs.nix-index-database.comma.enable = true;
@@ -182,7 +181,10 @@ in
   programs.bat = {
     enable = true;
     extraPackages = with pkgs.bat-extras; [
-      batdiff batman batgrep batwatch
+      batdiff
+      batman
+      batgrep
+      batwatch
     ];
   };
   # Ripgrep

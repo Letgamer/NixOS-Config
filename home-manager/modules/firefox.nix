@@ -2,24 +2,22 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   sanitize = s:
     lib.toLower (
       builtins.replaceStrings ["@" "." "{" "}"] ["_" "_" "_" "_"] s
     );
-in
-{
-  stylix.targets.firefox.profileNames = [ "default" ];
+in {
+  stylix.targets.firefox.profileNames = ["default"];
 
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "x-scheme-handler/about" = [ "firefox.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-      "text/html" = [ "firefox.desktop" ];
-      "application/pdf" = [ "firefox.desktop" ];
+      "x-scheme-handler/about" = ["firefox.desktop"];
+      "x-scheme-handler/http" = ["firefox.desktop"];
+      "x-scheme-handler/https" = ["firefox.desktop"];
+      "text/html" = ["firefox.desktop"];
+      "application/pdf" = ["firefox.desktop"];
     };
   };
 
@@ -37,13 +35,13 @@ in
             bookmarks = [
               {
                 name = "YouTube";
-                tags = [ "youtube" ];
+                tags = ["youtube"];
                 keyword = "youtube";
                 url = "https://www.youtube.com/";
               }
               {
                 name = "WhatsApp";
-                tags = [ "whatsapp" ];
+                tags = ["whatsapp"];
                 keyword = "whatsapp";
                 url = "https://web.whatsapp.com/";
               }
@@ -58,37 +56,37 @@ in
               }
               {
                 name = "Mastodon";
-                tags = [ "mastodon" ];
+                tags = ["mastodon"];
                 keyword = "mastodon";
                 url = "https://social.tchncs.de/home";
               }
               {
                 name = "Proton Mail";
-                tags = [ "mail" ];
+                tags = ["mail"];
                 keyword = "mail";
                 url = "https://mail.proton.me/u/0/inbox";
               }
               {
                 name = "Typst";
-                tags = [ "typst" ];
+                tags = ["typst"];
                 keyword = "typst";
                 url = "https://typst.app/";
               }
               {
                 name = "Annas Archive";
-                tags = [ "archive" ];
+                tags = ["archive"];
                 keyword = "archive";
                 url = "https://annas-archive.org/";
               }
               {
                 name = "Reddit";
-                tags = [ "reddit" ];
+                tags = ["reddit"];
                 keyword = "reddit";
                 url = "https://www.reddit.com/";
               }
               {
                 name = "Red-Flake";
-                tags = [ "redflake" ];
+                tags = ["redflake"];
                 keyword = "redflake";
                 url = "https://github.com/Red-Flake";
               }
@@ -97,43 +95,43 @@ in
                 bookmarks = [
                   {
                     name = "Notes";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://outline.let-net.cc/home";
                   }
                   {
                     name = "RSS";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://feed.let-net.cc/";
                   }
                   {
                     name = "Vaultwarden";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://vaultwarden.let-net.cc/";
                   }
                   {
                     name = "Gitea";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://git.let-net.cc/";
                   }
                   {
                     name = "Documents";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://docs.let-net.cc/dashboard";
                   }
                   {
                     name = "Bloodhound";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://ad.let-net.cc/ui/explore";
                   }
                   {
                     name = "Blog";
-                    tags = [ "selfhosted" ];
+                    tags = ["selfhosted"];
                     keyword = "selfhosted";
                     url = "https://blog.let-net.cc/";
                   }
@@ -162,43 +160,43 @@ in
                 bookmarks = [
                   {
                     name = "Mediathek";
-                    tags = [ "mediathek" ];
+                    tags = ["mediathek"];
                     keyword = "mediathek";
                     url = "https://mediathekviewweb.de/#query=%23Livestream%20%2BLivestream";
                   }
                   {
                     name = "Tarnkappe";
-                    tags = [ "tarnkappe" ];
+                    tags = ["tarnkappe"];
                     keyword = "tarnkappe";
                     url = "https://tarnkappe.info/listen";
                   }
                   {
                     name = "S.to";
-                    tags = [ "series" ];
+                    tags = ["series"];
                     keyword = "series";
                     url = "https://s.to";
                   }
                   {
                     name = "Cine.to";
-                    tags = [ "movies" ];
+                    tags = ["movies"];
                     keyword = "movies";
                     url = "https://cine.to";
                   }
                   {
                     name = "Filmpalast.to";
-                    tags = [ "movies" ];
+                    tags = ["movies"];
                     keyword = "movies";
                     url = "https://filmpalast.to";
                   }
                   {
                     name = "Einschalten.io";
-                    tags = [ "movies" ];
+                    tags = ["movies"];
                     keyword = "movies";
                     url = "https://einschalten.in";
                   }
                   {
                     name = "Huhu.to";
-                    tags = [ "movies" ];
+                    tags = ["movies"];
                     keyword = "movies";
                     url = "https://huhu.to/web-vod/browse?id=movie.trending";
                   }
@@ -209,25 +207,25 @@ in
                 bookmarks = [
                   {
                     name = "Zeit";
-                    tags = [ "news" ];
+                    tags = ["news"];
                     keyword = "news";
                     url = "https://www.zeit.de/exklusive-zeit-artikel";
                   }
                   {
                     name = "Zeit Energiemonitor";
-                    tags = [ "news" ];
+                    tags = ["news"];
                     keyword = "news";
                     url = "https://www.zeit.de/wirtschaft/energiemonitor-strompreis-gaspreis-erneuerbare-energien-ausbau";
                   }
                   {
                     name = "SZ";
-                    tags = [ "news" ];
+                    tags = ["news"];
                     keyword = "news";
                     url = "https://plus.sueddeutsche.de/";
                   }
                   {
                     name = "Spiegel";
-                    tags = [ "news" ];
+                    tags = ["news"];
                     keyword = "news";
                     url = "https://www.spiegel.de/plus/";
                   }
@@ -238,25 +236,25 @@ in
                 bookmarks = [
                   {
                     name = "Crackstation";
-                    tags = [ "crackstation" ];
+                    tags = ["crackstation"];
                     keyword = "crackstation";
                     url = "https://crackstation.net";
                   }
                   {
                     name = "CyberChef";
-                    tags = [ "cyberchef" ];
+                    tags = ["cyberchef"];
                     keyword = "cyberchef";
                     url = "https://gchq.github.io/CyberChef/";
                   }
                   {
                     name = "Synk Code Checker";
-                    tags = [ "snyk" ];
+                    tags = ["snyk"];
                     keyword = "synk";
                     url = "https://snyk.io/code-checker/";
                   }
                   {
                     name = "Grep.app";
-                    tags = [ "grep" ];
+                    tags = ["grep"];
                     keyword = "grep";
                     url = "https://grep.app/";
                   }
@@ -271,37 +269,37 @@ in
                   }
                   {
                     name = "Base64";
-                    tags = [ "base64" ];
+                    tags = ["base64"];
                     keyword = "base64";
                     url = "https://www.base64encode.org/";
                   }
                   {
                     name = "URL-Encode";
-                    tags = [ "url" ];
+                    tags = ["url"];
                     keyword = "url";
                     url = "https://www.urldecoder.org/";
                   }
                   {
                     name = "NameThatHash";
-                    tags = [ "hash" ];
+                    tags = ["hash"];
                     keyword = "hash";
                     url = "https://nth.skerritt.blog/";
                   }
                   {
                     name = "RegEx";
-                    tags = [ "regex" ];
+                    tags = ["regex"];
                     keyword = "regex";
                     url = "https://regex101.com/";
                   }
                   {
                     name = "Linux Cheatsheets";
-                    tags = [ "linux" ];
+                    tags = ["linux"];
                     keyword = "linux";
                     url = "https://linuxcommandlibrary.com/";
                   }
                   {
                     name = "IT Tools";
-                    tags = [ "tools" ];
+                    tags = ["tools"];
                     keyword = "tools";
                     url = "https://it-tools.tech/";
                   }
@@ -366,97 +364,97 @@ in
                 bookmarks = [
                   {
                     name = "Nixpkgs";
-                    tags = [ "nixpkgs" ];
+                    tags = ["nixpkgs"];
                     keyword = "nixpkgs";
                     url = "https://github.com/NixOS/nixpkgs";
                   }
                   {
                     name = "Package Search";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://search.nixos.org/packages?channel=unstable";
                   }
                   {
                     name = "Option Search";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://search.nixos.org/options?channel=unstable";
                   }
                   {
                     name = "Nix package versions";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://lazamar.co.uk/nix-versions/";
                   }
                   {
                     name = "Chaotic's Nyx";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://www.nyx.chaotic.cx/";
                   }
                   {
                     name = "NUR";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://nur.nix-community.org/";
                   }
                   {
                     name = "Noogle";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://noogle.dev/";
                   }
                   {
                     name = "Home Manager Options";
-                    tags = [ "homemanager" ];
+                    tags = ["homemanager"];
                     keyword = "homemanager";
                     url = "https://home-manager-options.extranix.com/";
                   }
                   {
                     name = "NixOS & Flakes Book";
-                    tags = [ "nixos" ];
+                    tags = ["nixos"];
                     keyword = "nixos";
                     url = "https://nixos-and-flakes.thiscute.world/introduction/";
                   }
                   {
                     name = "Nix Pills";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://nixos.org/guides/nix-pills/";
                   }
                   {
                     name = "Zero to Nix";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://zero-to-nix.com/";
                   }
                   {
                     name = "nix.dev";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://nix.dev/";
                   }
                   {
                     name = "Wombat's Book of Nix";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://mhwombat.codeberg.page/nix-book/";
                   }
                   {
                     name = "Plasma-Manager Options";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://nix-community.github.io/plasma-manager/options.xhtml";
                   }
                   {
                     name = "Nixpkgs PRs Dashboard";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://nixpkgs-prs.fliegendewurst.eu/";
                   }
                   {
                     name = "Nixpkgs PR Tracker";
-                    tags = [ "nix" ];
+                    tags = ["nix"];
                     keyword = "nix";
                     url = "https://nixpkgs-tracker.ocfox.me/";
                   }
@@ -467,43 +465,43 @@ in
                 bookmarks = [
                   {
                     name = "HackTricks";
-                    tags = [ "hacktricks" ];
+                    tags = ["hacktricks"];
                     keyword = "hacktricks";
                     url = "https://book.hacktricks.xyz/";
                   }
                   {
                     name = "HackTricks Cloud";
-                    tags = [ "hacktricks" ];
+                    tags = ["hacktricks"];
                     keyword = "hacktricks";
                     url = "https://cloud.hacktricks.wiki/";
                   }
                   {
                     name = "Payloads All The Things";
-                    tags = [ "payloadsallthethings" ];
+                    tags = ["payloadsallthethings"];
                     keyword = "payloadsallthethings";
                     url = "https://swisskyrepo.github.io/PayloadsAllTheThings/";
                   }
                   {
                     name = "Internal All The Things";
-                    tags = [ "internalallthethings" ];
+                    tags = ["internalallthethings"];
                     keyword = "internalallthethings";
                     url = "https://swisskyrepo.github.io/InternalAllTheThings/";
                   }
                   {
                     name = "Hardware All The Things";
-                    tags = [ "hardwareallthethings" ];
+                    tags = ["hardwareallthethings"];
                     keyword = "hardwareallthethings";
                     url = "https://swisskyrepo.github.io/HardwareAllTheThings/";
                   }
                   {
                     name = "Jorian CTF";
-                    tags = [ "jorianwoltjer" ];
+                    tags = ["jorianwoltjer"];
                     keyword = "jorianwoltjer";
                     url = "https://book.jorianwoltjer.com/";
                   }
                   {
                     name = "CTF Database";
-                    tags = [ "ctf" ];
+                    tags = ["ctf"];
                     keyword = "ctf";
                     url = "https://ctfsearch.hackmap.win/";
                   }
@@ -514,43 +512,43 @@ in
                 bookmarks = [
                   {
                     name = "HTB Main";
-                    tags = [ "htb" ];
+                    tags = ["htb"];
                     keyword = "htb";
                     url = "https://app.hackthebox.com";
                   }
                   {
                     name = "HTB Academy";
-                    tags = [ "htb" ];
+                    tags = ["htb"];
                     keyword = "htb";
                     url = "https://academy.hackthebox.com";
                   }
                   {
                     name = "HTB CTF";
-                    tags = [ "htb" ];
+                    tags = ["htb"];
                     keyword = "htb";
                     url = "https://ctf.hackthebox.com";
                   }
                   {
                     name = "Vulnlab";
-                    tags = [ "vulnlab" ];
+                    tags = ["vulnlab"];
                     keyword = "vulnlab";
                     url = "https://www.vulnlab.com/";
                   }
                   {
                     name = "PortSwigger Academy";
-                    tags = [ "portswigger" ];
+                    tags = ["portswigger"];
                     keyword = "portswigger";
                     url = "https://portswigger.net/web-security";
                   }
                   {
                     name = "TryHackMe";
-                    tags = [ "thm" ];
+                    tags = ["thm"];
                     keyword = "thm";
                     url = "https://tryhackme.com/";
                   }
                   {
                     name = "OverTheWire";
-                    tags = [ "overthewire" ];
+                    tags = ["overthewire"];
                     keyword = "overthewire";
                     url = "https://overthewire.org/wargames/";
                   }
@@ -561,25 +559,25 @@ in
                 bookmarks = [
                   {
                     name = "PentestGPT";
-                    tags = [ "pentestgpt" ];
+                    tags = ["pentestgpt"];
                     keyword = "pentestgpt";
                     url = "https://pentestgpt.ai";
                   }
                   {
                     name = "Grok";
-                    tags = [ "grok" ];
+                    tags = ["grok"];
                     keyword = "grok";
                     url = "https://grok.com";
                   }
                   {
                     name = "ChatGPT";
-                    tags = [ "chatgpt" ];
+                    tags = ["chatgpt"];
                     keyword = "chatgpt";
                     url = "https://chatgpt.com";
                   }
                   {
                     name = "Perplexity";
-                    tags = [ "perplexity" ];
+                    tags = ["perplexity"];
                     keyword = "perplexity";
                     url = "https://perplexity.ai";
                   }
@@ -590,55 +588,55 @@ in
                 bookmarks = [
                   {
                     name = "WayBackMachine";
-                    tags = [ "WayBackMachine" ];
+                    tags = ["WayBackMachine"];
                     keyword = "WayBackMachine";
                     url = "https://archive.org/";
                   }
                   {
                     name = "Shodan";
-                    tags = [ "shodan" ];
+                    tags = ["shodan"];
                     keyword = "shodan";
                     url = "https://www.shodan.io/";
                   }
                   {
                     name = "censys";
-                    tags = [ "censys" ];
+                    tags = ["censys"];
                     keyword = "censys";
                     url = "https://search.censys.io/";
                   }
                   {
                     name = "URLHaus abuse";
-                    tags = [ "abuse" ];
+                    tags = ["abuse"];
                     keyword = "abuse";
                     url = "https://urlhaus.abuse.ch/browse/";
                   }
                   {
                     name = "C2 Tracker";
-                    tags = [ "tracker" ];
+                    tags = ["tracker"];
                     keyword = "tracker";
                     url = "https://tracker.viriback.com/";
                   }
                   {
                     name = "Threatcenter";
-                    tags = [ "threatcenter" ];
+                    tags = ["threatcenter"];
                     keyword = "threatcenter";
                     url = "https://threatcenter.crdf.fr/";
                   }
                   {
                     name = "intelx";
-                    tags = [ "intelx" ];
+                    tags = ["intelx"];
                     keyword = "intelx";
                     url = "https://intelx.io/";
                   }
                   {
                     name = "OSINT Framework";
-                    tags = [ "osint" ];
+                    tags = ["osint"];
                     keyword = "osint";
                     url = "https://osintframework.com/";
                   }
                   {
                     name = "IntelTechniques";
-                    tags = [ "inteltechniques" ];
+                    tags = ["inteltechniques"];
                     keyword = "inteltechniques";
                     url = "https://inteltechniques.com/tools/Search.html";
                   }
@@ -649,49 +647,49 @@ in
                 bookmarks = [
                   {
                     name = "CSPBypass";
-                    tags = [ "csp" ];
+                    tags = ["csp"];
                     keyword = "csp";
                     url = "https://cspbypass.com/";
                   }
                   {
                     name = "jwt.io";
-                    tags = [ "jwt.io" ];
+                    tags = ["jwt.io"];
                     keyword = "jwt.io";
                     url = "https://jwt.io/";
                   }
                   {
                     name = "oauth.tools";
-                    tags = [ "oauth.tools" ];
+                    tags = ["oauth.tools"];
                     keyword = "oauth.tools";
                     url = "https://oauth.tools/";
                   }
                   {
                     name = "Chrome Extension Security";
-                    tags = [ "extension" ];
+                    tags = ["extension"];
                     keyword = "extension";
                     url = "https://extensions.neplox.security/";
                   }
                   {
                     name = "Dom-Clobbering";
-                    tags = [ "dom" ];
+                    tags = ["dom"];
                     keyword = "dom";
                     url = "https://domclob.xyz/";
                   }
                   {
                     name = "Dom-Explorer";
-                    tags = [ "dom" ];
+                    tags = ["dom"];
                     keyword = "dom";
                     url = "https://yeswehack.github.io/Dom-Explorer/";
                   }
                   {
                     name = "XS-Leaks";
-                    tags = [ "xs" ];
+                    tags = ["xs"];
                     keyword = "xs";
                     url = "https://xsleaks.dev/";
                   }
                   {
                     name = "GMSGadget";
-                    tags = [ "xss" ];
+                    tags = ["xss"];
                     keyword = "xss";
                     url = "https://gmsgadget.com/";
                   }
@@ -702,19 +700,19 @@ in
                 bookmarks = [
                   {
                     name = "GTFOBins";
-                    tags = [ "gtfobins" ];
+                    tags = ["gtfobins"];
                     keyword = "gtfobins";
                     url = "https://gtfobins.github.io/";
                   }
                   {
                     name = "LOLBAS ";
-                    tags = [ "lolbas" ];
+                    tags = ["lolbas"];
                     keyword = "lolbas";
                     url = "https://lolbas-project.github.io/";
                   }
                   {
                     name = "WADComs ";
-                    tags = [ "wadcoms" ];
+                    tags = ["wadcoms"];
                     keyword = "wadcoms";
                     url = "https://wadcoms.github.io/";
                   }
@@ -725,13 +723,13 @@ in
                 bookmarks = [
                   {
                     name = "Offsec Sysreptor";
-                    tags = [ "sysreptor" ];
+                    tags = ["sysreptor"];
                     keyword = "sysreptor";
                     url = "https://oscp.sysreptor.com/";
                   }
                   {
                     name = "HTB Sysreptor";
-                    tags = [ "sysreptor" ];
+                    tags = ["sysreptor"];
                     keyword = "sysreptor";
                     url = "https://htb.sysreptor.com/";
                   }
@@ -739,7 +737,7 @@ in
               }
               {
                 name = "Element";
-                tags = [ "element" ];
+                tags = ["element"];
                 keyword = "element";
                 url = "https://chat.tchncs.de";
               }
@@ -994,10 +992,10 @@ in
           wappalyzer
         ];
         settings = {
-        # Darkreader config: https://github.com/BryceBeagle/nixos-config/blob/main/modules/programs/firefox/extensions/darkreader.nix
-        # https://github.com/nix-community/home-manager/pull/6389 
-        # https://github.com/nix-community/home-manager/issues/4618
-        # https://github.com/nix-community/home-manager/issues/8094
+          # Darkreader config: https://github.com/BryceBeagle/nixos-config/blob/main/modules/programs/firefox/extensions/darkreader.nix
+          # https://github.com/nix-community/home-manager/pull/6389
+          # https://github.com/nix-community/home-manager/issues/4618
+          # https://github.com/nix-community/home-manager/issues/8094
           "${ublock-origin.addonId}".settings = {
             selectedFilterLists = [
               "user-filters"

@@ -3,12 +3,10 @@
   pkgs,
   inputs,
   ...
-}:
-let
+}: let
   c = config.lib.stylix.colors;
   hex = color: "0xFF${color}";
-in
-{
+in {
   home.packages = with pkgs; [
     pkgs.nautilus
     pkgs.clipse
@@ -158,7 +156,7 @@ in
 
       # Prevent notifications from Spotify
       "app-name=Spotify" = {
-        invisible = 1;  # Hide Spotify notifications
+        invisible = 1; # Hide Spotify notifications
       };
 
       # Only show latest grouped notification

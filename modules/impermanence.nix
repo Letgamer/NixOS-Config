@@ -3,8 +3,7 @@
   lib,
   username,
   ...
-}:
-{
+}: {
   boot.tmp.cleanOnBoot = true;
   environment.persistence."/nix/persist" = lib.mkIf (!(config.system.build ? vm)) {
     hideMounts = true;

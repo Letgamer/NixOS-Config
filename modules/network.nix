@@ -3,14 +3,13 @@
   hostname,
   lib,
   ...
-}:
-{
+}: {
   # For /etc/hostname
   networking.hostName = "${hostname}";
   environment.etc.hostname.mode = "0644";
 
   # Make /etc/hosts writeable
-  environment.etc."hosts".enable= false;
+  environment.etc."hosts".enable = false;
   system.activationScripts.initHosts = lib.mkAfter ''
     if [ ! -e /etc/hosts ]; then
       printf "%s\n" \

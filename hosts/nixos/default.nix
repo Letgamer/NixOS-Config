@@ -2,17 +2,11 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
-  lib,
-  pkgs,
   outputs,
   inputs,
-  username,
-  hostname,
   ...
-}:
-{
+}: {
   imports = [
-
     # all modules used
     outputs.nixosModules.hyprland
     outputs.nixosModules.boot

@@ -3,16 +3,14 @@
   lib,
   hostname,
   ...
-}:
-let
+}: let
   vscodeCliArgs = [
     # https://code.visualstudio.com/docs/configure/settings-sync#_recommended-configure-the-keyring-to-use-with-vs-code
     # For use with any package that implements the Secret Service API
     # (for example gnome-keyring, kwallet5, KeepassXC)
     "--password-store=basic"
   ];
-in
-{
+in {
   home.packages = with pkgs; [
     alejandra
   ];
@@ -29,7 +27,6 @@ in
     # set profiles
     profiles = {
       default = {
-
         # disable update check
         enableUpdateCheck = false;
 
@@ -116,7 +113,7 @@ in
           # Enable Nix LSP and autocompletion!
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nixd";
-          "nix.serverSettings"= {
+          "nix.serverSettings" = {
             "nixd" = {
               "formatting" = {
                 "command" = ["alejandra"];

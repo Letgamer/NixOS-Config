@@ -6,7 +6,6 @@
     portalPackage = null;
 
     settings = {
-
       monitor = ",preferred,auto,2";
 
       "$mainMod" = "SUPER";
@@ -123,58 +122,58 @@
         ", XF86AudioPrev, exec, playerctl previous"
       ];
 
-      bind = [
-        # Control L --> lock
-        "CONTROL, L, exec, loginctl lock-session"
+      bind =
+        [
+          # Control L --> lock
+          "CONTROL, L, exec, loginctl lock-session"
 
-        "$mainMod, X, exec, $terminal --confirm-close-surface=false --class=com.clipse.clipse -e clipse"
-        "$mainMod, Y, exec, nmcli device status | grep -E 'tun|vpn' | awk '{print $1}' | xargs -I {} nmcli -t -f IP4.ADDRESS device show {} | cut -d: -f2 | cut -d/ -f1 | wl-copy -n"
-        "$mainMod, Q, exec, $terminal"
-        "$mainMod, C, killactive"
-        "$mainMod, M, exit"
-        "$mainMod, E, exec, $fileManager"
-        "$mainMod, V, togglefloating"
-        "$mainMod, SPACE, exec, $menu"
-        "$mainMod, P, pseudo"
-        "$mainMod, J, layoutmsg, togglesplit"
-        "$mainMod, F, fullscreen"
-        "$mainMod+SHIFT, C, exec, hyprpicker -a"
+          "$mainMod, X, exec, $terminal --confirm-close-surface=false --class=com.clipse.clipse -e clipse"
+          "$mainMod, Y, exec, nmcli device status | grep -E 'tun|vpn' | awk '{print $1}' | xargs -I {} nmcli -t -f IP4.ADDRESS device show {} | cut -d: -f2 | cut -d/ -f1 | wl-copy -n"
+          "$mainMod, Q, exec, $terminal"
+          "$mainMod, C, killactive"
+          "$mainMod, M, exit"
+          "$mainMod, E, exec, $fileManager"
+          "$mainMod, V, togglefloating"
+          "$mainMod, SPACE, exec, $menu"
+          "$mainMod, P, pseudo"
+          "$mainMod, J, layoutmsg, togglesplit"
+          "$mainMod, F, fullscreen"
+          "$mainMod+SHIFT, C, exec, hyprpicker -a"
 
-        # Move focus with mainMod + arrow keys
-        "$mainMod, left, movefocus, l"
-        "$mainMod, right, movefocus, r"
-        "$mainMod, up, movefocus, u"
-        "$mainMod, down, movefocus, d"
+          # Move focus with mainMod + arrow keys
+          "$mainMod, left, movefocus, l"
+          "$mainMod, right, movefocus, r"
+          "$mainMod, up, movefocus, u"
+          "$mainMod, down, movefocus, d"
 
-        # Toggle scratchpad
-        "$mainMod, S, togglespecialworkspace, magic"
-        "$mainMod+SHIFT, S, movetoworkspace, special:magic"
+          # Toggle scratchpad
+          "$mainMod, S, togglespecialworkspace, magic"
+          "$mainMod+SHIFT, S, movetoworkspace, special:magic"
 
-        # SCREENSHOT
-        # area
-        ", Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave area"
-        # current screen
-        "CTRL, Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave output"
-        # all screens
-        "ALT, Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave screen"
+          # SCREENSHOT
+          # area
+          ", Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave area"
+          # current screen
+          "CTRL, Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave output"
+          # all screens
+          "ALT, Print, exec, env HOME=$HOME/Pictures grimblast --notify --freeze copysave screen"
 
-        # Scroll through existing workspaces with mainMod + scroll
-        "$mainMod, mouse_down, workspace, e+1"
-        "$mainMod, mouse_up, workspace, e-1"
-      ]
-      ++ (builtins.concatLists (
-        builtins.genList (
-          x:
-          let
-            ws = toString (x + 1);
-          in
-          [
-            "$mainMod, ${ws}, workspace, ${ws}"
-            "$mainMod SHIFT, ${ws}, movetoworkspace, ${ws}"
-            "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${ws}"
-          ]
-        ) 9
-      ));
+          # Scroll through existing workspaces with mainMod + scroll
+          "$mainMod, mouse_down, workspace, e+1"
+          "$mainMod, mouse_up, workspace, e-1"
+        ]
+        ++ (builtins.concatLists (
+          builtins.genList (
+            x: let
+              ws = toString (x + 1);
+            in [
+              "$mainMod, ${ws}, workspace, ${ws}"
+              "$mainMod SHIFT, ${ws}, movetoworkspace, ${ws}"
+              "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${ws}"
+            ]
+          )
+          9
+        ));
 
       # Move/resize windows with mainMod + LMB/RMB and dragging
       bindm = [
