@@ -1,7 +1,6 @@
 {
   hostname,
   username,
-  pkgs,
   ...
 }:
 {
@@ -46,6 +45,7 @@
           rewrite = {
             "Spotify Free" = " Spotify";
             "${username}@${hostname}:~" = "󰞷 Shell";
+            "~" = "󰞷 Shell";
           };
         };
 
@@ -137,8 +137,8 @@
     /* Rounded containers for each module */
     .module {
       background-color: @base00;
-      min-width:  15px;
-      margin: 4px 2px;
+      min-width: 15px;
+      margin: 4px 2px 0 2px;
       padding: 0 5px;
       border-radius: 12px;
       border: 2px solid @base0D;
