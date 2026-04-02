@@ -111,6 +111,9 @@ in {
             "tmp" = true;
           };
           # Enable Nix LSP and autocompletion!
+          "[nix]" = {
+            "editor.defaultFormatter" = "jnoortheen.nix-ide";
+          };
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nixd";
           "nix.serverSettings" = {

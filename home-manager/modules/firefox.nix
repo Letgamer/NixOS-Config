@@ -1078,12 +1078,16 @@ in {
           "${bypass-paywalls-clean.addonId}" = {
             force = true;
             settings = {
-              optInShown = false;
-              customShown = false;
+              optInShown = true;
+              customShown = true;
+              fetchShown = true;
               optInFetch = true;
               optIn = true;
               customOptIn = true;
               optInUpdate = false;
+              sites = {
+                "placeholder" = "#####";
+              };
             };
           };
         };
