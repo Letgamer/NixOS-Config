@@ -160,29 +160,24 @@
       window#waybar.empty #window {
         background: none;
         border: none;
+        box-shadow: none;
       }
 
       /* Battery visual settings */
       #battery.full{
         color: @base0B;
       }
-      #battery.charging,
-      #battery.plugged .text {
-        animation: blink 5s infinite alternate;
+      #battery.charging {
+        border-color: @base0B;
       }
       #battery.warning:not(.charging) {
         color: @base09;
       }
       #battery.critical:not(.charging) .text {
         color: @base08;
-        animation: blink 1s infinite alternate;
       }
       #battery.critical:not(.charging) {
         border-color: @base08;
-      }
-      @keyframes blink {
-        0% { opacity: 1; }
-        100% { opacity: 0.2; }
       }
 
       /* Workspace visual settings */

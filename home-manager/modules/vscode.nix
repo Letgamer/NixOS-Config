@@ -125,6 +125,8 @@ in {
               };
             };
           };
+          # https://github.com/nix-community/vscode-nix-ide/issues/482
+          "nix.hiddenLanguageServerErrors" = ["textDocument/definition"];
           # Terminal Settings
           "terminal.external.linuxExec" = "alacritty";
           "terminal.integrated.defaultProfile.linux" = "zsh";

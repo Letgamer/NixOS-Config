@@ -18,6 +18,7 @@ in {
       "x-scheme-handler/https" = ["firefox.desktop"];
       "text/html" = ["firefox.desktop"];
       "application/pdf" = ["firefox.desktop"];
+      "x-scheme-handler/discord" = ["discord.desktop"];
     };
   };
 
@@ -1077,8 +1078,8 @@ in {
           "${bypass-paywalls-clean.addonId}" = {
             force = true;
             settings = {
-              optInShown = true;
-              customShown = true;
+              optInShown = false;
+              customShown = false;
               optInFetch = true;
               optIn = true;
               customOptIn = true;

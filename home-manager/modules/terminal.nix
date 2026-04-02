@@ -55,6 +55,7 @@ in {
       bwatch = "batwatch";
 
       top = "btop";
+      discord = "vesktop";
       vscode = "code .";
       code = "code .";
 

@@ -30,4 +30,14 @@
       };
     };
   };
+
+  # Copied the main stuff from: https://github.com/NixOS/nixpkgs/blob/master/pkgs/by-name/ve/vesktop/package.nix#L163
+  xdg.desktopEntries.discord = {
+    name = "Discord";
+    exec = "vesktop %U";
+    icon = "vesktop";
+    genericName = "Internet Messenger";
+    categories = [ "Network" "InstantMessaging" "Chat" ];
+    mimeType = [ "x-scheme-handler/discord" ];
+  };
 }
