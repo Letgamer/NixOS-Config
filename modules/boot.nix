@@ -1,5 +1,15 @@
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 1;
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 1;
+      };
+      efi.canTouchEfiVariables = true;
+    };
+
+    # Silent boot
+    consoleLogLevel = 0;
+    initrd.verbose = false;
+  };
 }

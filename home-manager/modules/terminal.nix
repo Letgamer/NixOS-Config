@@ -9,11 +9,17 @@ in {
   home.shell.enableShellIntegration = true;
   home.shell.enableZshIntegration = true;
 
+  # programs.ghostty.systemd.enable does not autostart the service at boot, this fixes it
+  xdg.configFile."systemd/user/graphical-session.target.wants/app-com.mitchellh.ghostty.service" = {
+    source = "${pkgs.ghostty}/share/systemd/user/app-com.mitchellh.ghostty.service";
+  };
+
   programs.ghostty = {
     enable = true;
     enableZshIntegration = true;
     systemd.enable = true;
     settings = {
+      async-backend = "io_uring";
       shell-integration = "zsh";
       command = "${lib.getExe pkgs.zsh}";
       shell-integration-features = "ssh-env";
