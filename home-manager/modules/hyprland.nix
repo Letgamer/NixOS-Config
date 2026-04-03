@@ -75,7 +75,11 @@
         "match:class com.gazelle.gazelle, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # Custom Rules for Bluetooth TUI
         "match:class com.bluetui.bluetui, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
+        # Make File Picker floating
         "match:class xdg-desktop-portal-gtk, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.50)"
+        # Hide Burpsuite Startup windows
+        "match:class ^$, match:title ^Java$, match:xwayland true, match:float true, no_initial_focus on, suppress_event activatefocus, opacity 0.0"
+        "match:class burp-StartBurp, match:title Burp Suite Professional v2026.3.1 - licensed to h3110w0r1d, match:xwayland true, float on, opacity 0.0, no_initial_focus on, suppress_event activatefocus"
         # XWayland Fix
         "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_initial_focus on, suppress_event activatefocus"
         # Ignore maximize requests from all apps

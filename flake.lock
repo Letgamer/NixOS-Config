@@ -68,6 +68,47 @@
         "type": "github"
       }
     },
+    "burpsuite-nix": {
+      "inputs": {
+        "home-manager": "home-manager",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775239784,
+        "narHash": "sha256-xHmAxg7bbgPYsIMC6CgkUQwsP4fbC6mQq0AgnwdzAFo=",
+        "owner": "Red-Flake",
+        "repo": "burpsuite-nix",
+        "rev": "f8dc08247313f44492adf0f1dae05caa9686d115",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Red-Flake",
+        "repo": "burpsuite-nix",
+        "type": "github"
+      }
+    },
+    "burpsuitepro": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-unstable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775242391,
+        "narHash": "sha256-v49LlyoIvlD0oXi2brjUs6cDqWAYDCxVWYqYBrK0/d4=",
+        "owner": "Red-Flake",
+        "repo": "Burpsuite-Professional",
+        "rev": "8ded0c03e26d0dbd9fa461c11ad2dcbaf92a0ba4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Red-Flake",
+        "repo": "Burpsuite-Professional",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "nixpkgs": [
@@ -76,11 +117,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1775102584,
-        "narHash": "sha256-DMqFfnsbE6XYMG4xkO3ergr2mqxFEfmt3ePDB1V0M+0=",
+        "lastModified": 1775189004,
+        "narHash": "sha256-6CZuk2ChoYS2g97AuLw8caJwE2ta3SNoMPCKw/ptZdw=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "bda7b1b99e891711cacc68fac2fcdc06abc7fac9",
+        "rev": "d9f69eef7d004744bf402d1e0e00e7e020636808",
         "type": "gitlab"
       },
       "original": {
@@ -236,6 +277,27 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
+          "burpsuite-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764135300,
+        "narHash": "sha256-5xOuutXM7UPTUcn3uDAD8UlPQsXmqPrX81cXoDOAGcA=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "f4cb25928fafa9ae68660fe71f730fc820a59028",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -309,11 +371,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775090912,
-        "narHash": "sha256-Z69XJYa7IIa1d2SwFmeXbSXFK1eYFMuy122n1N3lOig=",
+        "lastModified": 1775215862,
+        "narHash": "sha256-YoFvBMHRE4jCUoAk73bsUOo20j1sQV2NQm4BgQCKqSA=",
         "owner": "FlameFlag",
         "repo": "nixcord",
-        "rev": "851474101e35826fd1c46142976fbd403c11ec9b",
+        "rev": "164e25500dcda5261d23242788ece7ab4f0a4619",
         "type": "github"
       },
       "original": {
@@ -396,9 +458,11 @@
     },
     "root": {
       "inputs": {
+        "burpsuite-nix": "burpsuite-nix",
+        "burpsuitepro": "burpsuitepro",
         "firefox-addons": "firefox-addons",
         "gazelle": "gazelle",
-        "home-manager": "home-manager",
+        "home-manager": "home-manager_2",
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nixcord": "nixcord",

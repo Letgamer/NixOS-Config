@@ -17,6 +17,7 @@
     outputs.homeManagerModules.terminal
     outputs.homeManagerModules.spotify
     outputs.homeManagerModules.discord
+    outputs.homeManagerModules.burpsuite
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
@@ -27,6 +28,7 @@
     inputs.spicetify-nix.homeManagerModules.spicetify
     inputs.nixcord.homeModules.nixcord
     inputs.gazelle.homeModules.gazelle
+    inputs.burpsuite-nix.homeManagerModules.default
   ];
 
   home = {

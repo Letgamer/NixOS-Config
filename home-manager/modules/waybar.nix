@@ -45,6 +45,7 @@
             "Spotify Free" = " Spotify";
             "${username}@${hostname}:~" = "󰞷 Shell";
             "~" = "󰞷 Shell";
+            "Burp (.*)" = " Burpsuite";
           };
         };
 

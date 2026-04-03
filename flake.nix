@@ -52,6 +52,14 @@
       url = "github:Zeus-Deus/gazelle-tui";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    burpsuite-nix = {
+      url = "github:Red-Flake/burpsuite-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    burpsuitepro = {
+      url = "github:Red-Flake/Burpsuite-Professional";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {

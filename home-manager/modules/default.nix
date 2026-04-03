@@ -12,4 +12,5 @@
   terminal = import ./terminal.nix;
   spotify = import ./spotify.nix;
   discord = import ./discord.nix;
+  burpsuite = import ./burpsuite.nix;
 }
