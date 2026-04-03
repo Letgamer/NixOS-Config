@@ -14,7 +14,6 @@
       "$menu" = "hyprlauncher";
 
       env = [
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         # See https://github.com/hyprwm/contrib/issues/142
         "GRIMBLAST_NO_CURSOR,0"
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
@@ -76,6 +75,7 @@
         "match:class com.gazelle.gazelle, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # Custom Rules for Bluetooth TUI
         "match:class com.bluetui.bluetui, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
+        "match:class xdg-desktop-portal-gtk, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.50)"
         # XWayland Fix
         "match:class ^$, match:title ^$, match:xwayland true, match:float true, match:fullscreen false, match:pin false, no_initial_focus on, suppress_event activatefocus"
         # Ignore maximize requests from all apps
