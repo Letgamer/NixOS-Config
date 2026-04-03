@@ -76,17 +76,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1775239784,
-        "narHash": "sha256-xHmAxg7bbgPYsIMC6CgkUQwsP4fbC6mQq0AgnwdzAFo=",
-        "owner": "Red-Flake",
-        "repo": "burpsuite-nix",
-        "rev": "f8dc08247313f44492adf0f1dae05caa9686d115",
-        "type": "github"
+        "lastModified": 1775317051,
+        "narHash": "sha256-+ORSrHTSgEqEppc7+OYIThMqPbHj5n/Z7PqS9YhVY3Q=",
+        "path": "/home/user/burpsuite-nix",
+        "type": "path"
       },
       "original": {
-        "owner": "Red-Flake",
-        "repo": "burpsuite-nix",
-        "type": "github"
+        "path": "/home/user/burpsuite-nix",
+        "type": "path"
       }
     },
     "burpsuitepro": {
@@ -117,11 +114,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1775189004,
-        "narHash": "sha256-6CZuk2ChoYS2g97AuLw8caJwE2ta3SNoMPCKw/ptZdw=",
+        "lastModified": 1775275385,
+        "narHash": "sha256-ZaU7vo1E6oY+sG1HeEhtEWvRr3zYxkNWeWztSnbfgmc=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "d9f69eef7d004744bf402d1e0e00e7e020636808",
+        "rev": "30a2e55fc20909b4b9e104e0254a2473184138a2",
         "type": "gitlab"
       },
       "original": {
@@ -371,11 +368,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775215862,
-        "narHash": "sha256-YoFvBMHRE4jCUoAk73bsUOo20j1sQV2NQm4BgQCKqSA=",
+        "lastModified": 1775293624,
+        "narHash": "sha256-LcalbpqkLs0GfAuZH/TvF1u33hLUNtl+HrkdqVHLl8U=",
         "owner": "FlameFlag",
         "repo": "nixcord",
-        "rev": "164e25500dcda5261d23242788ece7ab4f0a4619",
+        "rev": "3eb858c93518bae0bbe30a45845b9c5ea2fc9940",
         "type": "github"
       },
       "original": {
