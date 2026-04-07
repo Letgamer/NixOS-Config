@@ -76,8 +76,8 @@
         ]
       },
       "locked": {
-        "lastModified": 1775317051,
-        "narHash": "sha256-+ORSrHTSgEqEppc7+OYIThMqPbHj5n/Z7PqS9YhVY3Q=",
+        "lastModified": 1775401246,
+        "narHash": "sha256-8EdNfZ0+wVWs8IPxHhD7NaV6//NPJdHlRi48mCBDdZo=",
         "path": "/home/user/burpsuite-nix",
         "type": "path"
       },
@@ -93,17 +93,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1775242391,
-        "narHash": "sha256-v49LlyoIvlD0oXi2brjUs6cDqWAYDCxVWYqYBrK0/d4=",
-        "owner": "Red-Flake",
-        "repo": "Burpsuite-Professional",
-        "rev": "8ded0c03e26d0dbd9fa461c11ad2dcbaf92a0ba4",
-        "type": "github"
+        "lastModified": 1775401961,
+        "narHash": "sha256-bCAjQgAbBOC6cIUbF2uUeEQZA7jgslKFQTj0lBldHGs=",
+        "path": "/home/user/Burpsuite-Professional",
+        "type": "path"
       },
       "original": {
-        "owner": "Red-Flake",
-        "repo": "Burpsuite-Professional",
-        "type": "github"
+        "path": "/home/user/Burpsuite-Professional",
+        "type": "path"
       }
     },
     "firefox-addons": {
@@ -239,11 +236,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771773133,
-        "narHash": "sha256-SFONyN6cM55pDmGXMgpSB9+OMe5toc12LrABTg2LN3M=",
+        "lastModified": 1775516571,
+        "narHash": "sha256-k3jHo8I5TwlXG+/QNCwkHbTmfRcJZF2UOJAO8VXXu5I=",
         "owner": "Zeus-Deus",
         "repo": "gazelle-tui",
-        "rev": "eb532a8f33fe7898bab9ea4487b98f072f1c9335",
+        "rev": "b478ae9851ef73b78e1294cff8bc2f81f2bfc506",
         "type": "github"
       },
       "original": {

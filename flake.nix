@@ -58,7 +58,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     burpsuitepro = {
-      url = "github:Red-Flake/Burpsuite-Professional";
+      #url = "github:Red-Flake/Burpsuite-Professional";
+      url = "path:/home/user/Burpsuite-Professional";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
