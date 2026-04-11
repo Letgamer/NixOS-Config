@@ -194,6 +194,12 @@ in {
       batwatch
     ];
   };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
+  };
+
   # Ripgrep
   programs.ripgrep.enable = true;
   # Ripgrep in documents

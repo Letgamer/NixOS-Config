@@ -6,5 +6,6 @@
     git
     # vscode LSP
     nixd
+    glow
   ];
 }
