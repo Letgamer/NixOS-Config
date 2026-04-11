@@ -6,6 +6,7 @@
     git
     # vscode LSP
     nixd
+    nixfmt
     glow
   ];
 }

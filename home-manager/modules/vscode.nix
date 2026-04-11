@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  hostname,
   ...
 }: let
   vscodeCliArgs = [
@@ -119,12 +118,7 @@ in {
           "nix.serverSettings" = {
             "nixd" = {
               "formatting" = {
-                "command" = ["alejandra"];
-              };
-              "options" = {
-                "home-manager" = {
-                  "expr" = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options.home-manager.users.type.getSubOptions []";
-                };
+                "command" = ["nixfmt"];
               };
             };
           };
