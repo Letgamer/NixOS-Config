@@ -143,6 +143,8 @@ in {
     enable = true;
     settings = {
       border-radius = 10;
+      default-timeout = 4000;
+      ignore-timeout = 1;
 
       # Volume notification rule
       "app-name=osd" = {
