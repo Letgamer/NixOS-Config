@@ -26,6 +26,8 @@
     #outputs.nixosModules.pkgs.mobile
     outputs.nixosModules.pkgs.default
     outputs.nixosModules.pkgs.hardware
+    outputs.nixosModules.pkgs.windows
+    outputs.nixosModules.pkgs.ad
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix

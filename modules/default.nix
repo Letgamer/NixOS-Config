@@ -20,5 +20,7 @@
     default = import ./pkgs/default.nix;
     mobile = import ./pkgs/mobile.nix;
     hardware = import ./pkgs/hardware.nix;
+    windows = import ./pkgs/windows.nix;
+    ad = import ./pkgs/ad.nix;
   };
 }
