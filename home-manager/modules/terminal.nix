@@ -77,8 +77,12 @@ in {
       cfp = "(){ readlink -f '$1' | wl-copy -n; }";
       serve = "python3 -m http.server \${1:-8000}";
       tempe = "cd '$(mktemp -d)' && chmod -R 0700 .";
+
+      # Python
+      venv = "() { if [ ! -d .venv ]; then uv venv .venv; fi; source .venv/bin/activate; };";
     };
     shellGlobalAliases = {
+      python = "python3";
       copy = "wl-copy -n";
       pasta = "wl-paste -n";
       urlencode = "python3 -c 'import urllib.parse, sys; print(urllib.parse.quote(sys.stdin.read().strip()))'";
@@ -103,7 +107,6 @@ in {
         "$git_branch "
         "$git_status "
         "$rust "
-        "$python "
         "$nodejs "
         "$golang "
         "$php "
@@ -130,12 +133,9 @@ in {
         pure_msg = "";
         heuristic = true;
       };
-      python = {
-        format = "[\${version}]($style)";
-      };
       # Virtual environment (right side)
       custom.venv = {
-        command = "basename \"$VIRTUAL_ENV\"";
+        command = ''python -c "import sys; print(f'v.{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}')"'';
         when = "test -n \"$VIRTUAL_ENV\""; # only show if in a venv
         format = "[ $output](bold green) ";
       };

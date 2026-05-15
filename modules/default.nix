@@ -16,6 +16,7 @@
   nixpkgs = import ./nixpkgs.nix;
   users = import ./users.nix;
   virtualisation = import ./virtualisation.nix;
+  development = import ./development.nix;
 
   pkgs = {
     default = import ./pkgs/default.nix;
