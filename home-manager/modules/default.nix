@@ -13,4 +13,5 @@
   spotify = import ./spotify.nix;
   discord = import ./discord.nix;
   burpsuite = import ./burpsuite.nix;
+  distrobox = import ./distrobox.nix;
 }

@@ -14,6 +14,8 @@
       "docker"
       "libvirt"
       "libvirtd"
+      "docker"
+      "podman"
       "networkmanager"
       "network"
     ];

@@ -65,6 +65,10 @@ in {
       vscode = "code .";
       code = "code .";
 
+      # Distrobox
+      kali = "distrobox enter kali";
+      arch = "distrobox enter arch";
+
       # Misc
       ".." = "cd ..";
       mkdir = "mkdir -p";

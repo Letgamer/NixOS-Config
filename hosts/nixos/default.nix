@@ -21,6 +21,7 @@
     outputs.nixosModules.network
     outputs.nixosModules.nixpkgs
     outputs.nixosModules.users
+    outputs.nixosModules.virtualisation
 
     # all packages installed
     #outputs.nixosModules.pkgs.mobile

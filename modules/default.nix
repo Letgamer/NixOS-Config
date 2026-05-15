@@ -15,6 +15,7 @@
   network = import ./network.nix;
   nixpkgs = import ./nixpkgs.nix;
   users = import ./users.nix;
+  virtualisation = import ./virtualisation.nix;
 
   pkgs = {
     default = import ./pkgs/default.nix;
