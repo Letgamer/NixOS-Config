@@ -23,8 +23,12 @@
 
   networking.networkmanager = {
     enable = true;
+    wifi = {
+      #backend = "iwd";
+    };
   };
   networking.firewall.enable = false;
+  networking.nftables.enable = false;
 
   environment.systemPackages = with pkgs; [
     impala
