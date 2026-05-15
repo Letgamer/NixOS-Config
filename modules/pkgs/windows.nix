@@ -9,7 +9,12 @@
     })
     (bottles.override {removeWarningPopup = true;})
     winetricks
+
     msitools
+    wimlib
+    shortscan
+    python314Packages.xlsxwriter
+    powershell
 
     # DOTNET
     (dotnetCorePackages.combinePackages [
