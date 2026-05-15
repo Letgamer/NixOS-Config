@@ -2,6 +2,7 @@
   lib,
   outputs,
   inputs,
+  pkgs,
   ...
 }: {
   nixpkgs = {
@@ -57,5 +58,24 @@
     flake = "/home/user/NixOS-Config";
   };
 
+  # Enable AppImage support
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+
+  # Enable Flatpak support
+  services.flatpak.enable = true;
+  system.activationScripts.flatpak.text = ''
+    ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub \
+      https://dl.flathub.org/repo/flathub.flatpakrepo
+  '';
+
+  # For non-NixOs compatability
   programs.nix-ld.enable = true;
+  services.envfs.enable = true;
+  environment.systemPackages = with pkgs; [
+    steam-run
+    flatpak-builder
+  ];
 }
