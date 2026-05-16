@@ -463,7 +463,8 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "spicetify-nix": "spicetify-nix",
-        "stylix": "stylix"
+        "stylix": "stylix",
+        "wordlists": "wordlists"
       }
     },
     "spicetify-nix": {
@@ -645,6 +646,22 @@
       "original": {
         "owner": "tinted-theming",
         "repo": "base16-zed",
+        "type": "github"
+      }
+    },
+    "wordlists": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773881265,
+        "narHash": "sha256-I1at2qMFD6jOruiwQV9UWZyy7y4/x68wIic7xHJ0OjM=",
+        "owner": "Red-Flake",
+        "repo": "wordlists",
+        "rev": "2121735d44999f84a488291b412a6528e08cc9d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Red-Flake",
+        "repo": "wordlists",
         "type": "github"
       }
     }

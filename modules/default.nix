@@ -24,5 +24,6 @@
     hardware = import ./pkgs/hardware.nix;
     windows = import ./pkgs/windows.nix;
     ad = import ./pkgs/ad.nix;
+    wordlists = import ./pkgs/wordlists.nix;
   };
 }

@@ -62,6 +62,10 @@
       url = "path:/home/user/Burpsuite-Professional";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    wordlists = {
+      url = "github:Red-Flake/wordlists";
+      flake = false;
+    };
   };
 
   outputs = {

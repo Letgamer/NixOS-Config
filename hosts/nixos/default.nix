@@ -30,6 +30,7 @@
     outputs.nixosModules.pkgs.hardware
     outputs.nixosModules.pkgs.windows
     outputs.nixosModules.pkgs.ad
+    outputs.nixosModules.pkgs.wordlists
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix

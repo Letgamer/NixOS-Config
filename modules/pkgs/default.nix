@@ -8,5 +8,6 @@
     nixd
     nixfmt
     glow
+    jq
   ];
 }
