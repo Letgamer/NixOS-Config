@@ -1,14 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    # Full Wine setup with additional dependencies and configurations
-    (wineWow64Packages.waylandFull.override {
-      embedInstallers = true;
-      gstreamerSupport = true;
-      ffmpegSupport = true;
-      openclSupport = true;
-    })
+    # Full Wine setup via bottles with additional dependencies and configurations
     (bottles.override {removeWarningPopup = true;})
-    winetricks
 
     msitools
     wimlib
@@ -27,5 +20,6 @@
   ];
   environment.sessionVariables = {
     DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet";
+    SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
   };
 }

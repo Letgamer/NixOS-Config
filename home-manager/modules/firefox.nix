@@ -19,6 +19,9 @@ in {
       "text/html" = ["firefox.desktop"];
       "application/pdf" = ["firefox.desktop"];
       "x-scheme-handler/discord" = ["discord.desktop"];
+      "application/x-ms-dos-executable" = ["bottles.desktop"];
+      "application/x-msi" = ["bottles.desktop"];
+      "application/vnd.microsoft.portable-executable" = ["bottles.desktop"];
     };
   };
 

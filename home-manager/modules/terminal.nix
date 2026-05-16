@@ -72,13 +72,17 @@ in {
       # Misc
       ".." = "cd ..";
       mkdir = "mkdir -p";
-      mk = "() { mkdir -p -- '$1' && cd -- '$1'; };";
+      mk = ''() { mkdir -p -- "$1" && cd -- "$1"; } "$@"'';
       cpwd = "pwd | wl-copy -n";
-      cfp = "(){ readlink -f '$1' | wl-copy -n; }";
+      cfp = "(){ readlink -f $1 | wl-copy -n; } $@";
       serve = "python3 -m http.server \${1:-8000}";
       tempe = "cd '$(mktemp -d)' && chmod -R 0700 .";
 
+      # Execute Windows applications via Wine in bottles
+      wine = "() { bottles-cli run -b default -e $1; } $@";
+
       # Python
+      pysh = ''() { nix-shell -p "python3.withPackages (p: with p; [ $* ])"; } $@'';
       venv = "() { if [ ! -d .venv ]; then uv venv .venv; fi; source .venv/bin/activate; };";
     };
     shellGlobalAliases = {
