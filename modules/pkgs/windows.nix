@@ -12,6 +12,7 @@
     # DOTNET
     (dotnetCorePackages.combinePackages [
       dotnet-sdk_6
+      dotnet-sdk_9
       dotnet-sdk
     ])
     mono

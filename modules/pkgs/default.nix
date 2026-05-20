@@ -9,5 +9,7 @@
     nixfmt
     glow
     jq
+    fastfetch
+    tree
   ];
 }

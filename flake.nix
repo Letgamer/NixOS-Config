@@ -63,7 +63,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     wordlists = {
-      url = "github:Red-Flake/wordlists";
+      # https://github.com/NixOS/nix/issues/15285
+      url = "git+https://github.com/Red-Flake/wordlists?ref=main&submodules=1"; #&lfs=1
       flake = false;
     };
   };
