@@ -72,13 +72,13 @@
 
       windowrule = [
         # Custom rules for the clipboard manager
-        "match:class com.clipse.clipse, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.65)"
+        "match:title com.clipse.clipse, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.65)"
         # Custom Rules for Wiremix
-        "match:class com.wiremix.wiremix, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.25)"
+        "match:title com.wiremix.wiremix, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.25)"
         # Custom Rules for Impala Iwd TUI
-        "match:class com.gazelle.gazelle, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
+        "match:title com.gazelle.gazelle, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # Custom Rules for Bluetooth TUI
-        "match:class com.bluetui.bluetui, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
+        "match:title com.bluetui.bluetui, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # Make File Picker floating
         "match:class xdg-desktop-portal-gtk, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.50)"
         # Hide Burpsuite Startup windows
@@ -135,7 +135,7 @@
           # Control L --> lock
           "CONTROL, L, exec, loginctl lock-session"
 
-          "$mainMod, X, exec, $terminal --confirm-close-surface=false --class=com.clipse.clipse -e clipse"
+          "$mainMod, X, exec, $terminal --confirm-close-surface=false --title=com.clipse.clipse -e clipse"
           "$mainMod, Y, exec, nmcli device status | grep -E 'tun|vpn' | awk '{print $1}' | xargs -I {} nmcli -t -f IP4.ADDRESS device show {} | cut -d: -f2 | cut -d/ -f1 | wl-copy -n"
           "$mainMod, Q, exec, $terminal"
           "$mainMod, C, killactive"

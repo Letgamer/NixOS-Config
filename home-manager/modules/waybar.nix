@@ -56,7 +56,7 @@
           format-muted = " ";
           scroll-step = 5;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
-          on-click-right = "ghostty --confirm-close-surface=false --class=com.wiremix.wiremix -e wiremix --tab input";
+          on-click-right = "ghostty +new-window --confirm-close-surface=false --title=com.wiremix.wiremix -e wiremix --tab input";
         };
 
         "wireplumber#sink" = {
@@ -66,7 +66,7 @@
           format-icons = ["" " " " "];
           scroll-step = 5;
           on-click = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-          on-click-right = "ghostty --confirm-close-surface=false --class=com.wiremix.wiremix -e wiremix --tab output";
+          on-click-right = "ghostty +new-window --confirm-close-surface=false --title=com.wiremix.wiremix -e wiremix --tab output";
         };
 
         power-profiles-daemon = {
@@ -82,7 +82,7 @@
           format = "";
           format-off = "󰂲";
           format-connected = "󰂰 ";
-          on-click = "ghostty --confirm-close-surface=false --class=com.bluetui.bluetui -e bluetui";
+          on-click = "ghostty +new-window --confirm-close-surface=false --title=com.bluetui.bluetui -e bluetui";
         };
 
         network = {
@@ -90,7 +90,7 @@
           format-ethernet = "󰈀 ";
           format-disconnected = "󰖪 ";
           on-click-right = "ip -4 addr show $(ip -4 route show default | awk '{print $5; exit}') | awk '/inet / {print $2}' | cut -d/ -f1 | wl-copy -n";
-          on-click = "ghostty --confirm-close-surface=false --class=com.gazelle.gazelle -e gazelle";
+          on-click = "ghostty +new-window --confirm-close-surface=false --title=com.gazelle.gazelle -e gazelle";
         };
 
         "custom/vpn-ip" = {
