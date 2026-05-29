@@ -66,10 +66,22 @@
 
   # Enable Flatpak support
   services.flatpak.enable = true;
-  system.activationScripts.flatpak.text = ''
-    ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub \
-      https://dl.flathub.org/repo/flathub.flatpakrepo
-  '';
+
+  systemd.services.flatpak-flathub = {
+    description = "Add Flathub Flatpak remote";
+
+    wantedBy = ["multi-user.target"];
+
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
+
+    serviceConfig.Type = "oneshot";
+
+    script = ''
+      ${lib.getExe pkgs.flatpak} remote-add --if-not-exists flathub \
+        https://dl.flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
 
   # For non-NixOs compatability
   programs.nix-ld.enable = true;
