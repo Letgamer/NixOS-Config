@@ -12,7 +12,7 @@ in {
     pkgs.clipse
     pkgs.brightnessctl
     pkgs.playerctl
-    pkgs.unstable.hyprlauncher
+    pkgs.hyprlauncher
     pkgs.hyprpicker
     pkgs.wl-clipboard
     pkgs.libnotify
@@ -132,8 +132,12 @@ in {
   services.hyprpaper = {
     enable = true;
     settings = {
-      preload = "~/.config/backgrounds/mountains.png";
-      wallpaper = ", ~/.config/backgrounds/mountains.png";
+      splash = false; # disable the default splash screen
+      ipc = false;
+      wallpaper = {
+        monitor = "";
+        path = "~/.config/backgrounds/mountains.png";
+      };
     };
   };
 

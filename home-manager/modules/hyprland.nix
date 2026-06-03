@@ -4,6 +4,8 @@
     # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
     package = null;
     portalPackage = null;
+    # TODO: convert config to lua
+    configType = "hyprlang";
 
     settings = {
       monitor = ",preferred,auto,2";
@@ -49,7 +51,6 @@
       };
 
       dwindle = {
-        pseudotile = true;
         preserve_split = true;
       };
 

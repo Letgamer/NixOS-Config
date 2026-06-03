@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     # Full Wine setup via bottles with additional dependencies and configurations
-    (bottles.override {removeWarningPopup = true;})
+    (unstable.bottles.override {removeWarningPopup = true;})
 
     msitools
     wimlib

@@ -1031,66 +1031,51 @@ in {
             ];
           };
           # Bitwarden Configuration
-          "${bitwarden.addonId}" = {
-            force = true;
-            settings = {
-              global_environment_environment = {
-                region = "Self-hosted";
-                urls = {
-                  base = "https://vaultwarden.let-net.cc";
-                };
+          "${bitwarden.addonId}".settings = {
+            global_environment_environment = {
+              region = "Self-hosted";
+              urls = {
+                base = "https://vaultwarden.let-net.cc";
               };
-              global_loginEmail_storedEmail = "alexstephan005@protonmail.com";
-              global_vaultBrowserIntroCarousel_introCarouselDismissed = true;
-              global_extensionInitialInstall_extensionInstalled = true;
-              global_vaultAppearance_copyButtons = "quick";
-              global_autofillSettingsLocal_inlineMenuVisibility = {
-                __json__ = true;
-                value = "1";
-              };
-              user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoad = true;
-              user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoadDefault = true;
-              user_5450439a-482e-48fe-91ba-a0fecf259c67_domainSettings_defaultUriMatchStrategy = 1;
             };
+            global_loginEmail_storedEmail = "alexstephan005@protonmail.com";
+            global_vaultBrowserIntroCarousel_introCarouselDismissed = true;
+            global_extensionInitialInstall_extensionInstalled = true;
+            global_vaultAppearance_copyButtons = "quick";
+            global_autofillSettingsLocal_inlineMenuVisibility = {
+              __json__ = true;
+              value = "1";
+            };
+            user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoad = true;
+            user_5450439a-482e-48fe-91ba-a0fecf259c67_autofillSettings_autofillOnPageLoadDefault = true;
+            user_5450439a-482e-48fe-91ba-a0fecf259c67_domainSettings_defaultUriMatchStrategy = 1;
           };
           # Cookie-Editor
-          "${cookie-editor.addonId}" = {
-            force = true;
-            settings = {
-              all_options.adsEnabled = false;
-            };
+          "${cookie-editor.addonId}".settings = {
+            all_options.adsEnabled = false;
           };
-          "${pwnfox.addonId}" = {
-            force = true;
-            settings = {
-              enabled = true;
-              useBurpProxyContainer = true;
-              removeSecurityHeaders = true;
-            };
+          "${pwnfox.addonId}".settings = {
+            enabled = true;
+            useBurpProxyContainer = true;
+            removeSecurityHeaders = true;
           };
-          "${wappalyzer.addonId}" = {
-            force = true;
-            settings = {
-              termsAccepted = true;
-              tracking = false;
-              version = 1;
-              upgradeMessage = false;
-              theme = "dark";
-            };
+          "${wappalyzer.addonId}".settings = {
+            termsAccepted = true;
+            tracking = false;
+            version = 1;
+            upgradeMessage = false;
+            theme = "dark";
           };
-          "${bypass-paywalls-clean.addonId}" = {
-            force = true;
-            settings = {
-              optInShown = true;
-              customShown = true;
-              fetchShown = true;
-              optInFetch = true;
-              optIn = true;
-              customOptIn = true;
-              optInUpdate = false;
-              sites = {
-                "placeholder" = "#####";
-              };
+          "${bypass-paywalls-clean.addonId}".settings = {
+            optInShown = true;
+            customShown = true;
+            fetchShown = true;
+            optInFetch = true;
+            optIn = true;
+            customOptIn = true;
+            optInUpdate = false;
+            sites = {
+              "placeholder" = "#####";
             };
           };
         };
