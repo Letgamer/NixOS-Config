@@ -99,7 +99,6 @@ in {
     enableZshIntegration = true;
   };
 
-  # TODO: Test Python, Venv and vpnip module!
   programs.starship = {
     enable = true;
     enableZshIntegration = true;

@@ -1,7 +1,12 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
+    package = pkgs.openssh.override {withKerberos = true;};
 
     settings = {
       "github.com" = {

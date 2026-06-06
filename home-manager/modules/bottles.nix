@@ -4,10 +4,14 @@
   ...
 }: let
   bottleName = "default";
+  # This currently only works after the first run of bottles, which creates the necessary directories and downloads some files.
+  # https://github.com/bottlesdevs/Bottles/issues/4539
   script = pkgs.writeShellScript "bottles-init" ''
     set -euo pipefail
 
-    mkdir -p "$HOME/.local/share/bottles"
+    if [ ! -d "$HOME/.local/share/bottles" ]; then
+      exit 0
+    fi
 
     if ! ${lib.getExe' pkgs.master.bottles "bottles-cli"} --json list bottles | ${lib.getExe pkgs.jq} -e 'has("${bottleName}")' >/dev/null; then
       echo "Creating bottle ${bottleName}"
@@ -19,8 +23,6 @@
     fi
   '';
 in {
-  # This currently only works after the first run of bottles, which creates the necessary directories and downloads some files.
-  # https://github.com/bottlesdevs/Bottles/issues/4539
   systemd.user.services.bottles-init = {
     Unit = {
       Description = "Declaratively configure Bottles";
