@@ -7,30 +7,39 @@
     name,
     image,
     bootstrapScript,
-  }: {
+  }: let
+    bootstrap =
+      pkgs.writeShellScript "distrobox-${name}-bootstrap"
+      (builtins.readFile bootstrapScript);
+
+    script = pkgs.writeShellScript "distrobox-${name}-init" ''
+      set -euo pipefail
+
+      if ! ${lib.getExe pkgs.podman} container exists ${name}; then
+        ${lib.getExe pkgs.distrobox} create \
+          --name ${name} \
+          --image ${image} \
+          --init-hooks "${bootstrap}" \
+          --yes
+      fi
+    '';
+  in {
     systemd.user.services."distrobox-${name}" = {
-      wantedBy = ["default.target"];
-
-      after = ["podman.socket"];
-      wants = ["podman.socket"];
-
-      serviceConfig = {
-        Type = "oneshot";
+      Unit = {
+        Description = "Distrobox ${name}";
+        After = ["podman.socket"];
+        Wants = ["podman.socket"];
       };
 
-      script = ''
-        if ! ${pkgs.podman}/bin/podman container exists ${name}; then
-          ${pkgs.distrobox}/bin/distrobox create \
-            --name ${name} \
-            --image ${image} \
-            --volume ${bootstrapScript}:/bootstrap.sh:ro \
-            --yes
-        fi
+      Install = {
+        WantedBy = ["default.target"];
+      };
 
-        if ! ${pkgs.distrobox}/bin/distrobox enter ${name} -- test -f /var/tmp/bootstrap-complete; then
-          ${pkgs.distrobox}/bin/distrobox enter ${name} -- bash /bootstrap.sh
-        fi
-      '';
+      Service = {
+        Type = "oneshot";
+
+        ExecStart = "${script}";
+      };
     };
   };
 in

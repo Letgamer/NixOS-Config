@@ -18,9 +18,9 @@
     outputs.homeManagerModules.spotify
     outputs.homeManagerModules.discord
     outputs.homeManagerModules.burpsuite
-    #outputs.homeManagerModules.distrobox
+    outputs.homeManagerModules.distrobox
     # Currently it is not possible to use the cli for creating bottles
-    #outputs.homeManagerModules.bottles
+    outputs.homeManagerModules.bottles
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
