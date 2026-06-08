@@ -1,15 +1,42 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    #   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
+    acpi
     btop
+    curl
+    dnsutils
+    e2fsprogs
+    fastfetch
+    file
     git
+    glow
+    gnutar
+    imagemagick
+    inetutils
+    jq
+    libfaketime
+    lsof
+    lsb-release
+    ltrace
+    netcat-gnu
     # vscode LSP
     nixd
     nixfmt
-    glow
-    jq
-    fastfetch
+    ntp
+    p7zip
+    pciutils
+    psmisc
+    rlwrap
+    socat
+    sshpass
+    strace
+    tldr
     tree
+    unrar
+    unzip
+    usbutils
+    wayland-utils
+    wget
+    whois
+    zip
   ];
 }

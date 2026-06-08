@@ -11,7 +11,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      outputs.overlays.master-packages
       inputs.firefox-addons.overlays.default
     ];
     # Configure your nixpkgs instance

@@ -31,10 +31,11 @@
   networking.nftables.enable = false;
 
   environment.systemPackages = with pkgs; [
-    impala
-    openvpn
-    wireguard-tools
     eduvpn-client
+    impala
+    macchanger
+    openvpn
     tailscale
+    wireguard-tools
   ];
 }
