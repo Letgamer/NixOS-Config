@@ -3,6 +3,7 @@
     acpi
     btop
     curl
+    dig
     dnsutils
     e2fsprogs
     fastfetch

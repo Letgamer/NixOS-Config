@@ -40,7 +40,6 @@
 
         # Kerberos / GSSAPI
         GSSAPIAuthentication = true;
-        GSSAPIDelegateCredentials = true;
 
         # Legacy RSA support
         HostKeyAlgorithms = "+ssh-rsa";

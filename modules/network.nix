@@ -33,7 +33,6 @@
   environment.systemPackages = with pkgs; [
     eduvpn-client
     impala
-    macchanger
     openvpn
     tailscale
     wireguard-tools

@@ -8,7 +8,8 @@ fi
 
 apt update
 
-apt install -y kali-linux-headless
+# Disable temporarily
+#apt install -y kali-linux-headless
 
 # Core utilities
 apt install -y \

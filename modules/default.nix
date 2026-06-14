@@ -16,7 +16,6 @@
   nixpkgs = import ./nixpkgs.nix;
   users = import ./users.nix;
   virtualisation = import ./virtualisation.nix;
-  development = import ./development.nix;
 
   pkgs = {
     default = import ./pkgs/default.nix;
@@ -25,5 +24,7 @@
     windows = import ./pkgs/windows.nix;
     ad = import ./pkgs/ad.nix;
     wordlists = import ./pkgs/wordlists.nix;
+    network = import ./pkgs/network.nix;
+    dev = import ./pkgs/dev.nix;
   };
 }

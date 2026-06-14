@@ -125,7 +125,7 @@ in {
           # https://github.com/nix-community/vscode-nix-ide/issues/482
           "nix.hiddenLanguageServerErrors" = ["textDocument/definition"];
           # Terminal Settings
-          "terminal.external.linuxExec" = "alacritty";
+          "terminal.external.linuxExec" = "ghostty +new-window";
           "terminal.integrated.defaultProfile.linux" = "zsh";
           "terminal.integrated.profiles.linux.zsh.path" = "${lib.getExe pkgs.zsh}";
         };

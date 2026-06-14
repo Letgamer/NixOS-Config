@@ -22,7 +22,6 @@
     outputs.nixosModules.nixpkgs
     outputs.nixosModules.users
     outputs.nixosModules.virtualisation
-    outputs.nixosModules.development
 
     # all packages installed
     #outputs.nixosModules.pkgs.mobile
@@ -31,6 +30,8 @@
     outputs.nixosModules.pkgs.windows
     outputs.nixosModules.pkgs.ad
     outputs.nixosModules.pkgs.wordlists
+    outputs.nixosModules.pkgs.network
+    outputs.nixosModules.pkgs.dev
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
