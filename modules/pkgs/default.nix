@@ -19,8 +19,8 @@
     lsb-release
     ltrace
     netcat-gnu
-    # vscode LSP
-    nixd
+    nfs-utils
+    nixd # vscode LSP
     nixfmt
     ntp
     p7zip

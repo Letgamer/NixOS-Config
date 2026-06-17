@@ -1,26 +1,30 @@
 {pkgs, ...}: {
   # TODO:
-  # bloodhound-ce-py, bloodhound-quickwin, ldapdomaindump-patched, linWinPwn, wmiexec-Pro,
-  # ntlm_theft, pkinittools, petitpotam, gmsadumper, responder
+  # bloodhound-ce-py, bloodhound-quickwin, ldapdomaindump, linWinPwn, wmiexec-Pro,
+  # ntlm_theft, pkinittools, petitpotam, gmsadumper
   environment.systemPackages = with pkgs.unstable; [
-    python314Packages.impacket
-    openldap
-    ldapdomaindump
+    adenum
+    adidnsdump
+    autobloody
     certipy
-    netexec
-    python314Packages.bloodyad
+    coercer
+    evil-winrm
+    evil-winrm-py
+    kerbrute
     krb5
     krb5.dev
-    samba4Full
-    autobloody
-    python314Packages.lsassy
+    ldapdomaindump
     ldeep
-    pygpoabuse
-    python314Packages.pypykatz
-    coercer
+    netexec
+    openldap
     powerview
-    adidnsdump
-    adenum
+    pygpoabuse
     pywhisker
+    python314Packages.bloodyad
+    python314Packages.impacket
+    python314Packages.lsassy
+    python314Packages.pypykatz
+    responder
+    samba4Full
   ];
 }

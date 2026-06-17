@@ -24,14 +24,20 @@
     outputs.nixosModules.virtualisation
 
     # all packages installed
-    #outputs.nixosModules.pkgs.mobile
+    #outputs.nixosModules.pkgs.ad
+    #outputs.nixosModules.pkgs.crypto
     outputs.nixosModules.pkgs.default
-    outputs.nixosModules.pkgs.hardware
-    outputs.nixosModules.pkgs.windows
-    outputs.nixosModules.pkgs.ad
-    outputs.nixosModules.pkgs.wordlists
-    outputs.nixosModules.pkgs.network
-    outputs.nixosModules.pkgs.dev
+    #outputs.nixosModules.pkgs.dev
+    #outputs.nixosModules.pkgs.forensics
+    #outputs.nixosModules.pkgs.hardware
+    #outputs.nixosModules.pkgs.misc
+    #outputs.nixosModules.pkgs.mobile
+    #outputs.nixosModules.pkgs.network
+    #outputs.nixosModules.pkgs.protocols
+    #outputs.nixosModules.pkgs.pwn
+    #outputs.nixosModules.pkgs.web
+    #outputs.nixosModules.pkgs.windows
+    #outputs.nixosModules.pkgs.wordlists
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix

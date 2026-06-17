@@ -18,13 +18,19 @@
   virtualisation = import ./virtualisation.nix;
 
   pkgs = {
-    default = import ./pkgs/default.nix;
-    mobile = import ./pkgs/mobile.nix;
-    hardware = import ./pkgs/hardware.nix;
-    windows = import ./pkgs/windows.nix;
     ad = import ./pkgs/ad.nix;
-    wordlists = import ./pkgs/wordlists.nix;
-    network = import ./pkgs/network.nix;
+    crypto = import ./pkgs/crypto.nix;
+    default = import ./pkgs/default.nix;
     dev = import ./pkgs/dev.nix;
+    forensics = import ./pkgs/forensics.nix;
+    hardware = import ./pkgs/hardware.nix;
+    misc = import ./pkgs/misc.nix;
+    mobile = import ./pkgs/mobile.nix;
+    network = import ./pkgs/network.nix;
+    protocols = import ./pkgs/protocols.nix;
+    pwn = import ./pkgs/pwn.nix;
+    web = import ./pkgs/web.nix;
+    windows = import ./pkgs/windows.nix;
+    wordlists = import ./pkgs/wordlists.nix;
   };
 }

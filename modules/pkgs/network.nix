@@ -4,38 +4,39 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    macchanger
     nmap
     socat
-    macchanger
-
-    # Pivoting and tunneling tools
-    ligolo-ng
-    chisel
-    proxychains-ng
-    sshuttle
-    iodine
-    ngrok # Run 'ngrok config add-authtoken' first!
 
     # Proxy and traffic manipulation tools
     mitmproxy
-    tcpdump
     ssh-mitm
+    tcpdump
+
+    # Pivoting and tunneling tools
+    chisel
+    iodine
+    ligolo-ng
+    ngrok # Run 'ngrok config add-authtoken' first!
+    penelope
+    proxychains-ng
+    sshuttle
 
     # Wireless tools
-    bettercap
-    aircrack-ng
-    kismet
-    reaverwps
-    wifite2
-    hcxdumptool
-    hcxtools
-    bully
-    pixiewps
-    reaverwps-t6x
     (airgeddon.override {
       supportHashCracking = true;
       supportEvilTwin = true;
     })
+    aircrack-ng
+    bettercap
+    bully
+    hcxdumptool
+    hcxtools
+    kismet
+    pixiewps
+    reaverwps
+    reaverwps-t6x
+    wifite2
   ];
 
   # Make the proxychains config writeable on the fly

@@ -1,12 +1,13 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    picocom
-    cutecom
-    stlink
     can-utils
+    cutecom
     gcc-arm-embedded
     gnumake
+    picocom
+    stlink
   ];
+
   programs.wireshark = {
     enable = true;
     dumpcap.enable = true;

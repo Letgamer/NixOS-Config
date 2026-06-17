@@ -1,15 +1,5 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    # Full Wine setup via bottles with additional dependencies and configurations
-    (unstable.bottles.override {removeWarningPopup = true;})
-
-    # Windows Misc Tools
-    msitools
-    wimlib
-    shortscan
-    python314Packages.xlsxwriter
-    powershell
-
     # Cross compilation tools
     pkgsCross.mingw32.stdenv.cc
     pkgsCross.mingwW64.stdenv.cc
@@ -20,9 +10,24 @@
       dotnet-sdk_9
       dotnet-sdk
     ])
-    mono
     avalonia-ilspy
     dotnet-repl
+    mono
+
+    # Office tools
+    onlyoffice-desktopeditors
+    python314Packages.xlsxwriter
+    oletools
+    xlsx2csv
+
+    # Windows Misc Tools
+    msitools
+    powershell
+    shortscan
+    wimlib
+
+    # Wine setup
+    (unstable.bottles.override {removeWarningPopup = true;})
   ];
   environment.sessionVariables = {
     DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet";

@@ -22,6 +22,8 @@
       allowUnsupportedSystem = true;
       android_sdk.accept_license = true;
       microsoftVisualStudioLicenseAccepted = true;
+      # For Hashcat
+      rocmSupport = true;
     };
   };
 
