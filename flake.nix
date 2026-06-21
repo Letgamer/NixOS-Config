@@ -57,11 +57,6 @@
       url = "path:/home/user/burpsuite-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    burpsuitepro = {
-      #url = "github:Red-Flake/Burpsuite-Professional";
-      url = "path:/home/user/Burpsuite-Professional";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     wordlists = {
       # https://github.com/NixOS/nix/issues/15285
       url = "git+https://github.com/Red-Flake/wordlists?ref=main&submodules=1"; #&lfs=1

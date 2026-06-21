@@ -9,6 +9,7 @@
   modifications = final: prev: let
     #pkgs-hypr = inputs.hyprland.inputs.nixpkgs.legacyPackages.${final.system};
   in {
+    #burpsuite = (import ./burpsuite.nix) final prev;
     # Replace Mesa, Wayland, and related libraries with Hyprland-compatible versions
     #mesa = pkgs-hypr.mesa;
     #wayland = pkgs-hypr.wayland;

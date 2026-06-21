@@ -11,6 +11,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      (import ../overlays/burpsuite.nix)
       inputs.firefox-addons.overlays.default
     ];
     # Configure your nixpkgs instance
