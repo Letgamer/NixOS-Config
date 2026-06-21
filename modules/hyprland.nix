@@ -22,6 +22,11 @@
 
   services.dbus.implementation = "broker";
 
+  # https://wiki.nixos.org/wiki/Secret_Service
+  services.gnome.gnome-keyring.enable = true;
+  # OpenSSH is used as a ssh agent
+  services.gnome.gcr-ssh-agent.enable = false;
+
   # Auto startup without login manager
   services.xserver.displayManager.lightdm.enable = false;
   services.getty.autologinUser = "${username}";
