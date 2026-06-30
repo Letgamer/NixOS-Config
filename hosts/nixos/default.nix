@@ -5,7 +5,8 @@
   outputs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     # all modules used
     outputs.nixosModules.hyprland
@@ -27,7 +28,7 @@
     #outputs.nixosModules.pkgs.ad
     #outputs.nixosModules.pkgs.crypto
     outputs.nixosModules.pkgs.default
-    #outputs.nixosModules.pkgs.dev
+    outputs.nixosModules.pkgs.dev
     #outputs.nixosModules.pkgs.forensics
     #outputs.nixosModules.pkgs.hardware
     #outputs.nixosModules.pkgs.misc
@@ -65,7 +66,7 @@
   powerManagement = {
     enable = true;
     powertop.enable = true;
-    cpuFreqGovernor = "schedutil"; #power, performance, ondemand
+    cpuFreqGovernor = "schedutil"; # power, performance, ondemand
   };
   services.power-profiles-daemon.enable = true;
 

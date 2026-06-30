@@ -40,11 +40,9 @@
   ];
 
   # Make the proxychains config writeable on the fly
-  system.activationScripts.proxychains = lib.mkAfter ''
-    if [ ! -e /etc/proxychains.conf ]; then
-      cp ${pkgs.proxychains-ng}/etc/proxychains.conf /etc/proxychains.conf
-    fi
-  '';
+  systemd.tmpfiles.rules = [
+    "C /etc/proxychains.conf - - - - ${pkgs.proxychains-ng}/etc/proxychains.conf"
+  ];
 
   # Setup nmap with capabilities in order to use it without sudo
   security.wrappers.nmap = {
