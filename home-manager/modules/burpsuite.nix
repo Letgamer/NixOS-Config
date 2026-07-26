@@ -1,4 +1,13 @@
 {pkgs, ...}: {
+  # Separate Community Edition for e.g. OSCP
+  xdg.desktopEntries.burpsuitece = {
+    name = "Burp Suite Community Edition";
+    exec = "burpsuite --product-mode=community";
+    icon = "burpsuite";
+    genericName = "Web Application Security Testing Tool";
+    categories = ["Development" "Security"];
+  };
+
   programs.burp = {
     enable = true;
     proEdition = true;

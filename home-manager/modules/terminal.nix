@@ -81,6 +81,9 @@ in {
       # Execute Windows applications via Wine in bottles
       wine = "() { bottles-cli run -b default -e $1; } $@";
 
+      # Run the Burpsuite Community Edition, e.g. for OSCP
+      burpsuitece = "burpsuite --product-mode=community";
+
       # Python
       pysh = ''() { nix-shell -p "python3.withPackages (p: with p; [ $* ])"; } $@'';
       venv = "() { if [ ! -d .venv ]; then uv venv .venv; fi; source .venv/bin/activate; };";

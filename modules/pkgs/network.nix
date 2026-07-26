@@ -7,6 +7,7 @@
     macchanger
     nmap
     socat
+    chromium
 
     # Proxy and traffic manipulation tools
     mitmproxy
@@ -57,4 +58,6 @@
     NMAP_PRIVILEGED = "1";
     NPING_PRIVILEGED = "1";
   };
+
+  security.chromiumSuidSandbox.enable = true;
 }

@@ -36,7 +36,7 @@
             "class<code>" = "󰨞";
             "class<spotify>" = "";
             "class<vesktop>" = "";
-            "class<.*burpsuite\.jar.*> title<Burp .*>" = "";
+            "class<burp-StartBurp>" = "";
           };
         };
 

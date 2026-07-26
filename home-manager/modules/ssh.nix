@@ -16,6 +16,20 @@
         AddKeysToAgent = "yes";
       };
 
+      "Host letserver" = {
+        HostName = "192.168.178.84";
+        User = "root";
+        IdentityFile = "~/.ssh/id_server-ssh";
+        AddKeysToAgent = "yes";
+      };
+
+      "Host ctf" = {
+        HostName = "10.70.1.29";
+        User = "ctf";
+        IdentityFile = "~/.ssh/id_ctf-ssh";
+        AddKeysToAgent = "yes";
+      };
+
       "Host *" = lib.hm.dag.entryAfter ["github.com"] {
         AddKeysToAgent = "yes";
         ForwardAgent = true;

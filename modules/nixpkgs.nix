@@ -11,7 +11,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      (import ../overlays/burpsuite.nix)
+      #(import ../overlays/burpsuite.nix)
       inputs.firefox-addons.overlays.default
     ];
     # Configure your nixpkgs instance
@@ -33,7 +33,11 @@
   in {
     settings = {
       # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
+      experimental-features = [
+        "auto-allocate-uids"
+        "cgroups"
+        "nix-command flakes"
+      ];
       # Opinionated: disable global registry
       flake-registry = "";
       builders-use-substitutes = true;
@@ -45,6 +49,10 @@
       warn-dirty = false;
 
       eval-cache = true;
+
+      # for systemd-nspawn tests
+      auto-allocate-uids = true;
+      system-features = ["uid-range"];
     };
     # Opinionated: disable channels
     channel.enable = false;

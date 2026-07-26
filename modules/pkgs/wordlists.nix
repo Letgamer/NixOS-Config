@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     cewl
     crunch
+    cupp
     username-anarchy
   ];
 

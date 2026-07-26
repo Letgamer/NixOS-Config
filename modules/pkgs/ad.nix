@@ -1,11 +1,11 @@
 {pkgs, ...}: {
-  # TODO:
-  # bloodhound-ce-py, bloodhound-quickwin, ldapdomaindump, linWinPwn, wmiexec-Pro,
-  # ntlm_theft, pkinittools, petitpotam, gmsadumper
+  # TODO: linWinPwn
   environment.systemPackages = with pkgs.unstable; [
     adenum
     adidnsdump
     autobloody
+    bloodhound-py
+    certihound
     certipy
     coercer
     evil-winrm
