@@ -24,5 +24,6 @@
   };
 
   users.mutableUsers = false;
+  users.manageLingering = false;
   users.users.root.initialPassword = "test";
 }

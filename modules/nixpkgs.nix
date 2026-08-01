@@ -91,10 +91,15 @@
     after = ["network-online.target"];
     wants = ["network-online.target"];
 
-    serviceConfig.Type = "oneshot";
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      Restart = "on-failure";
+      RestartSec = "10s";
+    };
 
     script = ''
-      ${lib.getExe pkgs.flatpak} remote-add --if-not-exists flathub \
+      ${lib.getExe pkgs.flatpak} remote-add --system --if-not-exists flathub \
         https://dl.flathub.org/repo/flathub.flatpakrepo
     '';
   };
@@ -106,4 +111,14 @@
     steam-run
     flatpak-builder
   ];
+
+  # Reducing the closure size of the system
+  documentation.doc.enable = false;
+  documentation.nixos.enable = false;
+  documentation.info.enable = false;
+
+  environment.defaultPackages = [];
+  services.speechd.enable = false;
+  fonts.enableGhostscriptFonts = false;
+  fonts.enableDefaultPackages = false;
 }
