@@ -27,7 +27,7 @@
     wimlib
 
     # Wine setup
-    (unstable.bottles.override {removeWarningPopup = true;})
+    (bottles.override {removeWarningPopup = true;})
   ];
   environment.sessionVariables = {
     DOTNET_ROOT = "${pkgs.dotnet-sdk}/share/dotnet";

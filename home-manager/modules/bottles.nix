@@ -13,10 +13,10 @@
       exit 0
     fi
 
-    if ! ${lib.getExe' pkgs.unstable.bottles "bottles-cli"} --json list bottles | ${lib.getExe pkgs.jq} -e 'has("${bottleName}")' >/dev/null; then
+    if ! ${lib.getExe' pkgs.bottles "bottles-cli"} --json list bottles | ${lib.getExe pkgs.jq} -e 'has("${bottleName}")' >/dev/null; then
       echo "Creating bottle ${bottleName}"
 
-      ${lib.getExe' pkgs.unstable.bottles "bottles-cli"} new \
+      ${lib.getExe' pkgs.bottles "bottles-cli"} new \
         --bottle-name "${bottleName}" \
         --environment application \
         --arch win64
