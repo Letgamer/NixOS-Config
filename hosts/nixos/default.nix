@@ -5,13 +5,11 @@
   outputs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     # all modules used
     outputs.nixosModules.hyprland
     outputs.nixosModules.boot
-    #outputs.nixosModules.impermanence
     outputs.nixosModules.locale
     #outputs.nixosModules.hardware
     outputs.nixosModules.ssh
