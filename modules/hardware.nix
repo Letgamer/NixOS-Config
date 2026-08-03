@@ -55,8 +55,6 @@
     };
   };
 
-  services.fstrim.enable = true;
-
   # Recommended to explicitly declare video driver for Xorg and fallback support
   services.xserver.videoDrivers = ["amdgpu"];
 
@@ -79,12 +77,4 @@
 
   # Allow firmware Updates
   services.fwupd.enable = true;
-
-  # Add a swapfile
-  swapDevices = [
-    {
-      device = "/var/lib/swapfile";
-      size = 16 * 1024; # 16 GB
-    }
-  ];
 }

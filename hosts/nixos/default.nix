@@ -21,6 +21,8 @@
     outputs.nixosModules.nixpkgs
     outputs.nixosModules.users
     outputs.nixosModules.virtualisation
+    #outputs.nixosModules.disko
+    #outputs.nixosModules.preservation
 
     # all packages installed
     #outputs.nixosModules.pkgs.ad
@@ -41,6 +43,8 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     inputs.stylix.nixosModules.stylix
+    inputs.preservation.nixosModules.default
+    inputs.disko.nixosModules.disko
   ];
 
   virtualisation.vmVariant = {
