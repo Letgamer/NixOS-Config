@@ -21,8 +21,8 @@
     outputs.nixosModules.nixpkgs
     outputs.nixosModules.users
     outputs.nixosModules.virtualisation
-    #outputs.nixosModules.disko
-    #outputs.nixosModules.preservation
+    outputs.nixosModules.disko
+    outputs.nixosModules.preservation
 
     # all packages installed
     #outputs.nixosModules.pkgs.ad

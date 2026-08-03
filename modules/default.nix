@@ -15,6 +15,8 @@
   nixpkgs = import ./nixpkgs.nix;
   users = import ./users.nix;
   virtualisation = import ./virtualisation.nix;
+  disko = import ./disko.nix;
+  preservation = import ./preservation.nix;
 
   pkgs = {
     ad = import ./pkgs/ad.nix;

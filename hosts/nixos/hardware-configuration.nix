@@ -9,20 +9,5 @@
   hardware.cpu.intel.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/ea5ddc95-0b6a-4801-ae45-411055eb44c9";
-    fsType = "ext4";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5E0C-72F4";
-    fsType = "vfat";
-    options = ["fmask=0077" "dmask=0077"];
-  };
-
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/0f1f4e70-63e0-4d7e-b24b-a94b88a14f8e";}
-  ];
-
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
