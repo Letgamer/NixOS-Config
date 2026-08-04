@@ -1,15 +1,8 @@
-{
-  pkgs,
-  username,
-  ...
-}: {
+{username, ...}: {
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
     xwayland.enable = true; # enable x11 legacy support
-    # set the flake package
-    package = pkgs.hyprland;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland;
   };
 
   services.displayManager.defaultSession = "hyprland";

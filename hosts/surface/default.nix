@@ -21,14 +21,14 @@
     outputs.nixosModules.nixpkgs
     outputs.nixosModules.users
     outputs.nixosModules.virtualisation
-    #outputs.nixosModules.disko
-    #outputs.nixosModules.preservation
+    outputs.nixosModules.disko
+    outputs.nixosModules.preservation
 
     # all packages installed
     #outputs.nixosModules.pkgs.ad
     #outputs.nixosModules.pkgs.crypto
     outputs.nixosModules.pkgs.default
-    outputs.nixosModules.pkgs.dev
+    #outputs.nixosModules.pkgs.dev
     #outputs.nixosModules.pkgs.forensics
     #outputs.nixosModules.pkgs.hardware
     #outputs.nixosModules.pkgs.misc
@@ -46,19 +46,6 @@
     inputs.preservation.nixosModules.default
     inputs.disko.nixosModules.disko
   ];
-
-  virtualisation.vmVariant = {
-    # following configuration is added only when building VM with build-vm
-    virtualisation = {
-      memorySize = 4096; # Use 2048MiB memory.
-      cores = 3;
-      qemu.options = [
-        "-vga std"
-        "-display gtk"
-        "-device VGA,vgamem_mb=1028"
-      ];
-    };
-  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
