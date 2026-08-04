@@ -16,7 +16,7 @@
     outputs.homeManagerModules.vscode
     outputs.homeManagerModules.terminal
     outputs.homeManagerModules.spotify
-    outputs.homeManagerModules.discord
+    #outputs.homeManagerModules.discord
     outputs.homeManagerModules.burpsuite
     outputs.homeManagerModules.distrobox
     # Currently it is not possible to use the cli for creating bottles
