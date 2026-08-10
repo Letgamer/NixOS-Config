@@ -135,6 +135,39 @@
             }
           ];
         };
+
+      desktop = let
+        hostname = "desktop";
+      in
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              outputs
+              lib
+              username
+              hostname
+              ;
+          };
+          modules = [
+            ./hosts/${hostname}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.extraSpecialArgs = {
+                inherit username hostname inputs outputs;
+              };
+              home-manager.users.${username} = {
+                imports = [
+                  ./home-manager/hosts
+                ];
+              };
+            }
+          ];
+        };
     };
 
     # Packages available via `nix build .#<name>`
