@@ -22,10 +22,6 @@
     # Currently it is not possible to use the cli for creating bottles
     #outputs.homeManagerModules.bottles
 
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-    #inputs.stylix.homeModules.stylix
-
     # This uses a database based on unstable, which can mismatch with stable in rare cases
     inputs.nix-index-database.homeModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify

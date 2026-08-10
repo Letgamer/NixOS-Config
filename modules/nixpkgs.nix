@@ -3,6 +3,7 @@
   outputs,
   inputs,
   pkgs,
+  username,
   ...
 }: {
   nixpkgs = {
@@ -71,7 +72,7 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep 5 --keep-since 3d";
-    flake = "/home/user/NixOS-Config";
+    flake = "/home/${username}/NixOS-Config";
   };
 
   # Enable AppImage support

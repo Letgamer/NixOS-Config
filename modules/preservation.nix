@@ -1,4 +1,9 @@
 {username, ...}: {
+  # Fix failing systemd unit
+  systemd.suppressedSystemUnits = [
+    "systemd-machine-id-commit.service"
+  ];
+
   preservation = {
     enable = true;
 
