@@ -16,7 +16,7 @@
     outputs.homeManagerModules.vscode
     outputs.homeManagerModules.terminal
     outputs.homeManagerModules.spotify
-    #outputs.homeManagerModules.discord
+    outputs.homeManagerModules.discord
     outputs.homeManagerModules.burpsuite
     outputs.homeManagerModules.distrobox
     # Currently it is not possible to use the cli for creating bottles
@@ -35,10 +35,15 @@
     homeDirectory = "/home/${username}";
   };
 
-  programs.home-manager.enable = true;
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+  # Setting the nixpkgs configuration for nix tools
+  xdg.configFile."nixpkgs/config.nix".text = ''
+    {
+      allowUnfree = true;
+      allowBroken = true;
+      allowInsecurePredicate = x: true;
+      allowUnsupportedSystem = true;
+    }
+  '';
 
   home.stateVersion = "26.05";
 }

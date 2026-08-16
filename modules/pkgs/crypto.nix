@@ -2,7 +2,9 @@
   environment.systemPackages = with pkgs; [
     creds
     hash-identifier
-    hashcat
+    (hashcat.override {
+      rocmSupport = true;
+    })
     hashid
     john
 

@@ -11,13 +11,12 @@
       directories = [
         "/etc/nixos"
         "/var/lib/bluetooth"
-        {
-          directory = "/var/lib/nixos";
-          inInitrd = true;
-        }
+        "/var/lib/NetworkManager"
+        "/etc/NetworkManager/system-connections"
       ];
 
       files = [
+        "/var/db/sudo/lectured/1000"
         {
           file = "/etc/machine-id";
           inInitrd = true;
@@ -47,8 +46,13 @@
           ".mozilla"
           ".config"
           ".local"
+          ".BurpSuite"
+          ".java"
           "Documents"
+          "Downloads"
+          "Pictures"
           "NixOS-Config"
+          "nixpkgs"
         ];
 
         files = [

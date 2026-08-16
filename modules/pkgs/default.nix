@@ -24,6 +24,7 @@
     nixfmt
     ntp
     p7zip
+    pax-utils
     pciutils
     psmisc
     rlwrap

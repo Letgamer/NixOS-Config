@@ -57,6 +57,7 @@
       #url = "path:/home/user/burpsuite-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
   };
 
   outputs = {

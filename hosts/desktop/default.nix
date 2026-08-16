@@ -11,7 +11,7 @@
     outputs.nixosModules.hyprland
     outputs.nixosModules.boot
     outputs.nixosModules.locale
-    #outputs.nixosModules.hardware
+    outputs.nixosModules.hardware
     outputs.nixosModules.ssh
     #outputs.nixosModules.rgb
     outputs.nixosModules.stylix

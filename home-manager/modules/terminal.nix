@@ -84,6 +84,10 @@ in {
       # Run the Burpsuite Community Edition, e.g. for OSCP
       burpsuitece = "burpsuite --product-mode=community";
 
+      # Get a shell with every package existing
+      # e.g. mvsh python3 3.6.2
+      mvsh = ''() { nix shell "mv#multiverse.x86_64-linux.fast.versions.$1.\"$2\".out"; }'';
+
       # Python
       pysh = ''() { nix-shell -p "python3.withPackages (p: with p; [ $* ])"; } $@'';
       venv = "() { if [ ! -d .venv ]; then uv venv .venv; fi; source .venv/bin/activate; };";

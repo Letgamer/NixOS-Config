@@ -27,6 +27,7 @@ in {
 
   programs.firefox = with pkgs.firefox-addons; {
     enable = true;
+
     profiles.default = {
       isDefault = true;
 
@@ -80,7 +81,7 @@ in {
                 name = "Annas Archive";
                 tags = ["archive"];
                 keyword = "archive";
-                url = "https://annas-archive.org/";
+                url = "https://open-slum.org/";
               }
               {
                 name = "Reddit";
@@ -178,7 +179,7 @@ in {
                     name = "S.to";
                     tags = ["series"];
                     keyword = "series";
-                    url = "https://s.to";
+                    url = "https://serien.domains/";
                   }
                   {
                     name = "Cine.to";
@@ -202,7 +203,7 @@ in {
                     name = "Huhu.to";
                     tags = ["movies"];
                     keyword = "movies";
-                    url = "https://huhu.to/web-vod/browse?id=movie.trending";
+                    url = "https://huhu.to/";
                   }
                 ];
               }
@@ -780,6 +781,8 @@ in {
         "browser.tabs.warnOnCloseOtherTabs" = false;
         "browser.tabs.warnOnOpen" = false;
         "browser.warnOnQuit" = false;
+        "media.webspeech.synth.enabled" = false;
+        "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
 
         # Disable Tab Restrictions for Pop-Ups
         "browser.link.open_newwindow.restriction" = 0;

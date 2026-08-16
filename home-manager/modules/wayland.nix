@@ -8,6 +8,7 @@
   hex = color: "0xFF${color}";
 in {
   home.packages = with pkgs; [
+    # TODO: switch to yazi, after ghostty merges support for DnD to avoid pulling in gnome
     pkgs.nautilus
     pkgs.clipse
     pkgs.brightnessctl
@@ -71,6 +72,7 @@ in {
   '';
 
   home.file.".config/uwsm/env".text = ''
+    export NIXPKGS_ALLOW_UNFREE=1
     export HYPRLAND_WM=hyprland
     export NIXOS_OZONE_WL=1
     export ELECTRON_OZONE_PLATFORM_HINT=wayland
@@ -120,6 +122,11 @@ in {
     cyan = "#${c.base0C}"
     white = "#${c.base07}"
   '';
+
+  # https://wiki.nixos.org/wiki/Secret_Service
+  # Activate dssd: https://github.com/ylxdzsw/dssd
+  xdg.configFile.".config/systemd/user/dssd.service".source = "${pkgs.dssd}/lib/systemd/user/dssd.service";
+  home.file.".local/share/dbus-1/services/org.freedesktop.secrets.service".source = "${pkgs.dssd}/share/dbus-1/system-services/org.freedesktop.secrets.service";
 
   programs.gazelle = {
     enable = true;

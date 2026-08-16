@@ -37,7 +37,7 @@
     exec = "vesktop %U";
     icon = "vesktop";
     genericName = "Internet Messenger";
-    categories = [ "Network" "InstantMessaging" "Chat" ];
-    mimeType = [ "x-scheme-handler/discord" ];
+    categories = ["Network" "InstantMessaging" "Chat"];
+    mimeType = ["x-scheme-handler/discord"];
   };
 }

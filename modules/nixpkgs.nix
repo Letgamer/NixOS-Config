@@ -12,7 +12,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      #(import ../overlays/burpsuite.nix)
+      (import ../overlays/burpsuite.nix)
       inputs.firefox-addons.overlays.default
     ];
     # Configure your nixpkgs instance
@@ -24,8 +24,7 @@
       allowUnsupportedSystem = true;
       android_sdk.accept_license = true;
       microsoftVisualStudioLicenseAccepted = true;
-      # For Hashcat
-      rocmSupport = true;
+      firefox.speechSynthesisSupport = false;
     };
   };
 
@@ -64,6 +63,7 @@
       // {
         n.flake = inputs.nixpkgs;
         u.flake = inputs.nixpkgs-unstable;
+        mv.flake = inputs.multiverse;
       };
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };

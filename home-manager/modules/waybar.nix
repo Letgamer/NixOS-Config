@@ -41,7 +41,7 @@
         };
 
         "hyprland/window" = {
-          "max-length" = 50;
+          "max-length" = 150;
           rewrite = {
             "Spotify Free" = " Spotify";
             "${username}@${hostname}:~" = "󰞷 Shell";
