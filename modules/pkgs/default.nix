@@ -3,6 +3,7 @@
     acpi
     btop
     curl
+    diffoscopeMinimal
     dig
     dnsutils
     e2fsprogs
@@ -23,7 +24,9 @@
     nixd # vscode LSP
     nixfmt
     ntp
+    openssl
     p7zip
+    patchelf
     pax-utils
     pciutils
     psmisc
@@ -40,5 +43,8 @@
     wget
     whois
     zip
+
+    localsend
+    libreoffice
   ];
 }

@@ -19,6 +19,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     preservation.url = "github:nix-community/preservation";
+    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,18 +47,13 @@
     nixcord = {
       url = "github:FlameFlag/nixcord";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-nixcord.follows = "nixpkgs";
-    };
-    gazelle = {
-      url = "github:Zeus-Deus/gazelle-tui";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-packages.follows = "nixpkgs";
     };
     burpsuite-nix = {
       url = "github:Red-Flake/burpsuite-nix";
       #url = "path:/home/user/burpsuite-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    multiverse.url = "github:fzakaria/nixpkgs-multiverse";
   };
 
   outputs = {

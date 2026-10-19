@@ -1,6 +1,16 @@
-{pkgs, ...}: {
+{pkgs, username, ...}: {
   virtualisation = {
-    containers.enable = true;
+    containers = {
+      enable = true;
+      # To avoid the 8 GB impermanence limit for big builds
+      containersConf.settings = {
+        engine = {
+          env = [
+            "TMPDIR=/home/${username}/.local/share/containers/tmp"
+          ];
+        };
+      };
+    };
     podman = {
       enable = true;
 

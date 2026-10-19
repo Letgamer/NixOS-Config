@@ -41,7 +41,7 @@
       decoration = {
         rounding = 10;
 
-        active_opacity = 0.95;
+        active_opacity = 0.97;
         inactive_opacity = 0.8;
 
         blur = {
@@ -80,7 +80,7 @@
         # Custom Rules for Wiremix
         "match:title com.wiremix.wiremix, float on, stay_focused on, size (monitor_w*0.50) (monitor_h*0.25)"
         # Custom Rules for Impala Iwd TUI
-        "match:title com.gazelle.gazelle, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
+        "match:title com.impala.impala, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # Custom Rules for Bluetooth TUI
         "match:title com.bluetui.bluetui, float on, stay_focused on, size (monitor_w*0.65) (monitor_h*0.50)"
         # Make File Picker floating
@@ -144,6 +144,7 @@
           "$mainMod, V, togglefloating"
           "$mainMod, SPACE, exec, $menu"
           "$mainMod, P, pseudo"
+          "$mainMod, I, exec, hypridle-toggle"
           "$mainMod, J, layoutmsg, togglesplit"
           "$mainMod, F, fullscreen"
           "$mainMod+SHIFT, C, exec, hyprpicker -a"

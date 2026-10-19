@@ -45,6 +45,7 @@
     inputs.stylix.nixosModules.stylix
     inputs.preservation.nixosModules.default
     inputs.disko.nixosModules.disko
+    inputs.multiverse.nixosModules.default
   ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,

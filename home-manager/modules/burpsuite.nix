@@ -31,6 +31,7 @@
       "json-web-tokens".enable = true;
       "js-miner".enable = true;
       "param-miner".enable = true;
+      "pwnfox-for-chromium".enable = true;
 
       # Installed but not loaded
       "http-request-smuggler" = {

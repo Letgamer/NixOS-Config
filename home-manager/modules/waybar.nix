@@ -90,7 +90,7 @@
           format-ethernet = "󰈀 ";
           format-disconnected = "󰖪 ";
           on-click-right = "ip -4 addr show $(ip -4 route show default | awk '{print $5; exit}') | awk '/inet / {print $2}' | cut -d/ -f1 | wl-copy -n";
-          on-click = "ghostty +new-window --confirm-close-surface=false --title=com.gazelle.gazelle -e gazelle";
+          on-click = "ghostty +new-window --confirm-close-surface=false --title=com.impala.impala -e impala";
         };
 
         "custom/vpn-ip" = {

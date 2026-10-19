@@ -1,13 +1,19 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
+    # To mount the Android File System via MTP
+    simple-mtpfs
     # Decode/rebuild APKs
     apktool
     # Same, XAPK to APK
     apkeditor
+    # Sign Android APKs
+    apksigner
     # CLI tools for Frida (frida-ps, frida-trace, etc.)
     frida-tools
     # Frida core library (runtime instrumentation)
     libfrida-core
+    # Objection, used in combination with frida
+    objection
     # Java bytecode decompiler (DEX/JAR → Java)
     cfr
     # Android DEX/APK decompiler (Java + resources)

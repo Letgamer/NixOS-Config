@@ -23,7 +23,7 @@ in {
   networking.networkmanager = {
     enable = true;
     wifi = {
-      #backend = "iwd";
+      backend = "iwd";
     };
   };
   networking.firewall.enable = false;

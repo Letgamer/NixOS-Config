@@ -63,10 +63,12 @@
       // {
         n.flake = inputs.nixpkgs;
         u.flake = inputs.nixpkgs-unstable;
-        mv.flake = inputs.multiverse;
       };
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
+
+  # Enables the nixpkgs-multiverse
+  multiverse.enable = true;
 
   programs.nh = {
     enable = true;
@@ -111,6 +113,8 @@
   environment.systemPackages = with pkgs; [
     steam-run
     flatpak-builder
+    # Enables the nixpkgs-multiverse cli
+    inputs.multiverse.packages.${pkgs.stdenv.hostPlatform.system}.mvs
   ];
 
   # Reducing the closure size of the system

@@ -12,7 +12,7 @@
       "github.com" = {
         HostName = "github.com";
         User = "git";
-        IdentityFile = "~/.ssh/id_redline-ssh";
+        IdentityFile = "~/.ssh/id_github-ssh";
         AddKeysToAgent = "yes";
       };
 

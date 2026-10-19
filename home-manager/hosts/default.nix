@@ -26,7 +26,6 @@
     inputs.nix-index-database.homeModules.default
     inputs.spicetify-nix.homeManagerModules.spicetify
     inputs.nixcord.homeModules.nixcord
-    inputs.gazelle.homeModules.gazelle
     inputs.burpsuite-nix.homeManagerModules.default
   ];
 

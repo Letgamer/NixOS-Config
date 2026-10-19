@@ -1,16 +1,61 @@
 {
   config,
   pkgs,
-  inputs,
+  lib,
   ...
 }: let
   c = config.lib.stylix.colors;
   hex = color: "0xFF${color}";
+
+  # https://github.com/emersion/mako/wiki/Volume-change-notification
+  osd = pkgs.writeShellScriptBin "osd" ''
+    #!${lib.getExe pkgs.bash}
+
+    mode="$1"  # "volume" or "brightness"
+
+    case "$mode" in
+      volume)
+        volume_info=$(${lib.getExe' pkgs.wireplumber "wpctl"} get-volume @DEFAULT_AUDIO_SINK@)
+        if [[ "$volume_info" == *"[MUTED]" ]]; then
+            text="Muted"
+            value=0
+        else
+            value=$(awk '{print int($2 * 100)}' <<< "$volume_info")
+            text="󰕾  Volume"
+        fi
+        ;;
+      brightness)
+        current=$(${lib.getExe pkgs.brightnessctl} g)
+        max=$(${lib.getExe pkgs.brightnessctl} m)
+        value=$(( current * 100 / max ))
+        text="  Brightness"
+        ;;
+      *)
+        echo "Usage: $0 {volume|brightness}" >&2
+        exit 1
+        ;;
+    esac
+
+    ${lib.getExe pkgs.libnotify} -t 1000 \
+      -a "osd" \
+      -h string:x-canonical-private-synchronous:"$mode" \
+      -h int:value:$value \
+      "$text $value%"
+  '';
+
+  hypridle-toggle = pkgs.writeShellScriptBin "hypridle-toggle" ''
+    #!${pkgs.lib.getExe pkgs.bash}
+
+    if ${pkgs.systemd}/bin/systemctl --user is-active --quiet hypridle.service; then
+      ${pkgs.systemd}/bin/systemctl --user stop hypridle.service
+    else
+      ${pkgs.systemd}/bin/systemctl --user start hypridle.service
+    fi
+  '';
 in {
-  home.packages = with pkgs; [
-    # TODO: switch to yazi, after ghostty merges support for DnD to avoid pulling in gnome
+  home.packages = [
     pkgs.nautilus
-    pkgs.clipse
+    pkgs.impala
     pkgs.brightnessctl
     pkgs.playerctl
     pkgs.hyprlauncher
@@ -19,42 +64,8 @@ in {
     pkgs.libnotify
     pkgs.grimblast
     pkgs.rose-pine-hyprcursor
-    inputs.gazelle.packages.${pkgs.stdenv.hostPlatform.system}.default
-    # https://github.com/emersion/mako/wiki/Volume-change-notification
-    (pkgs.writeShellScriptBin "osd" ''
-      #!${lib.getExe pkgs.bash}
-
-      mode="$1"  # "volume" or "brightness"
-
-      case "$mode" in
-        volume)
-          volume_info=$(${lib.getExe' pkgs.wireplumber "wpctl"} get-volume @DEFAULT_AUDIO_SINK@)
-          if [[ "$volume_info" == *"[MUTED]" ]]; then
-              text="Muted"
-              value=0
-          else
-              value=$(awk '{print int($2 * 100)}' <<< "$volume_info")
-              text="󰕾  Volume"
-          fi
-          ;;
-        brightness)
-          current=$(${lib.getExe pkgs.brightnessctl} g)
-          max=$(${lib.getExe pkgs.brightnessctl} m)
-          value=$(( current * 100 / max ))
-          text="  Brightness"
-          ;;
-        *)
-          echo "Usage: $0 {volume|brightness}" >&2
-          exit 1
-          ;;
-      esac
-
-      ${lib.getExe pkgs.libnotify} -t 1000 \
-        -a "osd" \
-        -h string:x-canonical-private-synchronous:"$mode" \
-        -h int:value:$value \
-        "$text $value%"
-    '')
+    osd
+    hypridle-toggle
   ];
 
   # Needed for Hyprpicker and hyprpolkitagent, TODO: upstream to stylix
@@ -90,52 +101,16 @@ in {
   '';
   # https://github.com/hyprwm/contrib/issues/142 GRIMBLAST
 
-  home.file.".config/uwsm/env-hyprland".text = ''
-    export WLR_RENDERER_ALLOW_SOFTWARE=1
-  '';
-
-  # Deploy the image to ~/.wallpapers
-  home.file.".config/backgrounds/mountains.png".source = ./wallpapers/mountains.png;
-
-  home.file.".config/gazelle/theme.toml".text = ''
-    [colors.primary]
-    foreground = "#${c.base05}"
-    background = "#${c.base00}"
-
-    [colors.normal]
-    black = "#${c.base01}"
-    red = "#${c.base08}"
-    green = "#${c.base0B}"
-    yellow = "#${c.base0A}"
-    blue = "#${c.base0D}"
-    magenta = "#${c.base0E}"
-    cyan = "#${c.base0C}"
-    white = "#${c.base05}"
-
-    [colors.bright]
-    black = "#${c.base03}"
-    red = "#${c.base08}"
-    green = "#${c.base0B}"
-    yellow = "#${c.base0A}"
-    blue = "#${c.base0D}"
-    magenta = "#${c.base0E}"
-    cyan = "#${c.base0C}"
-    white = "#${c.base07}"
-  '';
-
   # https://wiki.nixos.org/wiki/Secret_Service
   # Activate dssd: https://github.com/ylxdzsw/dssd
   xdg.configFile.".config/systemd/user/dssd.service".source = "${pkgs.dssd}/lib/systemd/user/dssd.service";
   home.file.".local/share/dbus-1/services/org.freedesktop.secrets.service".source = "${pkgs.dssd}/share/dbus-1/system-services/org.freedesktop.secrets.service";
 
-  programs.gazelle = {
-    enable = true;
-    settings = {
-      theme = "user-theme"; # choose your theme
-    };
-  };
+  #programs.impala.enable = true;
 
-  # https://home-manager-options.extranix.com/?query=hyprpaper&release=release-25.11
+  # Deploy the image to ~/.wallpapers
+  home.file.".config/backgrounds/wallpaper.jpg".source = ./wallpapers/wallpaper.jpg;
+
   services.hyprpaper = {
     enable = true;
     settings = {
@@ -143,18 +118,17 @@ in {
       ipc = false;
       wallpaper = {
         monitor = "";
-        path = "~/.config/backgrounds/mountains.png";
+        path = "~/.config/backgrounds/wallpaper.jpg";
       };
     };
   };
 
-  # https://home-manager-options.extranix.com/?query=mako&release=release-25.11
   # Configure Volume and Brightness Notification https://github.com/emersion/mako/wiki/Volume-change-notification
   services.mako = {
     enable = true;
     settings = {
       border-radius = 10;
-      default-timeout = 4000;
+      default-timeout = 4 * 1000;
       ignore-timeout = 1;
 
       # Volume notification rule
@@ -175,10 +149,25 @@ in {
       "app-name=osd group-index=0" = {
         invisible = 0;
       };
+
+      # Add eye strain alerts
+      "app-name=eye-break" = {
+        layer = "overlay";
+        anchor = "center";
+        width = 800;
+        height = 250;
+        padding = 40;
+        default-timeout = 20 * 1000;
+        border-size = 3;
+        border-radius = 24;
+        font = "Sans 20";
+        text-alignment = "center";
+        history = 0;
+        format = ''<span size="xx-large" weight="bold">%s</span>\n\n<span size="medium">%b</span>'';
+      };
     };
   };
 
-  # https://home-manager-options.extranix.com/?query=hyprlock&release=release-25.11
   programs.hyprlock = {
     enable = true;
 
@@ -190,7 +179,7 @@ in {
 
       background = {
         monitor = "";
-        path = "~/.config/backgrounds/mountains.png";
+        path = "~/.config/backgrounds/wallpaper.jpg";
         blur_passes = 2;
       };
 
@@ -219,7 +208,6 @@ in {
     };
   };
 
-  # https://home-manager-options.extranix.com/?query=hypridle&release=release-25.11
   services.hypridle = {
     enable = true;
     settings = {
@@ -250,13 +238,10 @@ in {
     };
   };
 
-  # https://home-manager-options.extranix.com/?query=clipse&release=release-25.11
   services.clipse = {
     enable = true;
   };
 
-  # https://home-manager-options.extranix.com/?query=udiskie&release=release-25.11
-  # TODO: System Tray Waybar integration
   services.udiskie.enable = true;
 
   # hyprpolkitagent is a polkit authentication daemon. It is required for GUI applications to be able to request elevated privileges.
