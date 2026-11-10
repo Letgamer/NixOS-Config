@@ -34,6 +34,7 @@
     #outputs.nixosModules.pkgs.misc
     #outputs.nixosModules.pkgs.mobile
     #outputs.nixosModules.pkgs.network
+    outputs.nixosModules.pkgs.printing
     #outputs.nixosModules.pkgs.protocols
     #outputs.nixosModules.pkgs.pwn
     #outputs.nixosModules.pkgs.web

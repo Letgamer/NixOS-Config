@@ -12,7 +12,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      (import ../overlays/burpsuite.nix)
       inputs.firefox-addons.overlays.default
     ];
     # Configure your nixpkgs instance
@@ -22,6 +21,7 @@
       allowBroken = true;
       allowInsecurePredicate = x: true;
       allowUnsupportedSystem = true;
+      # The following three should not be in here:
       android_sdk.accept_license = true;
       microsoftVisualStudioLicenseAccepted = true;
       firefox.speechSynthesisSupport = false;
@@ -108,8 +108,8 @@
   };
 
   # For non-NixOs compatability
-  programs.nix-ld.enable = true;
-  services.envfs.enable = true;
+  #programs.nix-ld.enable = true;
+  #services.envfs.enable = true;
   environment.systemPackages = with pkgs; [
     steam-run
     flatpak-builder

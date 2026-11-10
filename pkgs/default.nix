@@ -10,4 +10,5 @@ pkgs: {
   petitpotam = pkgs.callPackage ./petitpotam.nix {};
   gmsadumper = pkgs.callPackage ./gmsadumper.nix {};
   bloodhound-quickwin = pkgs.callPackage ./bloodhound-quickwin.nix {};
+  burpsuite = pkgs.callPackage ./burpsuite.nix {};
 }

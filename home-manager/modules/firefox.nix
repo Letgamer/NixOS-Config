@@ -462,6 +462,12 @@ in {
                     url = "https://search.nixos.org/options?channel=unstable";
                   }
                   {
+                    name = "Nixpkgs Docs";
+                    tags = ["nixos"];
+                    keyword = "nixos";
+                    url = "https://ryantm.github.io/nixpkgs/languages-frameworks/index/";
+                  }
+                  {
                     name = "Nix package versions";
                     tags = ["nixos"];
                     keyword = "nixos";

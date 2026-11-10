@@ -17,10 +17,6 @@
     };
 
     cliArgs = [
-      "--suppress-jre-check"
-      "--i-accept-the-license-agreement"
-      "--disable-auto-update"
-      "--disable-check-for-updates-dialog"
       "--temporary-project"
       "--unpause-spider-and-scanner"
     ];

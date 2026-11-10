@@ -28,6 +28,7 @@
     misc = import ./pkgs/misc.nix;
     mobile = import ./pkgs/mobile.nix;
     network = import ./pkgs/network.nix;
+    printing = import ./pkgs/printing.nix;
     protocols = import ./pkgs/protocols.nix;
     pwn = import ./pkgs/pwn.nix;
     web = import ./pkgs/web.nix;

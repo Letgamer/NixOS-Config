@@ -51,7 +51,6 @@
     };
     burpsuite-nix = {
       url = "github:Red-Flake/burpsuite-nix";
-      #url = "path:/home/user/burpsuite-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -76,11 +76,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792221130,
-        "narHash": "sha256-zTg4hxERlbXLGTROf79T1/EQ3VAgXZOEX5pMufrfNeY=",
+        "lastModified": 1794335469,
+        "narHash": "sha256-3TdSRAAgOU/eO9tYMMYbsNY6oFjD++buYBlzUIVUvzg=",
         "owner": "Red-Flake",
         "repo": "burpsuite-nix",
-        "rev": "c1d1323ed5c12180dd716db483752e5c0fb0f668",
+        "rev": "60cc76d2f1f2845b177accf41e976ea6f1ac1103",
         "type": "github"
       },
       "original": {

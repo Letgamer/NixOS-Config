@@ -24,8 +24,8 @@
       };
 
       "Host ctf" = {
-        HostName = "10.70.1.29";
-        User = "ctf";
+        HostName = "10.70.1.37";
+        User = "user";
         IdentityFile = "~/.ssh/id_ctf-ssh";
         AddKeysToAgent = "yes";
       };
