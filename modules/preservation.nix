@@ -12,8 +12,6 @@
         "/etc/nixos"
         "/var/lib/bluetooth"
         "/var/lib/containers"
-        "/var/lib/NetworkManager"
-        "/etc/NetworkManager/system-connections"
         "/var/lib/iwd"
       ];
 

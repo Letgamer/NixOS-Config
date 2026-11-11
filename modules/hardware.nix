@@ -1,26 +1,23 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
-  # Increase the number of parallel build jobs for Nix to 12
-  nix.settings.max-jobs = lib.mkForce 12;
-
+{pkgs, ...}: {
   boot = {
-    initrd.availableKernelModules = [
-      "xhci_pci"
-      "ahci"
-      "sr_mod"
-      "nvme"
-      "usbhid"
-      "usb_storage"
-      "sd_mod"
-      "thunderbolt"
-    ];
+    initrd = {
+      availableKernelModules = [
+        "nvme"
+        "usbhid"
+        "xhci_pci"
+      ];
+      systemd.services.systemd-vconsole-setup = {
+        after = ["systemd-modules-load.service"];
+        wants = ["systemd-modules-load.service"];
+      };
+      supportedFilesystems.btrfs = true;
+    };
+
+    supportedFilesystems.btrfs = true;
 
     kernelModules = [
       "kvm-intel"
-      "intel_rapl"
+      "gigabyte-wmi"
     ];
 
     kernelParams = [
@@ -30,19 +27,14 @@
       # Skip early simpledrm/efifb; wait for amdgpu KMS
       "initcall_blacklist=sysfb_init"
     ];
-
-    initrd.systemd.services.systemd-vconsole-setup = {
-      after = ["systemd-modules-load.service"];
-      wants = ["systemd-modules-load.service"];
-    };
   };
 
   hardware = {
     # enable firmware with a license allowing redistribution
-    enableRedistributableFirmware = lib.mkForce true;
+    enableRedistributableFirmware = true;
 
     # enable all firmware regardless of license
-    enableAllFirmware = lib.mkForce true;
+    enableAllFirmware = true;
 
     # enable CPU microcode updates
     cpu.intel.updateMicrocode = true;
@@ -53,29 +45,25 @@
     graphics = {
       enable = true;
       enable32Bit = true;
-
-      # Optional: extra Vulkan ICD and Mesa Vulkan layers, useful for some apps and games
-      extraPackages = with pkgs; [
-        vulkan-tools # For vulkaninfo and debugging Vulkan apps
-      ];
     };
   };
 
   environment.variables = {
     HIP_PLATFORM = "amd";
-    AMD_VULKAN_ICD = "RADV";
+    # Spoof Navi 21 (gfx1030) ISA for RX 6600 (gfx1032) so ROCm/HIP workloads run without target errors
+    HSA_OVERRIDE_GFX_VERSION = "10.3.0";
   };
 
   environment.systemPackages = with pkgs; [
     clinfo
     vulkan-tools
     mesa-demos
-    radeontop # AMD GPU utilization monitor
-    lm_sensors # For temperature sensors
+    libva-utils
+    amdgpu_top
     pciutils
-    rocmPackages.rocm-runtime
+    smartmontools
     rocmPackages.rocminfo
-    rocmPackages.rocm-smi
+    rocmPackages.amdsmi
   ];
 
   # Allow firmware Updates

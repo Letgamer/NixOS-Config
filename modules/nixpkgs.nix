@@ -22,6 +22,7 @@
       allowInsecurePredicate = x: true;
       allowUnsupportedSystem = true;
       # The following three should not be in here:
+      rocmSupport = true;
       android_sdk.accept_license = true;
       microsoftVisualStudioLicenseAccepted = true;
       firefox.speechSynthesisSupport = false;

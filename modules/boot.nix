@@ -5,13 +5,14 @@
         enable = true;
         configurationLimit = 2;
       };
+      timeout = 1;
       efi.canTouchEfiVariables = true;
     };
     bcache.enable = false;
     kexec.enable = false;
 
     # Silent boot
-    consoleLogLevel = 3;
+    consoleLogLevel = 0;
     initrd.verbose = false;
   };
 
