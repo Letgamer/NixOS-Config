@@ -15,4 +15,5 @@
   burpsuite = import ./burpsuite.nix;
   distrobox = import ./distrobox.nix;
   bottles = import ./bottles.nix;
+  xdg = import ./xdg.nix;
 }

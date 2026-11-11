@@ -19,6 +19,7 @@
     outputs.homeManagerModules.discord
     outputs.homeManagerModules.burpsuite
     outputs.homeManagerModules.distrobox
+    outputs.homeManagerModules.xdg
     # Currently it is not possible to use the cli for creating bottles
     #outputs.homeManagerModules.bottles
 
