@@ -13,7 +13,6 @@
     outputs.nixosModules.locale
     outputs.nixosModules.hardware
     outputs.nixosModules.ssh
-    #outputs.nixosModules.rgb
     outputs.nixosModules.stylix
     outputs.nixosModules.sound
     outputs.nixosModules.bluetooth
