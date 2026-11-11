@@ -9,6 +9,6 @@ cd NixOS-Config
 
 sudo nix --extra-experimental-features "nix-command flakes" \
     run 'github:nix-community/disko/latest#disko-install' -- \
-    --flake .#surface \
+    --flake .#desktop \
     --disk main /dev/sda
 ```

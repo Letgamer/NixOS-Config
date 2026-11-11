@@ -59,130 +59,72 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
-    system = "x86_64-linux";
-    username = "user";
-    hostname = "nixos";
-    pkgs = nixpkgs.legacyPackages.${system};
-  in {
-    nixosConfigurations = {
-      ${hostname} = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit
-            inputs
-            outputs
-            lib
-            username
-            hostname
-            ;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      lib = nixpkgs.lib // home-manager.lib;
+      system = "x86_64-linux";
+      username = "user";
+      hostname = "desktop";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      nixosConfigurations = {
+        ${hostname} = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              outputs
+              lib
+              username
+              hostname
+              ;
+          };
+          modules = [
+            ./hosts/${hostname}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.extraSpecialArgs = {
+                inherit
+                  username
+                  hostname
+                  inputs
+                  outputs
+                  ;
+              };
+              home-manager.users.${username} = {
+                imports = [
+                  ./home-manager/hosts
+                ];
+              };
+            }
+          ];
         };
-        modules = [
-          ./hosts/${hostname}
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.backupFileExtension = "backup";
-            home-manager.extraSpecialArgs = {
-              inherit username hostname inputs outputs;
-            };
-            home-manager.users.${username} = {
-              imports = [
-                ./home-manager/hosts
-              ];
-            };
-          }
-        ];
       };
 
-      surface = let
-        hostname = "surface";
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit
-              inputs
-              outputs
-              lib
-              username
-              hostname
-              ;
-          };
-          modules = [
-            ./hosts/${hostname}
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = {
-                inherit username hostname inputs outputs;
-              };
-              home-manager.users.${username} = {
-                imports = [
-                  ./home-manager/hosts
-                ];
-              };
-            }
-          ];
-        };
+      # Packages available via `nix build .#<name>`
+      packages.${system} = import ./pkgs pkgs;
 
-      desktop = let
-        hostname = "desktop";
-      in
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit
-              inputs
-              outputs
-              lib
-              username
-              hostname
-              ;
-          };
-          modules = [
-            ./hosts/${hostname}
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.extraSpecialArgs = {
-                inherit username hostname inputs outputs;
-              };
-              home-manager.users.${username} = {
-                imports = [
-                  ./home-manager/hosts
-                ];
-              };
-            }
-          ];
-        };
+      # Code formatter used with `nix fmt`
+      formatter.${system} = pkgs.alejandra;
+
+      # Custom overlays
+      overlays = import ./overlays { inherit inputs; };
+
+      # Exported NixOS modules
+      nixosModules = import ./modules;
+
+      # Exported Home Manager modules
+      homeManagerModules = import ./home-manager/modules;
     };
-
-    # Packages available via `nix build .#<name>`
-    packages.${system} = import ./pkgs pkgs;
-
-    # Code formatter used with `nix fmt`
-    formatter.${system} = pkgs.alejandra;
-
-    # Custom overlays
-    overlays = import ./overlays {inherit inputs;};
-
-    # Exported NixOS modules
-    nixosModules = import ./modules;
-
-    # Exported Home Manager modules
-    homeManagerModules = import ./home-manager/modules;
-  };
 }
