@@ -26,6 +26,7 @@
       microsoftVisualStudioLicenseAccepted = true;
       firefox.speechSynthesisSupport = false;
     };
+    hostPlatform = "x86_64-linux";
   };
 
   nix = let
@@ -89,14 +90,16 @@
   systemd.services.flatpak-flathub = {
     description = "Add Flathub Flatpak remote";
 
-    wantedBy = ["multi-user.target"];
-
     after = ["network-online.target"];
     wants = ["network-online.target"];
 
+    unitConfig = {
+      # Skip this unit completely if the Flathub remote GPG key already exists
+      ConditionPathExists = "!/var/lib/flatpak/repo/flathub.trustedkeys.gpg";
+    };
+
     serviceConfig = {
       Type = "oneshot";
-      RemainAfterExit = true;
       Restart = "on-failure";
       RestartSec = "10s";
     };
@@ -105,6 +108,15 @@
       ${lib.getExe pkgs.flatpak} remote-add --system --if-not-exists flathub \
         https://dl.flathub.org/repo/flathub.flatpakrepo
     '';
+  };
+
+  systemd.timers.flatpak-flathub = {
+    description = "Trigger Flathub remote setup after boot";
+    wantedBy = ["timers.target"];
+    timerConfig = {
+      OnActiveSec = "5s";
+      Unit = "flatpak-flathub.service";
+    };
   };
 
   # For non-NixOs compatability

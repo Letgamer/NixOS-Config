@@ -9,12 +9,14 @@
     };
     bcache.enable = false;
     kexec.enable = false;
-    tmp.cleanOnBoot = true;
 
     # Silent boot
-    consoleLogLevel = 0;
+    consoleLogLevel = 3;
     initrd.verbose = false;
   };
+
+  # Enable the systemd job boot animation
+  services.bootvine.enable = true;
 
   # Modernize the boot process
   system.nixos-init.enable = true;

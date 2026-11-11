@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  # Increase the number of parallel build jobs for Nix to 24
+  # Increase the number of parallel build jobs for Nix to 12
   nix.settings.max-jobs = lib.mkForce 12;
 
   boot = {
@@ -18,17 +18,23 @@
       "thunderbolt"
     ];
 
-    initrd.kernelModules = ["amdgpu"];
     kernelModules = [
       "kvm-intel"
       "intel_rapl"
     ];
 
     kernelParams = [
-      "video=DP-3:2560x1440@165"
-      "video=HDMI-A-1:1920x1080@144"
       "mitigations=off"
+      # Disable for the bootup animation to be displayed correctly
+      "video=HDMI-A-1:d"
+      # Skip early simpledrm/efifb; wait for amdgpu KMS
+      "initcall_blacklist=sysfb_init"
     ];
+
+    initrd.systemd.services.systemd-vconsole-setup = {
+      after = ["systemd-modules-load.service"];
+      wants = ["systemd-modules-load.service"];
+    };
   };
 
   hardware = {
@@ -54,9 +60,6 @@
       ];
     };
   };
-
-  # Recommended to explicitly declare video driver for Xorg and fallback support
-  services.xserver.videoDrivers = ["amdgpu"];
 
   environment.variables = {
     HIP_PLATFORM = "amd";

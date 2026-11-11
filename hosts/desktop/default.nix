@@ -41,12 +41,11 @@
     #outputs.nixosModules.pkgs.windows
     #outputs.nixosModules.pkgs.wordlists
 
-    # Import your generated (nixos-generate-config) hardware configuration
-    ./hardware-configuration.nix
     inputs.stylix.nixosModules.stylix
     inputs.preservation.nixosModules.default
     inputs.disko.nixosModules.disko
     inputs.multiverse.nixosModules.default
+    inputs.bootvine.nixosModules.default
   ];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
