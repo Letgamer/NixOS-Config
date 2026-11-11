@@ -1,10 +1,11 @@
-{
+{pkgs, ...}: {
   wayland.windowManager.hyprland = {
     enable = true;
     # set the Hyprland and XDPH packages to null to use the ones from the NixOS module
     package = null;
     portalPackage = null;
     # TODO: convert config to lua
+    # Wait for 26.11 because of the waybar bug: https://github.com/Alexays/Waybar/pull/5013
     configType = "hyprlang";
 
     settings = {
@@ -23,10 +24,6 @@
         "GRIMBLAST_NO_CURSOR,0"
         "HYPRCURSOR_THEME,rose-pine-hyprcursor"
         "HYPRCURSOR_SIZE,24"
-      ];
-
-      exec-once = [
-        "hyprctl setcursor rose-pine-hyprcursor 24"
       ];
 
       general = {
@@ -133,7 +130,7 @@
 
       bind =
         [
-          "$mainMod, L, exec, loginctl lock-session"
+          "$mainMod, L, exec, loginctl lock-session && ${pkgs.systemd}/bin/systemctl --user stop eye-break.timer"
 
           "$mainMod, X, exec, $terminal --confirm-close-surface=false --title=com.clipse.clipse -e clipse"
           "$mainMod, Y, exec, nmcli device status | grep -E 'tun|vpn' | awk '{print $1}' | xargs -I {} nmcli -t -f IP4.ADDRESS device show {} | cut -d: -f2 | cut -d/ -f1 | wl-copy -n"

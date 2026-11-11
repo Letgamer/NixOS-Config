@@ -2,14 +2,15 @@
   lib,
   stdenvNoCC,
   fetchurl,
+  jre,
   copyDesktopItems,
   makeBinaryWrapper,
   makeShellWrapper,
   makeDesktopItem,
   unzip,
   zip,
-  jre,
-  chromium ? null,
+  chromium,
+  # Either "community" or "pro"
   iconName ? "community",
   licenseAccepted ? false,
   javaArgs ? [],
@@ -27,9 +28,6 @@ in
   assert lib.assertMsg (
     iconName == "pro" || iconName == "community"
   ) "iconName has to be either pro or community";
-  assert lib.assertMsg (
-    chromiumPlatform != null -> (chromium != null)
-  ) "chromium is required on supported Linux platforms";
     stdenvNoCC.mkDerivation (finalAttrs: {
       pname = "burpsuite";
       version = "2026.10.1";
@@ -44,6 +42,9 @@ in
         hash = "sha256-6KsIZTexZDuRygnS/CpsPgiouuDIUoB5fFyex2UGw8U=";
       };
 
+      strictDeps = true;
+      __structuredAttrs = true;
+
       nativeBuildInputs = [
         copyDesktopItems
         makeBinaryWrapper
@@ -51,9 +52,6 @@ in
         unzip
         zip
       ];
-
-      strictDeps = true;
-      __structuredAttrs = true;
 
       unpackPhase = ''
         runHook preUnpack
@@ -63,59 +61,58 @@ in
         runHook postUnpack
       '';
 
-      buildPhase = ''
+      buildPhase = lib.optionalString (chromiumPlatform != null) ''
         runHook preBuild
 
-        ${lib.optionalString (chromiumPlatform != null) ''
-          # Replace the embedded Chromium with the nixpkgs one on Linux
-          chromiumVersion=$(
-            unzip -p ${finalAttrs.src.name} chromium.properties |
-              grep "^${chromiumPlatform}=" |
-              cut -d= -f2
-          )
+        # Replace the embedded Chromium with the nixpkgs one on Linux
+        chromiumVersion=$(
+          unzip -p ${finalAttrs.src.name} chromium.properties |
+            grep "^${chromiumPlatform}=" |
+            cut -d= -f2
+        )
 
-          archive=chromium-${chromiumPlatform}-$chromiumVersion.zip
+        archive=chromium-${chromiumPlatform}-$chromiumVersion.zip
 
-          mkdir chromium
+        mkdir chromium
 
-          # We need to use a binary wrapper, as burpsuite checks the file for ELF magic bytes
-          makeBinaryWrapper \
-            ${lib.getExe chromium} \
-            chromium/chrome
+        # We need to use a binary wrapper, as burpsuite checks the file for ELF magic bytes
+        makeBinaryWrapper \
+          ${lib.getExe chromium} \
+          chromium/chrome
 
-          # Generate the values for the manifest.properties file
-          size=$(stat -Lc %s chromium/chrome)
-          md5=$(md5sum chromium/chrome | cut -d' ' -f1)
+        # Generate the values for the manifest.properties file
+        size=$(stat -Lc %s chromium/chrome)
+        md5=$(md5sum chromium/chrome | cut -d' ' -f1)
 
-          echo "chrome:$size;$md5;exe;False;null" > chromium/manifest.properties
+        echo "chrome:$size;$md5;exe;False;null" > chromium/manifest.properties
 
-          # Normalize timestamps of the generated files before zipping for reproducibility
-          touch -d @$SOURCE_DATE_EPOCH chromium/chrome chromium/manifest.properties
+        # Normalize timestamps of the generated files before zipping for reproducibility
+        touch -d @$SOURCE_DATE_EPOCH chromium/chrome chromium/manifest.properties
 
-          (
-            cd chromium
-            zip -X -o -q ../"$archive" chrome manifest.properties
-          )
+        (
+          cd chromium
+          zip -0 -X -o -q ../"$archive" chrome manifest.properties
+        )
 
-          zip -X -q -d ${finalAttrs.src.name} "$archive"
-          zip -X -q ${finalAttrs.src.name} "$archive"
-        ''}
+        zip -X -q -d ${finalAttrs.src.name} "$archive"
+        zip -0 -X -q ${finalAttrs.src.name} "$archive"
 
         runHook postBuild
       '';
 
       installPhase = ''
+        runHook preInstall
+
         install -Dm644 ${finalAttrs.src.name} "$out/share/${finalAttrs.src.name}"
 
-        mkdir -p "$out/bin"
-
-        # Wrap the java process with the optional args
         makeShellWrapper ${lib.getExe jre} "$out/bin/burpsuite" \
           --add-flags "${lib.concatStringsSep " " javaArgs}" \
           --add-flags "-jar $out/share/${finalAttrs.src.name}" \
           --add-flags "--suppress-jre-check --disable-check-for-updates-dialog --disable-auto-update" \
           --add-flags "${lib.optionalString licenseAccepted "--i-accept-the-license-agreement"}" \
           --add-flags "${lib.concatStringsSep " " burpArgs}"
+
+        runHook postInstall
       '';
 
       postInstall = ''
@@ -126,12 +123,11 @@ in
       desktopItems = [
         (makeDesktopItem {
           name = finalAttrs.pname;
-          exec = finalAttrs.pname;
-          icon = finalAttrs.pname;
+          exec = "burpsuite";
+          icon = "burpsuite";
           desktopName = "Burp Suite Desktop";
           comment = finalAttrs.meta.description;
           categories = [
-            "Network"
             "Development"
             "Security"
             "System"

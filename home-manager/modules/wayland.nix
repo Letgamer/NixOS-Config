@@ -168,6 +168,37 @@ in {
     };
   };
 
+  systemd.user.services.eye-break = {
+    Unit = {
+      Description = "20-20-20 Eye Break Notification";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = ''
+        ${lib.getExe pkgs.libnotify} \
+          -a "eye-break" \
+          "👀 Eye Break" \
+          "Look away from your screen for 20 seconds!"
+      '';
+    };
+  };
+
+  systemd.user.timers.eye-break = {
+    Unit = {
+      Description = "Run eye-break notification every 20 minutes";
+      PartOf = ["hyprland-session.target"];
+      After = ["hyprland-session.target"];
+    };
+    Timer = {
+      OnActiveSec = "20m";
+      OnUnitActiveSec = "20m";
+      AccuracySec = "1s";
+    };
+    Install = {
+      WantedBy = ["hyprland-session.target"];
+    };
+  };
+
   programs.hyprlock = {
     enable = true;
 
@@ -221,7 +252,8 @@ in {
         # 5 min – Lock session
         {
           timeout = 300;
-          on-timeout = "loginctl lock-session";
+          on-timeout = "loginctl lock-session && ${pkgs.systemd}/bin/systemctl --user stop eye-break.timer";
+          on-resume = "${pkgs.systemd}/bin/systemctl --user start eye-break.timer";
         }
         # 10 min – Dim screen
         {
